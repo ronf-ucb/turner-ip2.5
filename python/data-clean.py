@@ -10,7 +10,7 @@ def angleEncoder(value):
 
 filedata = csv.reader(open('Data/imudata.txt','rb'), delimiter=',',quotechar='"')
 # discard first 8 rows
-for i in range(1,7):
+for i in range(1,8):
     r=filedata.next()
     print '#',r
 #get first numeric row

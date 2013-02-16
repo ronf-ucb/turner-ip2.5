@@ -25,8 +25,7 @@ RESET_ROBOT = False
 
 # [Kp Ki Kd Kanti-wind ff]
 # now uses back emf velocity as d term
-#motorgains = [300,0,10,0,50, 300,0,10,0,50]
-# try just left motor
+# [left gains motor 0, right gains motor 1]
 motorgains = [400,0,400,0,0, 400,0,400,0,0]
 throttle = [0,0]
 duration = [512,512]  # length of run
@@ -137,8 +136,8 @@ def setGain():
 
 # allow user to set robot gain parameters
 def getGain(lr):
-    print 'Rmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[0:5]
-    print 'Lmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[5:11]  
+    print 'Lmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[0:5]
+    print 'Rmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[5:11]  
     x = None
     while not x:
         try:
@@ -152,7 +151,7 @@ def getGain(lr):
             print lr,'motor gains', motor
 # enable sensing gains again
             shared.motor_gains_set = False
-            if lr == 'R':
+            if lr == 'L':
                 motorgains[0:5] = motor
            #     motorgains[5:11] = motor
             else:
@@ -251,12 +250,12 @@ def writeFileHeader(dataFileName):
     date = date + str(today.tm_hour) +':' + str(today.tm_min)+':'+str(today.tm_sec)
     fileout.write('"Data file recorded ' + date + '"\n')
     fileout.write('"%  keyboard_telem with hall effect "\n')
-    fileout.write('"%  motorgains    = ' + repr(motorgains) + '\n')
+    fileout.write('"%  motorgains    = ' + repr(motorgains) + '"\n')
     fileout.write('"%  delta         = ' +repr(delta) + '"\n')
     fileout.write('"%  intervals     = ' +repr(intervals) + '"\n')
     fileout.write('"% Columns: "\n')
     # order for wiring on RF Turner
-    fileout.write('"% time | LPos| RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | RBEMF | LBEMF | VBAT "\n')
+    fileout.write('"% seq | time | LPos| RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
  #   fileout.write('"% time | Rlegs | Llegs | DCL | DCR | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LBEMF | RBEMF | SteerOut"\n')
   #  fileout.write('time, Rlegs, Llegs, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg, AX, AY, AZ, LBEMF, RBEMF, SteerOut\n')
     fileout.close()
