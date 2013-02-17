@@ -11,15 +11,18 @@
 #define GAIN_SCALER         100
 #define NUM_PIDS	2
 #define NUM_VELS	4 // 8 velocity setpoints per cycle
-// actual gear ratio 21.3:1. So with 2 counts/rev, get 42.6:1
-#define COUNT_REVS  42   // depends on gear ratio- counts per leg rev
-// STRIDE_TICKS should be easily divisible
-#define STRIDE_TICKS (COUNT_REVS*16)  // number of t1 ticks/leg revolution
-/* The back emf constant can be measured by measuring velocity from Hall Effect sensor */
-//#define K_EMF    ((1000/256)* 182.9/219.6)  // A/D units per hall count per ms, scale by >>8
-//#define K_EMF    ((1000/256)* 208/800)  // A/D units per hall count per ms, scale by >>8
-// ***** round to nearest integer */
-#define K_EMF    1  // A/D units per hall count per ms, scale by >>8
+
+
+/* The back emf constant can be measured by measuring velocity from Hall encoder 
+* 80 rad/sec = 12.5 rev/sec = 834 encPos[].pos/sec
+* 80 rad/sec gives 140 A/D units
+* v_input should be in A/D units
+* thus v_input = 140 * vel[i] / 834  
+* scale by 256 to get resolution in constant */
+// A/D units per encoder change per ms scaled by >> 8 
+// K_EMF = ((256 * 140) / 834)  =43
+#define K_EMF 43
+
 #ifndef ADC_MAX
 #define ADC_MAX             1024
 #endif
@@ -62,14 +65,6 @@ typedef struct
 	int Kaw;  // anti-windup gain
 } pidPos;
 
-// telemetry control structure 
-typedef struct
-{	char onoff;				// telemetry recording enabled 
-	unsigned long start;	// recording start time   
-	int count;				// count of samples to record
-	int skip;				// samples to skip
-} TelemStruct;
-
 // structure for velocity control of leg cycle
 typedef struct
 { 
@@ -90,12 +85,12 @@ void initPIDVelProfile();
 void setPIDVelProfile(int pid_num, int *interval, int *delta, int *vel);
 void initPIDObj(pidT *pid, int Kp, int Ki, int Kd, int Kaw, int ff);
 void initPIDObjPos(pidPos *pid, int Kp, int Ki, int Kd, int Kaw, int ff);
-void SetupTimer1(void);
+//void SetupTimer1(void);
 void pidSetInput(int pid_num, int input_val, unsigned int run_time);
 void pidSetInputSameRuntime(int pid_num, int input_val);
 void pidSetGains(int pid_num, int Kp, int Ki, int Kd, int Kaw, int ff);
 void pidGetState(); // update state vector from bemf and Hall angle
-void pidGetSetpoint();
+void pidGetSetpoint(int j);
 void pidSetControl();
 void EmergencyStop(void);
 unsigned char* pidGetTelemetry(void);

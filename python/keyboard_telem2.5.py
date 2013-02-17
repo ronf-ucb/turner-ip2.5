@@ -22,12 +22,13 @@ delay = 0.025
 RESET_ROBOT = False
 ##########################
 
-# motorgains = [200,2,0,2,0,    200,2,0,2,0]
+
 # [Kp Ki Kd Kanti-wind ff]
 # now uses back emf velocity as d term
-motorgains = [300,0,300,0,50, 300,0,300,0,50]
+# [left gains motor 0, right gains motor 1]
+motorgains = [400,0,400,0,0, 400,0,400,0,0]
 throttle = [0,0]
-duration = 512  # length of run
+duration = [512,512]  # length of run
 cycle = 512 # ms for a leg cycle
 # velocity profile
 # [time intervals for setpoints]
@@ -35,7 +36,7 @@ cycle = 512 # ms for a leg cycle
 # [velocity increments]   
 delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
 intervals = [128, 128, 128, 128]  # total 512 ms
-vel = [64, 64,64,64]  # = delta/interval
+vel = [128, 128,128,128]  # = delta/interval
 
 
 ser = serial.Serial(shared.BS_COMPORT, shared.BS_BAUDRATE,timeout=3, rtscts=0)
@@ -57,7 +58,7 @@ def setThrust():
 def menu():
     print "-------------------------------------"
     print "e: radio echo test    | g: right motor gains | h: Help menu"
-    print "l: left motor gains"
+    print "a: access PIDdata     | f: flash readback     | l: left motor gains"
     print "m: toggle memory mode | n: get robot name    | p: proceed"
     print "q: quit               | r: reset robot       | s: set throttle"
     print "t: time of move length| v: set velocity profile"
@@ -107,7 +108,7 @@ def setVelProfile():
     print "Sending velocity profile"
     print "set points [encoder values]", delta
     print "intervals (ms)",intervals
-    print "velocities (<<8)",vel
+    print "velocities (delta per ms)",vel
     temp = intervals+delta+vel
     temp = temp+temp  # left = right
     xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
@@ -135,8 +136,8 @@ def setGain():
 
 # allow user to set robot gain parameters
 def getGain(lr):
-    print 'Rmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[0:5]
-    print 'Lmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[5:11]  
+    print 'Lmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[0:5]
+    print 'Rmotor gains [Kp Ki Kd Kanti-wind ff]=', motorgains[5:11]  
     x = None
     while not x:
         try:
@@ -150,20 +151,48 @@ def getGain(lr):
             print lr,'motor gains', motor
 # enable sensing gains again
             shared.motor_gains_set = False
-            if lr == 'R':
+            if lr == 'L':
                 motorgains[0:5] = motor
            #     motorgains[5:11] = motor
             else:
                 motorgains[5:11] = motor
         else:
             print 'not enough gain values'
-            
-# execute move command
-count = 300
 
+# get one packet of PID data from robot
+def getPIDdata():
+    count = 0
+    shared.pkts = 0   # reset packet count
+    dummy_data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    # data format '=LLll'+13*'h' 
+    shared.imudata = [] #reset stored data
+    xb_send(0, command.GET_PID_TELEMETRY, pack('h',0))
+    time.sleep(0.2)
+    while shared.pkts == 0:
+        print "\n Retry after 1 seconds. Got only %d packets" %shared.pkts
+        time.sleep(1)
+        count = count + 1
+        if count > 10:
+            print 'no return packet'
+            shared.imudata.append(dummy_data) # use dummy data
+            break   
+    data = shared.imudata[0]  # convert string list to numbers
+#    print 'packet=', data
+    print 'index =', data[0]
+    print 'time = ', data[1]
+    print 'mpos=', data[2:4]
+    print 'pwm=',data[4:6]
+    print 'imu=',data[6:13]
+    print 'emf=',data[13:16]
+
+        
+# execute move command
+count = 300 # 300 Hz sampling in steering = 1 sec
+
+# duration modified to allow running legs for differennt number of cycles
 def proceed():
     global duration, count, delay, throttle
-    thrust = [throttle[0], duration, throttle[1], duration, 0]
+    thrust = [throttle[0], duration[0], throttle[1], duration[1], 0]
     if telemetry:
         xb_send(0, command.ERASE_SECTORS, pack('h',0))
         print "started erase, 3 second dwell"
@@ -172,8 +201,10 @@ def proceed():
         skip = 0    # store every other sample if = 1
         temp=[count,start,skip]
         print 'temp =',temp,'\n'
+        raw_input("Press any key to send StartTelem...")
         xb_send(0, command.START_TELEM, pack('3h',*temp))
         time.sleep(0.1)
+    print "thrust =" + str(thrust)
     xb_send(0, command.SET_THRUST_CLOSED_LOOP, pack('5h',*thrust))
     print "Throttle = ",throttle,"duration =", duration
     time.sleep(0.1)
@@ -187,19 +218,23 @@ def flashReadback():
     shared.imudata = []  # reset imudata structure
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',count))
-    # While waiting, write parameters to start of file
-    writeFileHeader(dataFileName)     
-    time.sleep(delay*count + 3)
+    time.sleep(delay*count + 7)
     while shared.pkts != count:
-        print "Retry"
+        print "\n Retry after 10 seconds. Got only %d packets" %shared.pkts
+        time.sleep(10)
         shared.imudata = []
         shared.pkts = 0
         xb_send(0, command.FLASH_READBACK, pack('=h',count))
-        time.sleep(delay*count + 3)
+        time.sleep(delay*count + 7)
         if shared.pkts > count:
             print "too many packets"
             break
+        if shared.pkts < count:
+            print "\n too few packets",str(shared.pkts)
+            break
     print "readback done"
+# While waiting, write parameters to start of file
+    writeFileHeader(dataFileName)     
     fileout = open(dataFileName, 'a')
     np.savetxt(fileout , np.array(shared.imudata), '%d', delimiter = ',')
     fileout.close()
@@ -215,12 +250,12 @@ def writeFileHeader(dataFileName):
     date = date + str(today.tm_hour) +':' + str(today.tm_min)+':'+str(today.tm_sec)
     fileout.write('"Data file recorded ' + date + '"\n')
     fileout.write('"%  keyboard_telem with hall effect "\n')
-    fileout.write('"%  motorgains    = ' + repr(motorgains) + '\n')
+    fileout.write('"%  motorgains    = ' + repr(motorgains) + '"\n')
     fileout.write('"%  delta         = ' +repr(delta) + '"\n')
     fileout.write('"%  intervals     = ' +repr(intervals) + '"\n')
     fileout.write('"% Columns: "\n')
     # order for wiring on RF Turner
-    fileout.write('"% time | Rlegs | Llegs | DCR | DCL | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | RBEMF | LBEMF "\n')
+    fileout.write('"% seq | time | LPos| RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
  #   fileout.write('"% time | Rlegs | Llegs | DCL | DCR | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LBEMF | RBEMF | SteerOut"\n')
   #  fileout.write('time, Rlegs, Llegs, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg, AX, AY, AZ, LBEMF, RBEMF, SteerOut\n')
     fileout.close()
@@ -245,7 +280,9 @@ def main():
     time.sleep(0.5)  # wait for whoami before sending next command
     setVelProfile()
     throttle = [0,0]
-    tinc = 25;
+    tinc = 25
+    time.sleep(1)  # wait for other commands to get queued and processes
+    #getPIDdata()    # one read for debugging
     # time in milliseconds
    # duration = 42*16-1  # 21.3 gear ratio, 2 counts/motor rev
    # duration = 5*100 -1  # integer multiple of time steps
@@ -257,15 +294,19 @@ def main():
     while True:
         print '>',
         keypress = msvcrt.getch()
+        
         if keypress == ' ':
             throttle = [0,0]
+        elif keypress == 'a':
+            getPIDdata()
         elif keypress == 'c':
             throttle[0] = 0
         elif keypress == 'd':
             throttle[0] -= tinc
         elif keypress == 'e':
             xb_send(0, command.ECHO,  "Echo Test")
-            throttle[0] += tinc
+        elif keypress == 'f':
+            flashReadback()
         elif keypress == 'g':
             getGain('R')
             setGain()
@@ -291,8 +332,11 @@ def main():
             throttle[1]= int(raw_input())
             print "new throttle =", throttle
         elif keypress == 't':
-            print 'cycle='+str(cycle)+' duration='+str(duration)+'. New duration:',
-            duration = int(raw_input())
+            print 'cycle='+str(cycle)+' duration='+str(duration)+\
+                     '. New duration[0]:',
+            duration[0] = int(raw_input())
+            print 'duration[1]:',
+            duration[1] = int(raw_input())
         elif keypress =='v':
             getVelProfile()
             setVelProfile()           

@@ -26,6 +26,7 @@
 #include "ams-enc.h"
 #include "tih.h"
 #include <stdlib.h> // for malloc
+#include "init.h"  // for Timer1
 
 //#define HALFTHROT 10000
 #define HALFTHROT 2000
@@ -51,7 +52,7 @@ int seqIndex;
 
 //for battery voltage:
 char calib_flag = 0;   // flag is set if doing calibration
-unsigned long offsetAccumulatorL, offsetAccumulatorR;
+long offsetAccumulatorL, offsetAccumulatorR;
 unsigned int offsetAccumulatorCounter;
 
 MoveQueue moveq;
@@ -63,11 +64,6 @@ int measLast1[NUM_PIDS];
 int measLast2[NUM_PIDS];
 int bemf[NUM_PIDS]; //used to store the true, unfiltered speed
 
-static struct piddata {
-    int output[NUM_PIDS];
-    unsigned int measurements[NUM_PIDS];
-	long p[2],i[2],d[2];
-} PIDTelemData;
 
 
 // -------------------------------------------
@@ -79,9 +75,7 @@ void pidSetup()
 		initPIDObjPos( &(pidObjs[i]), DEFAULT_KP, DEFAULT_KI, DEFAULT_KD, DEFAULT_KAW, DEFAULT_FF); 
 	}
 	initPIDVelProfile();
-	SetupTimer1();  // used for leg motor PID
-//	SetupTimer2(); // used for leg hall effect sensors
-//	SetupInputCapture(); // setup input capture for hall effect sensors
+	SetupTimer1();  // main interrupt used for leg motor PID
 
 // returns pointer to queue with 8 move entries
 	moveq = mqInit(8); 
@@ -118,22 +112,16 @@ void initPIDVelProfile()
 	{    	pidVel[j].index = 0;  // point to first velocity
 		pidVel[j].interpolate = 0; 
 		pidVel[j].leg_stride = 0;  // set initial leg count
-	// set control intervals during stride - try to get close to 21.3 ratio (use 42 counts)
-  		pidVel[j].interval[0]= (4*STRIDE_TICKS/NUM_VELS/3); 
-		pidVel[j].delta[0] =  11;
-	     	pidVel[j].interval[1]= (2*STRIDE_TICKS/NUM_VELS/3); 
-		pidVel[j].delta[1] =  10;
-	     	pidVel[j].interval[2]= (4*STRIDE_TICKS/NUM_VELS/3); 
-		pidVel[j].delta[2] =  11;
-	  	pidVel[j].interval[3]= (2*STRIDE_TICKS/NUM_VELS/3); 
-		pidVel[j].delta[3] =  10;
+  		
 		for(i = 0; i < NUM_VELS; i++)
 		{   	// interpolate values between setpoints, <<4 for resolution
+			pidVel[j].interval[i] = 128;  // 128 ms intervals
+		       pidVel[j].delta[i] =  0x1000; // 1/16 rev
 			pidVel[j].vel[i] = (pidVel[j].delta[i] << 8) / pidVel[j].interval[i];
 		 }
 		pidObjs[j].p_input = 0; // initialize first set point 
 //		pidObjs[j].v_input = 0; // initialize first velocity
-		pidObjs[j].v_input = (int)( pidVel[j].vel[0] * K_EMF);	//initialize first velocity
+		pidObjs[j].v_input = (int)(((long) pidVel[j].vel[0] * K_EMF) >>8);	//initialize first velocity, scaled
 	}
 }
 
@@ -190,12 +178,13 @@ void initPIDObj(pidT *pid, int Kp, int Ki, int Kd, int Kaw, int ff)
     pid->error = 0;
 }
 
+
 // called from set thrust closed loop, etc. Thrust 
 void pidSetInput(int pid_num, int input_val, unsigned int run_time){
 unsigned long temp;	
 /*      ******   use velocity setpoint + throttle for compatibility between Hall and Pullin code *****/
 /* otherwise, miss first velocity set point */
-    pidObjs[pid_num].v_input = input_val + (int)( pidVel[pid_num].vel[0] * K_EMF);	//initialize first velocity ;
+    pidObjs[pid_num].v_input = input_val + (int)(( (long)pidVel[pid_num].vel[0] * K_EMF) >> 8);	//initialize first velocity ;
     pidObjs[pid_num].run_time = run_time;
     pidObjs[pid_num].start_time = t1_ticks;
     //zero out running PID values
@@ -207,9 +196,11 @@ unsigned long temp;
 	measLast1[pid_num] =input_val;
 	measLast2[pid_num] =input_val;
 	temp = t1_ticks;  // need atomic read due to interrupt 
-	lastMoveTime = temp + (unsigned long) run_time;  // only one run time for both sides
-	// set initial time for next move set point
-  
+
+	if ((temp + (unsigned long) run_time) > lastMoveTime)
+	{ lastMoveTime = temp + (unsigned long) run_time; }  // set run time to max requested time
+
+// set initial time for next move set point 
 /*   need to set index =0 initial values */
 /* position setpoints start at 0 (index=0), then interpolate until setpoint 1 (index =1), etc */
 	pidVel[pid_num].expire = temp + (long) pidVel[pid_num].interval[0];   // end of first interval
@@ -259,27 +250,13 @@ void pidZeroPos(int pid_num){
 	EnableIntT1; // turn on pid interrupts
 }
 
-// from cmdGetPIDTelemetry
-unsigned char* pidGetTelemetry(void){
-	PIDTelemData.output[0] = pidObjs[0].output;
-	PIDTelemData.output[1] = pidObjs[1].output;
-	PIDTelemData.measurements[0] = pidObjs[0].v_state;
-	PIDTelemData.measurements[1] = pidObjs[1].v_state;
-	PIDTelemData.p[0] = pidObjs[0].p;
-	PIDTelemData.p[1] = pidObjs[1].p;
-	PIDTelemData.i[0] = pidObjs[0].i;
-	PIDTelemData.i[1] = pidObjs[1].i;
-	PIDTelemData.d[0] = pidObjs[0].d;
-	PIDTelemData.d[1] = pidObjs[1].d;
-	return (unsigned char*)&PIDTelemData;
-}
-
 
 // calibrate A/D offset, using PWM synchronized A/D reads inside 
 // timer 1 interrupt loop
 // BATTERY CHANGED FOR IP2.5 ***** need to fix
 void calibBatteryOffset(int spindown_ms){
-	unsigned long temp;
+	long temp;  // could be + or -
+	unsigned int battery_voltage;
 // save current PWM config
 	int tempPDC1 = PDC1;
 	int tempPDC2 = PDC2;
@@ -299,15 +276,16 @@ void calibBatteryOffset(int spindown_ms){
 	calib_flag = 1;  // enable calibration
 	while(offsetAccumulatorCounter < 100); // wait for 100 samples
 	calib_flag = 0;  // turn off calibration
+	battery_voltage = adcGetVbatt();
 	//Left
 	temp = offsetAccumulatorL;
-	temp = temp/(unsigned long)offsetAccumulatorCounter;
-	pidObjs[0].inputOffset = temp;
+	temp = temp/(long)offsetAccumulatorCounter;
+	pidObjs[0].inputOffset = (int) temp;
 
 	//Right
 	temp = offsetAccumulatorR;
-	temp = temp/(unsigned long)offsetAccumulatorCounter;
-	pidObjs[1].inputOffset = temp;
+	temp = temp/(long)offsetAccumulatorCounter;
+	pidObjs[1].inputOffset = (int) temp;
 
 	LED_RED = 0;
 // restore PID values
@@ -339,72 +317,71 @@ void EmergencyStop(void)
 /*****************************************************************************************/
 /*****************************************************************************************/
 
+/* update setpoint  only leg which has run_time + start_time > t1_ticks */
+/* turn off when all PIDs have finished */
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) 
-{
+{ int j;
 //  unsigned long time_start, time_end; 
 //	time_start =  swatchTic(); 
 
     if (t1_ticks == T1_MAX) t1_ticks = 0;
     t1_ticks++;
-	
-	if(t1_ticks > lastMoveTime) // turn off if done running
-	{ //	pidSetInput(0, 0, 0);    don't reset state when done run, keep for recording telemetry
-		pidObjs[0].onoff = 0;
-	//	pidSetInput(1, 0, 0);
+    pidGetState();	// always update state, even if motor is coasting
+ // only update tracking setpoint if time has not yet expired
+	for (j = 0; j< NUM_PIDS; j++)
+   	{     if ((pidObjs[j].start_time + pidObjs[j].run_time) >=  t1_ticks)
+		{ pidGetSetpoint(j);  }  // only update setpoint if still in run time
+   	}
+
+	if(t1_ticks > lastMoveTime) // turn off if done running all legs
+   	{	pidObjs[0].onoff = 0;
 		pidObjs[1].onoff = 0;
-	}
-	else 		// update velocity setpoints if needed - only when running
-	{ pidGetSetpoint();}
+   	}  
 
-	pidGetState();
-
-       pidSetControl();
-/* better read telemetry at slower tick rate - updated by steering servo */
-
+	pidSetControl();	// run control even if not updating setpoint to hold position 
 //	time_end =  swatchToc();
     //Clear Timer1 interrupt flag
     _T1IF = 0;
 }
 
+// update desired velocity and position tracking setpoints for each leg
+void pidGetSetpoint(int j)
+{ int index; long temp_v;
+		index = pidVel[j].index;		
+		// update desired position between setpoints, scaled by 256
+		pidVel[j].interpolate += pidVel[j].vel[index];
 
-void pidGetSetpoint()
-{ int j, index;
-
-	 for(j=0; j < NUM_PIDS; j++)
-		{  	index = pidVel[j].index;		
-			// update desired position between setpoints, scaled by 256
-			pidVel[j].interpolate += pidVel[j].vel[index];
-
-			if (t1_ticks >= pidVel[j].expire)  // time to reach previous setpoint has passed
-			{ 	pidVel[j].interpolate = 0;	
-				pidObjs[j].p_input += pidVel[j].delta[index];	//update to next set point
-				pidVel[j].expire += pidVel[j].interval[index];  // expire time for next interval
-			       pidObjs[j].v_input = (int)pidVel[j].vel[index];	  //update to next velocity 
-			
-				// got to next index point	
-				pidVel[j].index++;
-				if (pidVel[j].index >= NUM_VELS) 
-				{     pidVel[j].index = 0;
-					pidVel[j].leg_stride++;  // one full leg revolution
+	if (t1_ticks >= pidVel[j].expire)  // time to reach previous setpoint has passed
+	{ 	pidVel[j].interpolate = 0;	
+			pidObjs[j].p_input += pidVel[j].delta[index];	//update to next set point
+			pidVel[j].expire += pidVel[j].interval[index];  // expire time for next interval
+			temp_v = ((long)pidVel[j].vel[index] * K_EMF)>>8;  // scale velocity to A/D units
+		       pidObjs[j].v_input = (int)(temp_v);	  //update to next velocity 
+		
+			// got to next index point	
+			pidVel[j].index++;
+			if (pidVel[j].index >= NUM_VELS) 
+			{     pidVel[j].index = 0;
+				pidVel[j].leg_stride++;  // one full leg revolution
 	/**** maybe need to handle round off in position set point ***/
-				}  // loop on index
-			}
-		}
+			}  // loop on index
+	}
 }
 
-#define VEL_BEMF 0  // select either back emf or backwd diff for vel est
+ // select either back emf or backwd diff for vel est
+#define VEL_BEMF 1
 /* update state variables including motor position and velocity */
 void pidGetState()
 {   int i;
 	long p_state, oldpos[NUM_PIDS], velocity;
 // get diff amp offset with motor off at startup time
 	if(calib_flag)
-	{ 	offsetAccumulatorL += adcGetAN8();  
-		offsetAccumulatorR += adcGetAN9();   
+	{ 	
+		offsetAccumulatorL += adcGetMotorA();  
+		offsetAccumulatorR += adcGetMotorB();   
 		offsetAccumulatorCounter++; 	}
- // choose velocity estimate  
-
-#define VEL_BEMF 0
+ 
+// choose velocity estimate  
 #if VEL_BEMF == 0    // use first difference on position for velocity estimate
 	for(i=0; i<NUM_PIDS; i++)
 	{ oldpos[i] = pidObjs[i].p_state; }
@@ -434,9 +411,10 @@ void pidGetState()
 #if VEL_BEMF == 1
 int measurements[NUM_PIDS];
 // Battery: AN0, MotorA AN8, MotorB AN9, MotorC AN10, MotorD AN11
-	measurements[0] = pidObjs[0].inputOffset - adcGetAN8(); // watch sign for A/D? unsigned int -> signed?
-     	measurements[1] = pidObjs[1].inputOffset - adcGetAN9(); // AN1
+	measurements[0] = pidObjs[0].inputOffset - adcGetMotorA(); // watch sign for A/D? unsigned int -> signed?
+     	measurements[1] = pidObjs[1].inputOffset - adcGetMotorB(); // MotorB
 
+	
 //Get motor speed reading on every interrupt - A/D conversion triggered by PWM timer to read Vm when transistor is off
 // when motor is loaded, sometimes see motor short so that  bemf=offset voltage
 // get zero sometimes - open circuit brush? Hence try median filter
@@ -477,16 +455,17 @@ void pidSetControl()
    {  //pidobjs[0] : right side
 	// p_input has scaled velocity interpolation to make smoother
 	// p_state is [16].[16]
-        	pidObjs[j].p_error = pidObjs[j].p_input + (pidVel[j].interpolate >> 8)  - pidObjs[j].p_state;
+        	pidObjs[j].p_error = pidObjs[j].p_input + pidVel[j].interpolate  - pidObjs[j].p_state;
             pidObjs[j].v_error = pidObjs[j].v_input - pidObjs[j].v_state;  // v_input should be revs/sec
             //Update values
             UpdatePID(&(pidObjs[j]));
        } // end of for(j)
-  /*** HACK tih uses channel+1, motor A and B swapped, A wired backwards ****/
-		if(pidObjs[j].onoff)
-		{ tiHSetDC(1, -pidObjs[1].output); 
-		   tiHSetDC(2, pidObjs[0].output); 
-		}  // change sign if motor is wired backwards...
+
+		if(pidObjs[0].onoff && pidObjs[1].onoff)  // both motors on to run
+		{
+ 		   tiHSetDC(1, pidObjs[0].output); 
+		   tiHSetDC(2, pidObjs[1].output); 
+		} 
 		else // turn off motors if PID loop is off
 		{ tiHSetDC(1,0); tiHSetDC(2,0); }	
 }
@@ -495,15 +474,18 @@ void pidSetControl()
 void UpdatePID(pidPos *pid)
 {
     pid->p = ((long)pid->Kp * pid->p_error) >> 12 ;  // scale so doesn't over flow
-    pid->i = (long)pid->Ki  * pid->i_error;
+    pid->i = ((long)pid->Ki  * pid->i_error) >> 12; // scale doesn't overflow 
     pid->d=(long)pid->Kd *  (long) pid->v_error;
     // better check scale factors
 
     pid->preSat = pid->feedforward + pid->p +
-		 ((pid->i + pid->d) >> 4); // divide by 16
+		 ((pid->i ) >> 4) +  // divide by 16
+		(pid->d >> 4); // divide by 16
 	pid->output = pid->preSat;
  
-	pid-> i_error = (long)pid-> i_error + (long)pid->p_error; // integrate error
+/* i_error say up to 1 rev error 0x10000, X 256 ms would be 0x1 00 00 00  
+    scale p_error by 16, so get 12 bit angle value*/
+	pid-> i_error = (long)pid-> i_error + ((long)pid->p_error >> 4); // integrate error
 // saturate output - assume only worry about >0 for now
 // apply anti-windup to integrator  
 	if (pid->preSat > MAXTHROT) 
