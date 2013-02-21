@@ -51,8 +51,10 @@ def resetRobot():
 
 def setThrust():
     global duration, count, delay, throttle
-    thrust = [throttle[0], throttle[1], duration]
-    xb_send(0, command.SET_THRUST, pack("3h",*thrust))
+    time = max(duration) # just pick mx of 2 motor run times for now
+    thrust = [throttle[0], throttle[1], time]
+    print 'thrust', thrust
+    xb_send(0, command.SET_THRUST, pack('3h',*thrust))
     print "cmdSetThrust " + str(thrust)
 
 def menu():
@@ -101,16 +103,20 @@ def getVelProfile():
     print 'intervals (ms)',intervals
  
         
+def invert(x):
+    return (-x)
 
 #set velocity profile
+# invert profile for motor 0 for VelociRoACH kinematics
 def setVelProfile():
     global intervals, vel
     print "Sending velocity profile"
     print "set points [encoder values]", delta
     print "intervals (ms)",intervals
     print "velocities (delta per ms)",vel
-    temp = intervals+delta+vel
-    temp = temp+temp  # left = right
+    temp0 = intervals + map(invert,delta) + map(invert,vel) # invert 0
+    temp1 = intervals+delta+vel
+    temp = temp0 + temp1  # -left = right
     xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
     time.sleep(1)
    
@@ -187,7 +193,7 @@ def getPIDdata():
 
         
 # execute move command
-count = 300 # 300 Hz sampling in steering = 1 sec
+count = 450 # 300 Hz sampling in steering = 1 sec
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
@@ -218,7 +224,7 @@ def flashReadback():
     shared.imudata = []  # reset imudata structure
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',count))
-    time.sleep(delay*count + 7)
+    time.sleep(delay*count + 10)
     while shared.pkts != count:
         print "\n Retry after 10 seconds. Got only %d packets" %shared.pkts
         time.sleep(10)

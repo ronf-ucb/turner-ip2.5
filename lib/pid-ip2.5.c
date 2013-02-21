@@ -497,8 +497,8 @@ void UpdatePID(pidPos *pid)
 	if (pid->preSat < -MAXTHROT)
       { 	      pid->output = -MAXTHROT; 
 			pid->i_error = (long) pid->i_error + 
-				(long)(pid->Kaw) * ((long)(MAXTHROT) - (long)(pid->preSat)) 
-				/ ((long)GAIN_SCALER);		
+				(long)(pid->Kaw) * 
+					((long)(MAXTHROT) - (long)(pid->preSat)) / ((long)GAIN_SCALER);		
 	}      
 }
 

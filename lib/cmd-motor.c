@@ -80,6 +80,7 @@ void cmdSetPIDGains(unsigned char type, unsigned char status, unsigned char leng
 
 
 // set up velocity profile structure  - assume 4 set points for now, generalize later
+// packet = motor0: intervals[0..3], delta[0...3], vel[0...3], motor1: intervals[0..3], delta[0...3], vel[0...3]
 void cmdSetVelProfile(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int interval[NUM_VELS], delta[NUM_VELS], vel[NUM_VELS];
 	int idx = 0, i = 0;
