@@ -26,6 +26,7 @@
 #define CMD_WHO_AM_I 0x8D
 #define CMD_START_TELEM 0x8E
 #define CMD_ZERO_POS 0x8f
+#define CMD_ESTOP 0x91
 
 void cmdSetup(void);
 void cmdHandleRadioRxBuffer(void);

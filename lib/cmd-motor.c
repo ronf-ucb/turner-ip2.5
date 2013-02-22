@@ -11,6 +11,7 @@
 #include "timer.h"
 #include "telemetry.h"
 #include "stopwatch.h"
+#include "blink.h"
 
 extern pidPos pidObjs[NUM_PIDS];
 
@@ -31,7 +32,36 @@ void cmdSetThrust(unsigned char type, unsigned char status, unsigned char length
 	tiHSetDC(2,0);
 	EnableIntT1;
  }  
-	
+
+
+// 	stop motors and PD loop
+void cmdEStop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+{ 	CRITICAL_SECTION_START; // Disable interrupts
+	EmergencyStop(); // stop pid loop
+	CRITICAL_SECTION_END; // Re-enable interrupts
+	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ESTOP, status, length, frame);  
+    	return; //success     
+}
+
+
+#define MESSAGE "Emergency Stop - low Battery!"
+void cmdEStopSend(void)
+{	 unsigned char string_length; 
+	unsigned char message_string[sizeof(MESSAGE)] = MESSAGE;
+	unsigned char status = 1;
+	CRITICAL_SECTION_START; // Disable interrupts
+	EmergencyStop(); // stop pid loop
+	 CRITICAL_SECTION_END; // Re-enable interrupts
+//	message_string = MESSAGE;
+	string_length = sizeof(MESSAGE);
+// note packet won't be sent until return from battery interrupt
+	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ESTOP, status, string_length, message_string);  
+
+	blink_leds(30,150); // also alert that we have had a battery brown out
+	return;
+}
+
+
 // report motor position and  reset motor position (from Hall angular sensors)
 // note motor_count is long (4 bytes) revs+frac rev
 void cmdZeroPos(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 

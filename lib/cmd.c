@@ -30,6 +30,7 @@
 #include "tiH.h"
 #include "timer.h"
 #include "telemetry.h"
+#include "battery.h"
 
 
 #include <stdio.h>
@@ -131,7 +132,11 @@ void cmdSetup(void) {
 	cmd_func[CMD_WHO_AM_I] = &cmdWhoAmI;
 	cmd_func[CMD_START_TELEM] = &cmdStartTelemetry;
 	cmd_func[CMD_ZERO_POS] = &cmdZeroPos;
+	cmd_func[CMD_ESTOP] = &cmdEStop;
+// setup battery low voltage callback
+	 batSetCallback(&cmdEStopSend);
 }
+
 
 // Jan 2013- new command handler using function queue
 void cmdPushFunc(MacPacket rx_packet)

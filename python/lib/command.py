@@ -65,6 +65,7 @@ SET_VEL_PROFILE =           0x8C
 WHO_AM_I =                  0x8D
 START_TELEM =               0x8E
 ZERO_POS =                  0x8F
+ESTOP =                     0x91
 
 # CMD values of 0xF0(240) - 0xFF(255) are reserved for future use
 

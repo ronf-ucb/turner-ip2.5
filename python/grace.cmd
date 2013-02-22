@@ -1,8 +1,13 @@
 # http://plasma-gate.weizmann.ac.il/Xmgr/doc/commands.html
 # commands to grace to plot IMU telemetry data
 # run with xmgrace -batch grace.cmd -nxy imudata.dat
+# LPos, RPos, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg
+# s0    s1    s2   s3   s4     s5     s6     s7
+# AX, AY, AZ, LBEMF, RBEMF, VBatt SteerOut
+# s8  s9  s10  s11    s12    s13   s14
 # ARRANGE(nrows, ncols, offset, hgap, vgap) 
 arrange ( 3, 2, .20, .3, .30)
+################################
 focus g0
 autoscale
 yaxis label "gyro"

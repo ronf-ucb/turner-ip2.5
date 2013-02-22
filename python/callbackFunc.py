@@ -74,6 +74,10 @@ def xbee_received(packet):
         if (datum[0] != -1):
             for i in range(pp):
                 shared.imudata.append(datum[4*i:4*(i+1)] )
+    elif (type == command.ESTOP):
+        print 'Emergency Stop from Robot'
+        print "estop:",data
+        
     elif (type == command.SPECIAL_TELEMETRY):
         shared.pkts = shared.pkts + 1
         # first word is packet #
@@ -91,7 +95,7 @@ def xbee_received(packet):
             if (shared.pkts != telem_index):
                 print str(shared.pkts) + "<>" + str(telem_index),
             shared.imudata.append(datum)  # save data anyway
-  
+      
     else:    
         pass
 

@@ -303,9 +303,11 @@ void calibBatteryOffset(int spindown_ms){
 /*****************************************************************************************/
 void EmergencyStop(void)
 {
-	pidSetInput(0 ,0, 0);
+	pidSetInput(0 ,0, 0);  // set runtime to zero 
+	pidObjs[0].onoff = 0;   
 	pidSetInput(1,0,0);
-	DisableIntT1; // turn off pid interrupts
+	pidObjs[1].onoff = 1;
+//	DisableIntT1; // turn off pid interrupts
        SetDCMCPWM(MC_CHANNEL_PWM1, 0, 0);    // set PWM to zero
        SetDCMCPWM(MC_CHANNEL_PWM2, 0, 0); 
 }

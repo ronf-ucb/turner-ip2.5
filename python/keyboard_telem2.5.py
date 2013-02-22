@@ -193,7 +193,7 @@ def getPIDdata():
 
         
 # execute move command
-count = 450 # 300 Hz sampling in steering = 1 sec
+count = 300 # 300 Hz sampling in steering = 1 sec
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
