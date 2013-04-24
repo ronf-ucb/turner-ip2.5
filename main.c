@@ -39,7 +39,13 @@
 
 Payload rx_payload;
 MacPacket rx_packet;
+
+volatile MacPacket uart_tx_packet;
+volatile unsigned char uart_tx_flag;
+
 Test* test;
+
+
 unsigned int error_code;
 
 int main() {

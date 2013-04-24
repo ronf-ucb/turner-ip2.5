@@ -27,7 +27,10 @@ void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, u
 	while((i < 127) && version_string[i] != '\0')
 	{ i++;}
 	string_length=i;     
-	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_WHO_AM_I, status, string_length, version_string);  
+	serialSendData(RADIO_DEST_ADDR, status, CMD_WHO_AM_I,
+            				string_length, version_string, 0);
+	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
+					status, string_length, version_string);  
       return; //success
 }
 
