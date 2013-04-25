@@ -33,6 +33,7 @@
 #include <stdlib.h>
 #include "cmd.h"
 #include "pid-ip2.5.h"
+#include "uart_driver.h"
 #include "steering.h"
 #include "consts.h"
 #include "adc_pid.h"
@@ -65,7 +66,7 @@ int main() {
     SetupTimer2();
     sclockSetup();
     mpuSetup();
-    amsHallSetup();
+  //  amsHallSetup();
     dfmemSetup(); 
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
@@ -77,6 +78,11 @@ int main() {
     radioSetSrcAddr(RADIO_SRC_ADDR);
     radioSetSrcPanID(RADIO_PAN_ID);
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
+
+	uart_tx_packet = NULL;
+    	uart_tx_flag = 0;
+    	uartInit(&cmdPushFunc);
+
 /**** set up steering last - so dfmem can finish ****/
 	steeringSetup(); // steering and Timer5 Int
 	blink_leds(4,500); // blink LEDs 4 times at half sec
@@ -92,6 +98,13 @@ int main() {
 
     EnableIntT2;
     while(1){
+
+// Send outgoing uart packets
+        if(uart_tx_flag) {
+            uartSendPacket(uart_tx_packet);
+            uart_tx_flag = 0;
+        }
+
         while(!queueIsEmpty(fun_queue))
         {
             test = queuePop(fun_queue);
