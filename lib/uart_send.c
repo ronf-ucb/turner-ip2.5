@@ -35,6 +35,9 @@
 #include "mac_packet.h"
 #include "ppool.h"
 #include "radio.h"
+#include "version.h"
+#include "cmd.h"
+#include "../MyConsts/radio_settings.h"
 
 extern volatile unsigned char uart_tx_flag;
 extern volatile MacPacket uart_tx_packet;
@@ -45,11 +48,12 @@ unsigned char serialSendData (unsigned int dest_addr, unsigned char status,
     MacPacket packet;
     Payload pld;
 
-    packet = radioRequestPacket(datalen);
+    packet = radioRequestPacket(datalen); // allocate memory for serial packet
     if ( packet == NULL ) return 0;  // Unable to allocate packet
     macSetDestAddr(packet, dest_addr);          // SRC and PAN already set
 
     pld = macGetPayload(packet);
+ /* setup all packet data : */
     paySetData(pld, datalen, (unsigned char*) dataptr);
     paySetType(pld, type);
     paySetStatus(pld, status);
@@ -59,7 +63,19 @@ unsigned char serialSendData (unsigned int dest_addr, unsigned char status,
     uart_tx_packet = packet;
     uart_tx_flag = 1;
 
-
-
     return 1;
+}
+
+// try out sending a message over serial
+void test_serial()
+{   unsigned char i, string_length; unsigned char *version_string;
+// maximum string length to avoid packet size limit
+	version_string = (unsigned char *)versionGetString();
+	i = 0;
+	while((i < 127) && version_string[i] != '\0')
+	{ i++;}
+	string_length=i;     
+	serialSendData(RADIO_DEST_ADDR, 0, CMD_WHO_AM_I,
+            				string_length, version_string);
+      return; //success
 }

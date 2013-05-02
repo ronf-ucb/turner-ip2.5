@@ -49,8 +49,7 @@
 #define TEST_PACKET_INTERVAL_MS 200
 #define MOTOR_TEST_DUTY_CYCLE   50
 #define MOTOR_TEST_DURATION     10 //How long to run the motor (in seconds) during the test
-#define MD_LED_1                _LATB8
-#define MD_LED_2                _LATB11
+
 #define SMA_1                   1
 #define SMA_2                   2
 
