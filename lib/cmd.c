@@ -216,7 +216,7 @@ static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigne
 								 unsigned char *frame)
 { 	unsigned int sampLen = sizeof(telemStruct_t);
 	telemGetPID(packetNum);  // get current state
-	 radioConfirmationPacket(RADIO_DEST_ADDR,
+	 radioConfirmationPacket1(RADIO_DEST_ADDR,
 						     CMD_SPECIAL_TELEMETRY, 
 						     status, sampLen, (unsigned char *) &telemPIDdata);  
 	packetNum++;
@@ -244,7 +244,7 @@ static void cmdFlashReadback(unsigned char type, unsigned char status, unsigned 
 void cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
 { // MacPacket packet; Payload pld;
 	//Send confirmation packet
-	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ECHO, status, length, frame);  
+	radioConfirmationPacket1(RADIO_DEST_ADDR, CMD_ECHO, status, length, frame);  
     return; //success     
 }
 
@@ -267,10 +267,10 @@ void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, u
 	while((i < 127) && version_string[i] != '\0')
 	{ i++;}
 	string_length=i;     
-	serialSendData(RADIO_DEST_ADDR, status, CMD_WHO_AM_I,
-            				string_length, version_string);
-//	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
-//					status, string_length, version_string);  
+	//serialSendData(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
+//					status, string_length, version_string);
+	radioConfirmationPacket1(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
+					status, string_length, version_string);  
       return; //success
 }
 

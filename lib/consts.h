@@ -1,6 +1,9 @@
 #ifndef __CONSTS_H
 #define __CONSTS_H
 
+// enable Hall encoder = 1, as it is not always present/plugged in
+#define HALL_PRESENT 0
+
 #ifndef ADC_MAX
 #define ADC_MAX             1023
 #endif

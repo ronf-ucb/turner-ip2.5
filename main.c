@@ -40,7 +40,7 @@
 #include "adc_pid.h"
 
 static Payload rx_payload;
-static MacPacket rx_packet;
+// static MacPacket rx_packet;
 
 volatile MacPacket uart_tx_packet;
 volatile unsigned char uart_tx_flag;
@@ -66,12 +66,14 @@ int main() {
 //    SetupTimer1(); setup in pidSetup
     SetupTimer2();
     sclockSetup();
-//     mpuSetup();
-  //  amsHallSetup();
-   // dfmemSetup(); 
-    // tiHSetup();   // set up H bridge drivers
+    mpuSetup();
+#if HALL_PRESENT == 1  // Hall encoder may not be present
+    amsHallSetup();
+#endif
+       dfmemSetup(); 
+       tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
-//	pidSetup();  // setup PID control
+    pidSetup();  // setup PID control
 
     // Radio setup
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
@@ -85,7 +87,7 @@ int main() {
     	uartInit(&cmdPushFunc);
 
 /**** set up steering last - so dfmem can finish ****/
-//	steeringSetup(); // steering and Timer5 Int
+	steeringSetup(); // steering and Timer5 Int
 	blink_leds(4,500); // blink LEDs 4 times at half sec
     char j;
     for(j=0; j<3; j++){
@@ -100,6 +102,7 @@ int main() {
     EnableIntT2;
 
 	test_serial();  // send WhoAmI string
+
     while(1){
 
 // Send outgoing uart packets
@@ -107,6 +110,7 @@ int main() {
             uartSendPacket(uart_tx_packet);  // 
             uart_tx_flag = 0;
         }
+
 
         while(!queueIsEmpty(fun_queue))
         {

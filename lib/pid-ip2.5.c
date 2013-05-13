@@ -391,10 +391,15 @@ void pidGetState()
 
 // only works to +-32K revs- might reset after certain number of steps? Should wrap around properly
 	for(i =0; i<NUM_PIDS; i++)
-	{	amsGetPos(i);
+	{	
+	#if HALL_PRESENT == 1  // Hall encoder may not be present
+		amsGetPos(i);
 	      p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
 	      p_state = p_state + (encPos[i].oticks << 16);
 		p_state = p_state - (long)(encPos[i].offset <<2); 	// subtract offset to get zero position
+	#elseif HALL_PRESENT == 0
+		p_state = 0  // default position value	
+	#endif
 		pidObjs[i].p_state = p_state;
 	}
 

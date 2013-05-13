@@ -41,8 +41,26 @@
 
 extern volatile unsigned char uart_tx_flag;
 extern volatile MacPacket uart_tx_packet;
-unsigned char serialSendData (unsigned int dest_addr, unsigned char status,
-                             unsigned char type, unsigned int datalen,
+// redefine radio to be serial for testing purposes 
+/* unsigned char radioConfirmationPacket1(unsigned int dest_addr,  unsigned char type, 
+				unsigned char status, unsigned int datalen,
+                             unsigned char* dataptr) 
+*/
+
+
+unsigned char radioConfirmationPacket1(unsigned int dest_addr,  unsigned char type, 
+				unsigned char status, unsigned int datalen,
+                             unsigned char* dataptr)
+{ unsigned char sent;
+	sent = serialSendData (dest_addr,  type, status, datalen, dataptr);
+
+	return(sent);
+}
+
+
+
+unsigned char serialSendData (unsigned int dest_addr,  unsigned char type, 
+				unsigned char status, unsigned int datalen,
                              unsigned char* dataptr) //, unsigned char fast_fail)
 {
     MacPacket packet;

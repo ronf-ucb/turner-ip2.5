@@ -131,7 +131,7 @@ void telemFlashReadback(unsigned int count)
 	   if ((sampNum+1) != data.telemStruct.sampleIndex)
 		while(1) // hang here if bad read
 		{ blink_leds(1,200); }
-	   radioConfirmationPacket(RADIO_DEST_ADDR,
+	   radioConfirmationPacket1(RADIO_DEST_ADDR,
 						     CMD_SPECIAL_TELEMETRY, 
 						     status, sampLen, (unsigned char *) &data);  
 	// delay_ms(25);	// slow down for XBee 57.6 K
