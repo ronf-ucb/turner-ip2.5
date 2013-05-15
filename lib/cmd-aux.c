@@ -1,3 +1,13 @@
+#include "cmd.h"
+#include "cmd_const.h"
+#include "cmd-motor.h"
+#include "cmd-aux.h"
+#include "radio.h"
+#include "../MyConsts/radio_settings.h"
+#include "led.h"
+#include "pid-ip2.5.h"
+#include "version.h"
+
 /*-----------------------------------------------------------------------------
  *          AUX functions
 -----------------------------------------------------------------------------*/
@@ -8,12 +18,12 @@ void cmdEcho(unsigned char type, unsigned char status, unsigned char length, uns
     return; //success     
 }
 
-static void cmdNop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+void cmdNop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
     Nop();
 }
 
 
-static void cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+void cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {
 	asm volatile("reset");
 }
@@ -27,8 +37,8 @@ void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, u
 	while((i < 127) && version_string[i] != '\0')
 	{ i++;}
 	string_length=i;     
-	serialSendData(RADIO_DEST_ADDR, status, CMD_WHO_AM_I,
-            				string_length, version_string, 0);
+	/* serialSendData(RADIO_DEST_ADDR, status, CMD_WHO_AM_I,
+            				string_length, version_string, 0); */
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
 					status, string_length, version_string);  
       return; //success

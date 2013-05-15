@@ -1,4 +1,5 @@
-BS_COMPORT = 'COM4'
+BS_COMPORT = 'COM4' # ron
+# BS_COMPORT = 'COM3' # duncan
 BS_BAUDRATE = 230400
 
 motor_gains_set = False

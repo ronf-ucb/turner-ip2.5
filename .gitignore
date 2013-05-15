@@ -14,3 +14,4 @@ private
 *.properties
 *.bash
 /obj/
+/*.old
