@@ -73,7 +73,7 @@ int main() {
        dfmemSetup(); 
        tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
-    pidSetup();  // setup PID control
+//    pidSetup();  // setup PID control
 
     // Radio setup
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
