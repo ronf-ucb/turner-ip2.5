@@ -93,7 +93,7 @@ void test_serial()
 	while((i < 127) && version_string[i] != '\0')
 	{ i++;}
 	string_length=i;     
-	serialSendData(RADIO_DEST_ADDR, 0, CMD_WHO_AM_I,
+	serialSendData(RADIO_DEST_ADDR, CMD_WHO_AM_I, 0,
             				string_length, version_string);
       return; //success
 }

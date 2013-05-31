@@ -241,7 +241,9 @@ void pidOn(int pid_num){
 void pidZeroPos(int pid_num){ 
 // disable interrupts to reset state variables
 	DisableIntT1; // turn off pid interrupts
+#if HALL_PRESENT ==1  // Hall encoder may not be present
 	amsHallSetup(); //  reinitialize rev count and relative zero encoder position for both motors
+#endif
 	pidObjs[pid_num].p_state = 0;
 // reset position setpoint as well
 	pidObjs[pid_num].p_input = 0;
