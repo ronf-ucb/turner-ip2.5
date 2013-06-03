@@ -84,7 +84,7 @@ int main() {
 
 	uart_tx_packet = NULL;
     	uart_tx_flag = 0;
-    	uartInit(&cmdPushFunc);
+ 
 
 /**** set up steering last - so dfmem can finish ****/
 	steeringSetup(); // steering and Timer5 Int
@@ -98,7 +98,7 @@ int main() {
     }
 
     LED_2 = ON;
-
+   	uartInit(&cmdPushFunc); // enable last in case packets already being received
     EnableIntT2;
 
 	test_serial();  // send WhoAmI string
