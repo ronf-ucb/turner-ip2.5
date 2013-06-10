@@ -221,7 +221,7 @@ static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigne
 						     status, sampLen, (unsigned char *) &telemPIDdata);  
 	packetNum++;
     // delay_ms(25);	// slow down for XBee 57.6 K
-	blink_leds(1,20); // wait 20 ms to give plenty of time to send packets
+   	blink_leds(1,2); // wait 2 ms to give plenty of time to send packets, and ROS to process
 }
 
 
