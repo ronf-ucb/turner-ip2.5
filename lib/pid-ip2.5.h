@@ -68,7 +68,7 @@ typedef struct
 // structure for velocity control of leg cycle
 typedef struct
 { 
-	int interpolate;  				// intermediate value between setpoints
+	long interpolate;  				// intermediate value between setpoints
 	unsigned long expire;		// end of current segment
 	int index;					// right index to moves
 	int interval[NUM_VELS];	// number of ticks between intervals

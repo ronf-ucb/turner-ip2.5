@@ -193,7 +193,7 @@ def getPIDdata():
 
         
 # execute move command
-count = 300 # 300 Hz sampling in steering = 1 sec
+count = 600 # 300 Hz sampling in steering = 2 sec
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
@@ -207,7 +207,7 @@ def proceed():
         skip = 0    # store every other sample if = 1
         temp=[count,start,skip]
         print 'temp =',temp,'\n'
-        raw_input("Press any key to send StartTelem...")
+        raw_input("Press any key to send StartTelem and Set_Thrust ...")
         xb_send(0, command.START_TELEM, pack('3h',*temp))
         time.sleep(0.1)
     print "thrust =" + str(thrust)
@@ -220,7 +220,7 @@ def proceed():
 def flashReadback():
     global count, dataFileName
     raw_input("Press any key to start readback ...")
-    print "started readback"
+    print "started readback of %d packets" %count
     shared.imudata = []  # reset imudata structure
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',count))

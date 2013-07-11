@@ -14,7 +14,7 @@
 #define RADIO_SRC_ADDR        0x2112
 #endif
 
-//#define RONF
+#define RONF
 // ronf robot radio addresses
 #ifdef RONF
 #define RADIO_MY_CHAN 0x13
@@ -24,7 +24,7 @@
 #define RADIO_SRC_ADDR 0x2052
 #endif
 
-#define MOTILE
+//#define MOTILE
 #ifdef MOTILE
 #define RADIO_MY_CHAN 0x0e
 #define RADIO_PAN_ID 0x3000
