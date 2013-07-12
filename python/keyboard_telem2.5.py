@@ -29,14 +29,14 @@ RESET_ROBOT = False
 motorgains = [400,0,400,0,0, 400,0,400,0,0]
 throttle = [0,0]
 duration = [512,512]  # length of run
-cycle = 512 # ms for a leg cycle
+cycle = 128 # ms for a leg cycle
 # velocity profile
 # [time intervals for setpoints]
 # [position increments at set points]
 # [velocity increments]   
 delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
-intervals = [128, 128, 128, 128]  # total 512 ms
-vel = [128, 128,128,128]  # = delta/interval
+intervals = [48, 48, 16, 16]  # total 128 ms
+vel = [348, 348,712,712]  # = delta/interval
 
 
 ser = serial.Serial(shared.BS_COMPORT, shared.BS_BAUDRATE,timeout=3, rtscts=0)
@@ -193,7 +193,7 @@ def getPIDdata():
 
         
 # execute move command
-count = 600 # 300 Hz sampling in steering = 2 sec
+count = 300 # 300 Hz sampling in steering = 2 sec
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
