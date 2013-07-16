@@ -17,7 +17,7 @@ extern pidPos pidObjs[NUM_PIDS];
 
 // set PWM values for short duration for each motor
 // throttle[0], throttle[1], duration
-void cmdSetThrust(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+unsigned char cmdSetThrust(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
  {	int thrust1 = frame[0] + (frame[1] << 8);
 	int thrust2 = frame[2] + (frame[3] << 8);
 	unsigned int run_time_ms = frame[4] + (frame[5] << 8);
@@ -31,17 +31,19 @@ void cmdSetThrust(unsigned char type, unsigned char status, unsigned char length
 	tiHSetDC(1,0);
 	tiHSetDC(2,0);
 	EnableIntT1;
+	return 1;
  }  
 
 
 // 	stop motors and PD loop
-void cmdEStop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+unsigned char cmdEStop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 { 	CRITICAL_SECTION_START; // Disable interrupts
 	EmergencyStop(); // stop pid loop
 	CRITICAL_SECTION_END; // Re-enable interrupts
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ESTOP, status, length, frame);  
-    	return; //success     
+    	return 1; //success     
 }
+
 
 
 #define MESSAGE "Emergency Stop - low Battery!"
@@ -64,7 +66,7 @@ void cmdEStopSend(void)
 
 // report motor position and  reset motor position (from Hall angular sensors)
 // note motor_count is long (4 bytes) revs+frac rev
-void cmdZeroPos(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
+unsigned char cmdZeroPos(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
 { 	long motor_count[2]; 
 	motor_count[0] = pidObjs[0].p_state;
 	motor_count[1] = pidObjs[1].p_state;
@@ -72,9 +74,10 @@ void cmdZeroPos(unsigned char type, unsigned char status, unsigned char length, 
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ZERO_POS,\
 		 status, sizeof(motor_count), (unsigned char *)motor_count);  
      pidZeroPos(0); pidZeroPos(1);
+	return 1;
 }
 
-void cmdSetThrustClosedLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+unsigned char cmdSetThrustClosedLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {	int thrust1 = frame[0] + (frame[1] << 8);
 	unsigned int run_time_ms1 = frame[2] + (frame[3] << 8);
 	int thrust2 = frame[4] + (frame[5] << 8);
@@ -84,9 +87,10 @@ void cmdSetThrustClosedLoop(unsigned char type, unsigned char status, unsigned c
 	pidOn(0);
 	pidSetInput(1 ,thrust2, run_time_ms2);
 	pidOn(1);
+	return 1;
 }
 
-void cmdSetPIDGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+unsigned char cmdSetPIDGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int Kp, Ki, Kd, Kaw, ff;
 	int idx = 0;
 
@@ -105,13 +109,13 @@ void cmdSetPIDGains(unsigned char type, unsigned char status, unsigned char leng
 
 	//Send confirmation packet
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_SET_PID_GAINS, status, 20, frame);  
-      return; //success
+      return 1; //success
 }
 
 
 // set up velocity profile structure  - assume 4 set points for now, generalize later
 // packet = motor0: intervals[0..3], delta[0...3], vel[0...3], motor1: intervals[0..3], delta[0...3], vel[0...3]
-void cmdSetVelProfile(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+unsigned char cmdSetVelProfile(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int interval[NUM_VELS], delta[NUM_VELS], vel[NUM_VELS];
 	int idx = 0, i = 0;
 	for(i = 0; i < NUM_VELS; i ++)
@@ -137,7 +141,7 @@ void cmdSetVelProfile(unsigned char type, unsigned char status, unsigned char le
 
 	//Send confirmation packet
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_SET_VEL_PROFILE, status, 48, frame);  
-     return; //success
+     return 1; //success
 }
 
 

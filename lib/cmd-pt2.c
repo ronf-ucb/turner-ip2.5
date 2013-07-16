@@ -2,7 +2,7 @@
     old, unused or obsolete commands can go in here 
 */
 
-static void cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
     unsigned int count;     unsigned long tic;   unsigned char *tic_char;
     MacPacket packet; Payload pld;
 /*
@@ -60,12 +60,13 @@ static void cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigne
 
     //LED_RED = 0;
 */
+	return 1;
 }
 
 /*-----------------------------------------------------------------------------
  *          IMU functions
 -----------------------------------------------------------------------------*/
-static void cmdGetImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdGetImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
 
 //	senGetIMUData(status, CMD_GET_IMU_DATA);
 
@@ -87,6 +88,7 @@ static void cmdGetImuData(unsigned char type, unsigned char status, unsigned cha
     pld->type = CMD_GET_IMU_DATA;
     radioTxPayload(pld);
     */
+	return 1;
 }
 
 
@@ -94,7 +96,7 @@ static void cmdGetImuData(unsigned char type, unsigned char status, unsigned cha
 // 4 bytes for time
 // 6 bytes for xl data
 // 6 bytes for gyro data
-static void cmdGetImuLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdGetImuLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
 /*
     unsigned int count;
     unsigned long tic;
@@ -125,18 +127,21 @@ static void cmdGetImuLoop(unsigned char type, unsigned char status, unsigned cha
     }
     LED_RED = 0;
 */
+	return 1;
 }
 
 
-static void cmdStartImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdStartImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
 //    senSetImuDataSave(1);  
+	return 1;
 }
 
-static void cmdStopImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdStopImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
   //  senSetImuDataSave(0);  
+	return 1;
 }
 
-static void cmdTxSavedImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdTxSavedImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
  /*  
     unsigned int page, byte;
     unsigned int i, j;
@@ -164,11 +169,12 @@ static void cmdTxSavedImuData(unsigned char type, unsigned char status, unsigned
     }
     LED_RED = 0;
 */
+	return 1;
 }
 
 
 
-static void cmdSetMoveQueue(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdSetMoveQueue(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
 	unsigned int count;
 	int idx = 0;
 	count = (unsigned int)(*(frame+idx));
@@ -195,9 +201,10 @@ static void cmdSetMoveQueue(unsigned char type, unsigned char status, unsigned c
 		idx += 4;
 		mqPush(moveq, move);
 	}
+	return 1;
 }
 
-static void cmdSetSteeringGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdSetSteeringGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int Kp, Ki, Kd, Kaw, ff;
 	int idx = 0;
 	MacPacket packet; Payload pld;
@@ -217,9 +224,10 @@ static void cmdSetSteeringGains(unsigned char type, unsigned char status, unsign
 
     // Enqueue the packet for broadcast
     while(!radioEnqueueTxPacket(packet));
+	return 1;
 }
 
-static void cmdSetThrustOpenLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdSetThrustOpenLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	//unsigned char chan1[4], chan2[4];
     //float *duty_cycle1 = (float*)chan1;
 	//float *duty_cycle2 = (float*)chan2;
@@ -244,10 +252,11 @@ static void cmdSetThrustOpenLoop(unsigned char type, unsigned char status, unsig
     //mcSetDutyCycle(MC_CHANNEL_PWM1, duty_cycle1[0]);
 	//mcSetDutyCycle(MC_CHANNEL_PWM2, duty_cycle2[0]);
 	//mcSetDutyCycle(1, duty_cycle[0]);
+	return 1;
 }
 
 
-static void cmdSteer(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdSteer(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
     
     unsigned char chr_test[4];
     float *steer_value = (float*)chr_test;
@@ -259,6 +268,7 @@ static void cmdSteer(unsigned char type, unsigned char status, unsigned char len
 /*
     mcSteer(steer_value[0]);
 */
+	return 1;
 }
 
 
@@ -267,7 +277,7 @@ static void cmdSteer(unsigned char type, unsigned char status, unsigned char len
 
 
 
-static void cmdSetCtrldTurnRate(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdSetCtrldTurnRate(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int rate;
 	int idx = 0;
 	MacPacket packet; Payload pld;
@@ -284,10 +294,11 @@ static void cmdSetCtrldTurnRate(unsigned char type, unsigned char status, unsign
 
     // Enqueue the packet for broadcast
     while(!radioEnqueueTxPacket(packet));
+	return 1;
 }
 
 
-static void cmdSpecialTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdSpecialTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 /*	int count;
 	unsigned long temp;
 	//count = (int)(*(frame));
@@ -305,16 +316,18 @@ static void cmdSpecialTelemetry(unsigned char type, unsigned char status, unsign
 		readDFMem();
 	}
 */
+	return 1;
 }
 
 
 
-static void cmdEraseMemSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+static unsigned char cmdEraseMemSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
     unsigned int page;
 	page = frame[0] + (frame[1] << 8);
     LED_RED = 1;
     dfmemEraseSector(0x0100);   // erase Sector 1 (page 256 - 511)
     LED_RED = 0;
+	return 1;
 }
 
 

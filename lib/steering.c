@@ -53,7 +53,10 @@ void steeringSetup(void)
 // get gyro offset 
 	calib[0] = 0; calib[1]=1; calib[2]=0;
 	for( i =0; i < GYRO_AVG_SAMPLES; i++)
-	{ mpuUpdate();
+	{ // mpuUpdate();
+	// DUNCAN
+	   mpuBeginUpdate();
+	  waitDmaFinish();
 	   calib[0] += mpu_data.gyro_data[0];
  	   calib[1] += mpu_data.gyro_data[1];
 	   calib[2] += mpu_data.gyro_data[2];
@@ -99,7 +102,10 @@ void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void)
 	int i;
  
 // this is only place where mpuUpdate can be called as it shares SPI2 with dfmem
-  	mpuUpdate(); // read mpu6000 gyro + accelerometer
+    //  	mpuUpdate(); // read mpu6000 gyro + accelerometer
+	// DUNCAN
+	  mpuBeginUpdate();
+	  waitDmaFinish();	
 
 // for now just copy data from structure
 	for(i = 0; i<3; i++)

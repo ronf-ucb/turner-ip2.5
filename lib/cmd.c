@@ -24,8 +24,9 @@
 #include "steering.h"
 #include "dfmem.h"
 //  #include "dfmem_extra.h" replace with telemetry.h
-#include "tests.h"
-#include "queue.h"
+// #include "tests.h" not needed by DUNCAN
+// #include "queue.h" replaced by circular array
+#include "carray.h"
 #include "version.h"
 #include "../MyConsts/radio_settings.h"
 #include "tiH.h"
@@ -48,6 +49,7 @@ extern TelemConStruct TelemControl;
 extern unsigned long t1_ticks;
 extern int samplesToSave;
 unsigned long packetNum = 0; // sequential packet number
+extern volatile CircArray fun_queue;
 
 extern moveCmdT currentMove, idleMove, manualMove;
 // updated version string to identify robot
@@ -56,41 +58,41 @@ extern moveCmdT currentMove, idleMove, manualMove;
 // use an array of function pointer to avoid a number of case statements
 // MAX_CMD_FUNC_SIZE is defined in cmd_const.h
 // arg to all commands are: type, status, length, *frame
-void (*cmd_func[MAX_CMD_FUNC_SIZE])(unsigned char, unsigned char, unsigned char, unsigned char*);
+unsigned char (*cmd_func[MAX_CMD_FUNC_SIZE])(unsigned char, unsigned char, unsigned char, unsigned char*);
 
 /*-----------------------------------------------------------------------------
  *          Declaration of static functions
 -----------------------------------------------------------------------------*/
 
-static void cmdSteer(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdGetImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdGetImuLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdStartImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdStopImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdTxSavedImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdEraseMemSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSteer(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdGetImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdGetImuLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdStartImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdStopImuDataSave(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdTxSavedImuData(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdEraseMemSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 
 
 
 //User commands
-static void cmdSetThrustOpenLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdSetCtrldTurnRate(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdSetMoveQueue(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdSetSteeringGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdSpecialTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdFlashReadback(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdStartTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSetThrustOpenLoop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSetCtrldTurnRate(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSetMoveQueue(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSetSteeringGains(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdSpecialTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdFlashReadback(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdStartTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 
 //auxiliary commands defined in cmd-aux.c
 /*
-void cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+static unsigned char cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 static void cmdNop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 static void cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-static void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
-void cmdError(void);
+static unsigned char cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+unsigned char cmdError(void);
 */
 
 // commands defined in cmd-motor.c:
@@ -148,17 +150,21 @@ void cmdSetup(void) {
 // Jan 2013- new command handler using function queue
 void cmdPushFunc(MacPacket rx_packet)
 {   Payload rx_payload;
-    unsigned char command, status;  
+    unsigned char command;  
 	 rx_payload = macGetPayload(rx_packet);
 	 
-	 Test* test = (Test*) malloc(sizeof(Test));
-        if(!test) return;
-	  test->packet = rx_packet;
+//	 Test* test = (Test*) malloc(sizeof(Test));
+ //       if(!test) return;
+//	  test->packet = rx_packet;
+	if (rx_payload == NULL) 
+		return;
 
         command = payGetType(rx_payload);
-	   if( command < MAX_CMD_FUNC_SIZE)
-	  {     test->tf=cmd_func[command];
-		   queuePush(fun_queue, test); 
+	   if( command < MAX_CMD_FUNC_SIZE && cmd_func[command] != NULL)
+	  {     rx_payload -> test = cmd_func[command];
+// test->tf=cmd_func[command];
+//		   queuePush(fun_queue, test); 
+		  carrayAddTail(fun_queue, rx_packet);
 	  }   
 	  else 
 	 {  cmdError();   // halt on error - could also just ignore....
@@ -184,7 +190,7 @@ void cmdPushFunc(MacPacket rx_packet)
 */
 
 
-static void cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+static unsigned char cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {
 //	eraseDFMemSectors0a0b();
 /// updated for IP2.5
@@ -192,13 +198,14 @@ static void cmdEraseSector(unsigned char type, unsigned char status, unsigned ch
 	CRITICAL_SECTION_START   //  can't have interrupt process grabbing SPI2
 	dfmemEraseSectorsForSamples( (unsigned long) 300, sizeof(telemStruct_t));
 	CRITICAL_SECTION_END
-	mpuUpdate(); // make sure we can still use SPI2
+//	mpuUpdate(); // make sure we can still use SPI2
+	return 1;
 }
 
 
 // telemetry is saved at 300 Hz inside steering servo
 // alternative telemetry which runs at 1 kHz rate inside PID loop
-static void cmdStartTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+static unsigned char cmdStartTelemetry(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
 	int idx=0;
        unsigned long temp;
      TelemControl.count = frame[idx] + (frame[idx+1] << 8); idx+=2;
@@ -216,10 +223,11 @@ static void cmdStartTelemetry(unsigned char type, unsigned char status, unsigned
 	if(TelemControl.count > 0) 
 	{ TelemControl.onoff = 1;   // use just steering servo sample capture
 	 } // enable telemetry last 
+	return 1;
 }
 
 //send single radio packet with current PID state
-static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigned char length,
+static unsigned char cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigned char length,
 								 unsigned char *frame)
 { 	unsigned int sampLen = sizeof(telemStruct_t);
 	telemGetPID(packetNum);  // get current state
@@ -229,15 +237,17 @@ static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigne
 	packetNum++;
     // delay_ms(25);	// slow down for XBee 57.6 K
 	blink_leds(1,20); // wait 20 ms to give plenty of time to send packets
+	return 1;
 }
 
 
-static void cmdFlashReadback(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+static unsigned char cmdFlashReadback(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {	unsigned int count;
 	count = frame[0] + (frame[1] << 8);
 	telemFlashReadback(count);	
 /**********  will need to disable mpuUpdate to read flash... ******/
 //	readDFMemBySample(count);
+	return 1;
 }
 
 

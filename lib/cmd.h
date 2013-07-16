@@ -29,8 +29,8 @@
 #define CMD_ESTOP 0x91
 
 void cmdSetup(void);
-void cmdHandleRadioRxBuffer(void);
-void cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
+unsigned char cmdHandleRadioRxBuffer(void);
+unsigned char cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 void cmdPushFunc(MacPacket rx_packet);
 
 #endif // __CMD_H

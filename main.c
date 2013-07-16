@@ -20,10 +20,13 @@
 #include "init_default.h"
 #include "timer.h"
 #include "utils.h"
-#include "queue.h"
+// DUNCAN
+// #include "queue.h"
+#include "carray.h"
+#include "ppool.h"
 #include "radio.h"
 #include "MyConsts/radio_settings.h"
-#include "tests.h" 
+ #include "tests.h" 
 #include "dfmem.h"
 #include "interrupts.h"
 #include "sclock.h"
@@ -39,18 +42,22 @@
 
 Payload rx_payload;
 MacPacket rx_packet;
+static test_function rx_function;
 
 volatile MacPacket uart_tx_packet;
 volatile unsigned char uart_tx_flag;
 
-Test* test;
+// Test* test;
+
+volatile CircArray fun_queue;
 
 
 unsigned int error_code;
 
 int main() {
-    fun_queue = queueInit(FUN_Q_LEN);
-    test_function tf;
+  //  fun_queue = queueInit(FUN_Q_LEN);
+	fun_queue = carrayCreate(FUN_Q_LEN);
+ //   test_function tf;
     error_code = ERR_NONE;
 
     /* Initialization */
@@ -64,15 +71,16 @@ int main() {
 //    SetupTimer1(); setup in pidSetup
     SetupTimer2();
     sclockSetup();
-    mpuSetup();
-    amsHallSetup();
-    dfmemSetup(); 
+    mpuSetup(1);
+  //  amsHallSetup();
+	amsEncoderSetup();
+    dfmemSetup(0); 
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
 	pidSetup();  // setup PID control
 
     // Radio setup
-    radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
+    radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE,0);
     radioSetChannel(RADIO_MY_CHAN);
     radioSetSrcAddr(RADIO_SRC_ADDR);
     radioSetSrcPanID(RADIO_PAN_ID);
@@ -92,6 +100,36 @@ int main() {
 
     EnableIntT2;
     while(1){
+	// Send outgoing radio packets
+        radioProcess();
+
+ // move received packets to function queue
+        while (!radioRxQueueEmpty()) 
+	{   // Check for unprocessed packet
+            rx_packet = radioDequeueRxPacket();
+            if(rx_packet != NULL)
+	    {  cmdPushFunc(rx_packet);  }
+        }
+
+// process commands from function queue
+	while(!carrayIsEmpty(fun_queue)) 
+	{   rx_packet = carrayPopHead(fun_queue);
+            if(rx_packet != NULL) 
+	    {  rx_payload = macGetPayload(rx_packet);
+               if(rx_payload != NULL) 
+	       {   rx_function = (test_function)(rx_payload->test);
+                   if(rx_function != NULL) 
+		    {    LED_2 = ~LED_2;
+                       (rx_function)(payGetType(rx_payload), payGetStatus(rx_payload), payGetDataLength(rx_payload), payGetData(rx_payload));
+                   }
+               }
+               ppoolReturnFullPacket(rx_packet);
+            }
+       }
+    }
+    return 0;
+}
+/*
         while(!queueIsEmpty(fun_queue))
         {
             test = queuePop(fun_queue);
@@ -104,6 +142,5 @@ int main() {
             radioReturnPacket(test->packet);
             free(test);
         }
-    }
-    return 0;
-}
+*/
+

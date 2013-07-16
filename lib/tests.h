@@ -22,7 +22,7 @@
 extern volatile PayQueue rx_pay_queue;
 extern unsigned char argument, regaddr, regvalue;
 extern unsigned int i, j, rowcnt, imcnt;
-extern volatile Queue fun_queue;
+// extern volatile Queue fun_queue;
 // extern mpuObj mpu_data;
 
 // A function pointer type definition for all testing functions
@@ -63,7 +63,7 @@ unsigned char set_motor_direction(unsigned char chan_num, unsigned char\
 extern unsigned char argument, regaddr, regvalue;
 extern unsigned int i, j, rowcnt, imcnt;
 
-extern volatile Queue fun_queue;
+// extern volatile Queue fun_queue;
 
 typedef struct {
     MacPacket packet;

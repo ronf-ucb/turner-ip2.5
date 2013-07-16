@@ -11,25 +11,27 @@
 /*-----------------------------------------------------------------------------
  *          AUX functions
 -----------------------------------------------------------------------------*/
-void cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
+unsigned char cmdEcho(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
 { // MacPacket packet; Payload pld;
 	//Send confirmation packet
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_ECHO, status, length, frame);  
-    return; //success     
+    return 1; //success     
 }
 
-void cmdNop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
+unsigned char cmdNop(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
     Nop();
+	return 1;
 }
 
 
-void cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+unsigned char cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {
 	asm volatile("reset");
+	return 1;
 }
 
 // send robot info when queried
-void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
+unsigned char cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) 
 {   unsigned char i, string_length; unsigned char *version_string;
 // maximum string length to avoid packet size limit
 	version_string = (unsigned char *)versionGetString();
@@ -41,13 +43,13 @@ void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, u
             				string_length, version_string, 0); */
 	radioConfirmationPacket(RADIO_DEST_ADDR, CMD_WHO_AM_I, 
 					status, string_length, version_string);  
-      return; //success
+      return 1; //success
 }
 
 // handle bad command packets
 // we might be in the middle of a dangerous maneuver- better to stop and signal we need resent command
 // wait for command to be resent
-void cmdError()
+unsigned char cmdError()
 { int i;
  	EmergencyStop();
 	for(i= 0; i < 10; i++)
@@ -58,5 +60,6 @@ void cmdError()
 			LED_3 ^= 1;
 			delay_ms(200);
           }
+	return 1;
 }
 

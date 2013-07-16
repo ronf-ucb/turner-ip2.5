@@ -18,6 +18,13 @@ extern int gdata[3];
 extern int gyroAvg;
 extern int xldata[3];  // accelerometer data 
 extern int offsx, offsy, offsz;
+/** Port status codes */
+typedef enum {
+    STAT_SPI_CLOSED, /** Port not initialized */
+    STAT_SPI_OPEN,  /** Port not busy */
+    STAT_SPI_BUSY,  /** Port busy */
+} SpicStatus;
+
 extern SpicStatus port_status[SPIC_NUM_PORTS];  
 
 // structure to keep track of telemetry recording

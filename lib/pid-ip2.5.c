@@ -24,6 +24,7 @@
 #include "stopwatch.h"
 //#include "incap.h" // input capture
 #include "ams-enc.h"
+#include "mpu6000.h"
 #include "tih.h"
 #include <stdlib.h> // for malloc
 #include "init.h"  // for Timer1
@@ -241,7 +242,8 @@ void pidOn(int pid_num){
 void pidZeroPos(int pid_num){ 
 // disable interrupts to reset state variables
 	DisableIntT1; // turn off pid interrupts
-	amsHallSetup(); //  reinitialize rev count and relative zero encoder position for both motors
+	//amsHallSetup(); //  reinitialize rev count and relative zero encoder position for both motors
+	amsEncoderSetup();
 	pidObjs[pid_num].p_state = 0;
 // reset position setpoint as well
 	pidObjs[pid_num].p_input = 0;
@@ -326,6 +328,10 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 //  unsigned long time_start, time_end; 
 //	time_start =  swatchTic(); 
 
+//DUNCAN
+	mpuBeginUpdate();
+	amsEncoderStartAsyncRead();
+
     if (t1_ticks == T1_MAX) t1_ticks = 0;
     t1_ticks++;
     pidGetState();	// always update state, even if motor is coasting
@@ -376,7 +382,11 @@ void pidGetSetpoint(int j)
 /* update state variables including motor position and velocity */
 void pidGetState()
 {   int i;
-	long p_state, oldpos[NUM_PIDS], velocity;
+	long p_state;
+#if VEL_BEMF == 0
+	long oldpos[NUM_PIDS], velocity;
+#endif 
+
 // get diff amp offset with motor off at startup time
 	if(calib_flag)
 	{ 	
@@ -392,7 +402,8 @@ void pidGetState()
 
 // only works to +-32K revs- might reset after certain number of steps? Should wrap around properly
 	for(i =0; i<NUM_PIDS; i++)
-	{	amsGetPos(i);
+	{
+/* 	DUNCAN amsGetPos(i); done by DMA */
 	      p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
 	      p_state = p_state + (encPos[i].oticks << 16);
 		p_state = p_state - (long)(encPos[i].offset <<2); 	// subtract offset to get zero position
