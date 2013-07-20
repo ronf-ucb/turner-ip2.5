@@ -16,7 +16,7 @@ def xbee_received(packet):
     status = ord(rf_data[0])
     type = ord(rf_data[1])
     data = rf_data[2:]
-    
+    # print 'rcv cmd:', str(type)
     if (type == command.GET_IMU_DATA):
         datum = unpack('l6h', data)
         #datum = unpack('l3f', data)
@@ -42,7 +42,7 @@ def xbee_received(packet):
 
     elif (type == command.SET_PID_GAINS):
         print "Set PID gains"
-        gains = unpack('10h', data)
+        gains = unpack('10h', data) # 10 gain 16 bit words
         print gains
         shared.motor_gains_set = True 
     elif (type == command.SET_STEERING_GAINS):
@@ -87,16 +87,22 @@ def xbee_received(packet):
         pattern = '=LLll'+13*'h'
         datum = unpack(pattern, data)
         telem_index = datum[0]
+        datum = list(datum) #DUNCAN
  # diagnostic
 #        if (shared.pkts <= 30):
-#            print "datum =", datum
- #           print "rssi= ", ord(packet.get('rssi'))
-        if (datum[0] != -1):
-            if (shared.pkts != telem_index):
-                print str(shared.pkts) + "<>" + str(telem_index),
-            shared.imudata.append(datum)  # save data anyway
-      
-    else:    
+ #       print "datum =", map(hex,datum)
+ #        if (datum[0] != -1):
+        print "telemetry packet #", telem_index, '\r',
+        if (datum[0] != -1) and (telem_index >= 0):
+            shared.imudata[telem_index] = datum
+            shared.bytesIn = shared.bytesIn + (5*4 + 11*2)
+##         
+##            if (shared.pkts != telem_index):
+##                print str(shared.pkts) + "<>" + str(telem_index),
+##            shared.imudata.append(datum)  # save data anyway
+##      
+    else:
+        print 'Unknown rcv cmd:', hex(type)
         pass
 
 

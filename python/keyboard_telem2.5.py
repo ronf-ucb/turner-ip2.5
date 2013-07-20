@@ -50,7 +50,7 @@ def resetRobot():
     xb_send(0, command.SOFTWARE_RESET, pack('h',0))
 
 def setThrust():
-    global duration, count, delay, throttle
+    global duration, delay, throttle
     time = max(duration) # just pick mx of 2 motor run times for now
     thrust = [throttle[0], throttle[1], time]
     print 'thrust', thrust
@@ -131,7 +131,9 @@ def setGain():
         count = count + 1
         xb_send(0, command.SET_PID_GAINS, pack('10h',*motorgains))
         time.sleep(2)
-        if count > 32:
+  #      print "keybd for next try"
+   #     x = raw_input()
+        if count > 10:
             print "count exceeded. Exit."
             print "Halting xb"
             xb.halt()
@@ -189,23 +191,23 @@ def getPIDdata():
     print 'mpos=', data[2:4]
     print 'pwm=',data[4:6]
     print 'imu=',data[6:13]
-    print 'emf=',data[13:16]
+    print 'emf/Vbatt=',data[13:16]
 
         
 # execute move command
-count = 300 # 300 Hz sampling in steering = 2 sec
+numSamples = 300 # 300 Hz sampling in steering = 2 sec
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
-    global duration, count, delay, throttle
+    global duration, numSamples, delay, throttle
     thrust = [throttle[0], duration[0], throttle[1], duration[1], 0]
     if telemetry:
-        xb_send(0, command.ERASE_SECTORS, pack('h',0))
+        xb_send(0, command.ERASE_SECTORS, pack('h',numSamples))
         print "started erase, 3 second dwell"
         time.sleep(3)
         start = 0   # two byte start time to record
         skip = 0    # store every other sample if = 1
-        temp=[count,start,skip]
+        temp=[numSamples,start,skip]
         print 'temp =',temp,'\n'
         raw_input("Press any key to send StartTelem and Set_Thrust ...")
         xb_send(0, command.START_TELEM, pack('3h',*temp))
@@ -218,31 +220,34 @@ def proceed():
         flashReadback()
 
 def flashReadback():
-    global count, dataFileName
+    global numsamples, dataFileName
     raw_input("Press any key to start readback ...")
-    print "started readback of %d packets" %count
-    shared.imudata = []  # reset imudata structure
+    print "started readback of %d packets" %numSamples
+   # shared.imudata = []  # reset imudata structure
+    shared.imudata = [ [] ] * numSamples  # reset imudata structure
     shared.pkts = 0  # reset packet count???
-    xb_send(0, command.FLASH_READBACK, pack('=h',count))
-    time.sleep(delay*count + 10)
-    while shared.pkts != count:
+    xb_send(0, command.FLASH_READBACK, pack('=h',numSamples))
+    time.sleep(delay*numSamples + 10)
+    while shared.pkts != numSamples:
         print "\n Retry after 10 seconds. Got only %d packets" %shared.pkts
         time.sleep(10)
-        shared.imudata = []
+     #   shared.imudata = [] # don't reinitialize already has some data
         shared.pkts = 0
-        xb_send(0, command.FLASH_READBACK, pack('=h',count))
-        time.sleep(delay*count + 7)
-        if shared.pkts > count:
+        xb_send(0, command.FLASH_READBACK, pack('=h',numSamples))
+        time.sleep(delay*numSamples + 7)
+        if shared.pkts > numSamples:
             print "too many packets"
             break
-        if shared.pkts < count:
+        if shared.pkts < numSamples:
             print "\n too few packets",str(shared.pkts)
             break
     print "readback done"
 # While waiting, write parameters to start of file
     writeFileHeader(dataFileName)     
     fileout = open(dataFileName, 'a')
-    np.savetxt(fileout , np.array(shared.imudata), '%d', delimiter = ',')
+ #   np.savetxt(fileout , np.array(shared.imudata), '%d', delimiter = ',')
+    np.savetxt(fileout , np.array([e for e in shared.imudata if len(e)]), '%d', delimiter = ',')
+    # Write non-empty lists in imudata to file
     fileout.close()
     print "data saved to ",dataFileName
 
@@ -310,7 +315,9 @@ def main():
         elif keypress == 'd':
             throttle[0] -= tinc
         elif keypress == 'e':
+            import pdb; pdb.set_trace()
             xb_send(0, command.ECHO,  "Echo Test")
+            print 'xb_send ECHO'
         elif keypress == 'f':
             flashReadback()
         elif keypress == 'g':
