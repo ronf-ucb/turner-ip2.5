@@ -14,7 +14,8 @@ import shared
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
 telemetry = False
-imudata = []
+numSamples = 300 # 300 Hz sampling in steering = 2 sec
+imudata = [ [] ] * (numSamples+1)
 gainsNotSet = True;
 delay = 0.025
 
@@ -195,7 +196,7 @@ def getPIDdata():
 
         
 # execute move command
-numSamples = 300 # 300 Hz sampling in steering = 2 sec
+
 
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
@@ -224,7 +225,7 @@ def flashReadback():
     raw_input("Press any key to start readback ...")
     print "started readback of %d packets" %numSamples
    # shared.imudata = []  # reset imudata structure
-    shared.imudata = [ [] ] * numSamples  # reset imudata structure
+    shared.imudata = [ [] ] * (numSamples+1)  # reset imudata structure
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',numSamples))
     time.sleep(delay*numSamples + 10)
@@ -315,7 +316,7 @@ def main():
         elif keypress == 'd':
             throttle[0] -= tinc
         elif keypress == 'e':
-            import pdb; pdb.set_trace()
+   #         import pdb; pdb.set_trace()
             xb_send(0, command.ECHO,  "Echo Test")
             print 'xb_send ECHO'
         elif keypress == 'f':

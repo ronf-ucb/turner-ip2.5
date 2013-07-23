@@ -9,6 +9,6 @@ pkts = 0
 bytesIn = 0
 count2deg = 2000.0/(2**15-1)
 
-imudata = []
+imudata = [[]] * 300 # HACK should use numSamples
 statedata = []
 dutycycles = []
