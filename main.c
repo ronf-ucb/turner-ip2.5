@@ -65,7 +65,10 @@ int main() {
     SetupTimer2();
     sclockSetup();
     mpuSetup();
+/*   if Hall not present will hang */
+#if HALL_SENSOR == 1
     amsHallSetup();
+#endif
     dfmemSetup(); 
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table

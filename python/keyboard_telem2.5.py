@@ -229,7 +229,8 @@ def flashReadback():
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',numSamples))
     time.sleep(delay*numSamples + 10)
-    while shared.pkts != numSamples:
+    print '\n after sleep, got shared.pkts =', shared.pkts
+    while shared.pkts < numSamples:
         print "\n Retry after 10 seconds. Got only %d packets" %shared.pkts
         time.sleep(10)
      #   shared.imudata = [] # don't reinitialize already has some data
@@ -242,7 +243,7 @@ def flashReadback():
         if shared.pkts < numSamples:
             print "\n too few packets",str(shared.pkts)
             break
-    print "readback done"
+    print "readback done with shared.pkts=", shared.pkts
 # While waiting, write parameters to start of file
     writeFileHeader(dataFileName)     
     fileout = open(dataFileName, 'a')
@@ -267,7 +268,7 @@ def writeFileHeader(dataFileName):
     fileout.write('"%  intervals     = ' +repr(intervals) + '"\n')
     fileout.write('"% Columns: "\n')
     # order for wiring on RF Turner
-    fileout.write('"% seq | time | LPos| RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
+    fileout.write('"% seq | time | LPos | RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
  #   fileout.write('"% time | Rlegs | Llegs | DCL | DCR | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LBEMF | RBEMF | SteerOut"\n')
   #  fileout.write('time, Rlegs, Llegs, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg, AX, AY, AZ, LBEMF, RBEMF, SteerOut\n')
     fileout.close()
@@ -288,6 +289,7 @@ def main():
   
    
     xb_send(0, command.WHO_AM_I, "Robot Echo")
+    time.sleep(0.5)
     setGain()
     time.sleep(0.5)  # wait for whoami before sending next command
     setVelProfile()
@@ -383,7 +385,10 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         xb.halt()
         ser.close()
-    except IOError:
+    except IOError as inst:
+        print type(inst)     # the exception instance
+        print inst.args      # arguments stored in .args
+        print inst 
         print "IO Error."
         xb.halt()
         ser.close()
