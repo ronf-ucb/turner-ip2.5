@@ -241,7 +241,10 @@ void pidOn(int pid_num){
 void pidZeroPos(int pid_num){ 
 // disable interrupts to reset state variables
 	DisableIntT1; // turn off pid interrupts
+/*   if Hall not present will hang */
+#if HALL_SENSOR == 1
 	amsHallSetup(); //  reinitialize rev count and relative zero encoder position for both motors
+#endif
 	pidObjs[pid_num].p_state = 0;
 // reset position setpoint as well
 	pidObjs[pid_num].p_input = 0;
@@ -391,13 +394,20 @@ void pidGetState()
 #endif
 
 // only works to +-32K revs- might reset after certain number of steps? Should wrap around properly
+/*   if Hall not present will hang */
+#if HALL_SENSOR == 1
 	for(i =0; i<NUM_PIDS; i++)
-	{	amsGetPos(i);
-	      p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
-	      p_state = p_state + (encPos[i].oticks << 16);
-		p_state = p_state - (long)(encPos[i].offset <<2); 	// subtract offset to get zero position
-		pidObjs[i].p_state = p_state;
+	{  amsGetPos(i); 
+	    p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
+	    p_state = p_state + (encPos[i].oticks << 16);
+	    p_state = p_state - (long)(encPos[i].offset <<2); 	// subtract offset to get zero position
+/*******  HACK For Jane's velociRoach *******/
+    		if(i ==1) 
+			pidObjs[i].p_state = p_state; // hack for Duncan's encoder
+		else
+			pidObjs[i].p_state = p_state; 
 	}
+#endif
 
 #if VEL_BEMF == 0    // use first difference on position for velocity estimate
 	for(i=0; i<NUM_PIDS; i++)
@@ -466,7 +476,7 @@ void pidSetControl()
 
 		if(pidObjs[0].onoff && pidObjs[1].onoff)  // both motors on to run
 		{
- 		   tiHSetDC(1, pidObjs[0].output); 
+ 		   tiHSetDC(1, pidObjs[0].output);  // RF Bot
 		   tiHSetDC(2, pidObjs[1].output); 
 		} 
 		else // turn off motors if PID loop is off
