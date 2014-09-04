@@ -75,6 +75,7 @@ int main() {
 	pidSetup();  // setup PID control
 
     // Radio setup
+    blink_leds(4,200); // blink LEDs 4 times at half sec
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
     radioSetChannel(RADIO_MY_CHAN);
     radioSetSrcAddr(RADIO_SRC_ADDR);
