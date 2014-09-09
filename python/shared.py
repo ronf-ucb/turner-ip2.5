@@ -1,5 +1,5 @@
 BS_COMPORT = 'COM4' # ron
-# BS_COMPORT = 'COM3' # duncan
+#BS_COMPORT = 'COM3' # duncan, ROBOPROC
 BS_BAUDRATE = 230400
 
 motor_gains_set = False

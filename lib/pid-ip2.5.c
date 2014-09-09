@@ -9,6 +9,7 @@
  * modified Jan. 2013 to include AMS Hall encoder, and MPU 6000 gyro
  */
 #include "pid-ip2.5.h"
+#include "consts.h"
 #include "dfmem.h"
 #include "gyro.h"
 #include "steering.h"
@@ -19,7 +20,6 @@
 #include "led.h"
 #include "adc.h"
 #include "move_queue.h"
-//#include "hall.h"
 #include "p33Fxxxx.h"
 #include "stopwatch.h"
 //#include "incap.h" // input capture
@@ -400,12 +400,8 @@ void pidGetState()
 	{  amsGetPos(i); 
 	    p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
 	    p_state = p_state + (encPos[i].oticks << 16);
-	    p_state = p_state - (long)(encPos[i].offset <<2); 	// subtract offset to get zero position
-/*******  HACK For Jane's velociRoach *******/
-    		if(i ==1) 
-			pidObjs[i].p_state = p_state; // hack for Duncan's encoder
-		else
-			pidObjs[i].p_state = p_state; 
+	    p_state = p_state - (long)(encPos[i].offset <<2); 	//  subtract offset to get zero position
+	    pidObjs[i].p_state = p_state; 
 	}
 #endif
 
