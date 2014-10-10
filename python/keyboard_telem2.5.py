@@ -176,8 +176,12 @@ def getGain(lr):
 def getPIDdata():
     count = 0
     shared.pkts = 0   # reset packet count
-    dummy_data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    # data format '=LLll'+13*'h' 
+    dummy_data = [0,0] # index, time
+    dummy_data = dummy_data + [0,0,0,0,0,0] # mpos, ref position, PMC duty cycle
+    dummy_data = dummy_data + [0,0,0,0,0,0,0] # gyro + accelerometer
+    dummy_data = dummy_data+ [0,0,0] # back EMF and VBatt
+    # data format '=LLll'+13*'h'
+    # data format Duncan '=LLLLll'+13*'h' 
     shared.imudata = [] #reset stored data
     xb_send(0, command.GET_PID_TELEMETRY, pack('h',0))
     time.sleep(0.2)
@@ -194,14 +198,13 @@ def getPIDdata():
     print 'index =', data[0]
     print 'time = ', data[1]
     print 'mpos=', data[2:4]
-    print 'pwm=',data[4:6]
-    print 'imu=',data[6:13]
-    print 'emf/Vbatt=',data[13:16]
+    print 'ref=', data[4:6]
+    print 'pwm=',data[6:8]
+    print 'imu=',data[8:15]
+    print 'emf/Vbatt=',data[15:18]
 
         
 # execute move command
-
-
 # duration modified to allow running legs for differennt number of cycles
 def proceed():
     global duration, numSamples, delay, throttle
@@ -252,7 +255,10 @@ def flashReadback():
     writeFileHeader(dataFileName)     
     fileout = open(dataFileName, 'a')
  #   np.savetxt(fileout , np.array(shared.imudata), '%d', delimiter = ',')
-    np.savetxt(fileout , np.array([e for e in shared.imudata if len(e)]), '%d', delimiter = ',')
+# hack to prune off sequence number
+    temp_array = np.array([e for e in shared.imudata if len(e)])
+    np.savetxt(fileout , temp_array, '%d', delimiter = ',')
+#    np.savetxt(fileout , np.array([e for e in shared.imudata if len(e)]), '%d', delimiter = ',')
     # Write non-empty lists in imudata to file
     fileout.close()
     print "data saved to ",dataFileName
@@ -266,15 +272,21 @@ def writeFileHeader(dataFileName):
     date = str(today.tm_year)+'/'+str(today.tm_mon)+'/'+str(today.tm_mday)+'  '
     date = date + str(today.tm_hour) +':' + str(today.tm_min)+':'+str(today.tm_sec)
     fileout.write('"Data file recorded ' + date + '"\n')
+    if 1:   # duncan version
+        fileout.write('"% Right Stride Frequency         = 0"\n')
+        fileout.write('"% Left Stride Frequency         = 0"\n')
+        fileout.write('"% Phase (Fractional)        = 0"\n')
     fileout.write('"%  keyboard_telem with hall effect "\n')
     fileout.write('"%  motorgains    = ' + repr(motorgains) + '"\n')
-    fileout.write('"%  delta         = ' +repr(delta) + '"\n')
-    fileout.write('"%  intervals     = ' +repr(intervals) + '"\n')
+    if 0: # Ron version
+        fileout.write('"%  delta         = ' +repr(delta) + '"\n')
+        fileout.write('"%  intervals     = ' +repr(intervals) + '"\n')
     fileout.write('"% Columns: "\n')
     # order for wiring on RF Turner
-    fileout.write('"% seq | time | LPos | RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
- #   fileout.write('"% time | Rlegs | Llegs | DCL | DCR | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LBEMF | RBEMF | SteerOut"\n')
-  #  fileout.write('time, Rlegs, Llegs, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg, AX, AY, AZ, LBEMF, RBEMF, SteerOut\n')
+  #  fileout.write('"% seq | time | LPos | RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"\n')
+    #telem format for Duncan, note no sequence number
+    fileout.write('"% time | LPos | RPos | LRef | RRef | dcL | dcR | GyX | GyY | GyZ | AX | AY | AZ | LEMF | REMF | BAT "\n')
+  #  fileout.write('time, Rlegs, Llegs, DCL, DCR, GyroX, GryoY, GryoZ, GryoZAvg, AX, AY, AX, LBEMF, RBEMF, SteerOut\n')
     fileout.close()
     
 def main():

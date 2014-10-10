@@ -6,12 +6,14 @@ typedef struct {
 	       unsigned long timeStamp; 
 		long posL;  	// Hall angle position
 		long posR;
+		long refL;		// reference position
+		long refR;
 		int dcL;		// PWM duty cycle
 		int dcR;
 		int gyroX;
 		int gyroY;
 		int gyroZ;
-		int gyroAvg;
+//		int gyroAvg;    // not used in Duncan telem, and not a state variable
 		int accelX;
 		int accelY;
 		int accelZ;

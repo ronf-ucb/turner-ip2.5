@@ -1,7 +1,0 @@
-"Data file recorded 2013/7/19  18:4:50"
-"%  keyboard_telem with hall effect "
-"%  motorgains    = [400, 0, 400, 0, 0, 400, 0, 400, 0, 0]"
-"%  delta         = [16384, 16384, 16384, 16384]"
-"%  intervals     = [48, 48, 16, 16]"
-"% Columns: "
-"% seq | time | LPos| RPos | LPWM | RPWM | GyroX | GryoY | GryoZ | GryoZAvg | AX | AY | AZ | LEMF | REMF | BAT | Steer"

@@ -36,11 +36,14 @@ extern int bemf[NUM_PIDS];
 /* data structure for telemetry */
 telemU telemPIDdata;
 
-
+// 7 Oct 2014 - added reference position
+// Duncan's telemetry uses this format: 
+// time | Right Leg Pos | Left Leg Pos | Commanded Right Leg Pos | Commanded Left Leg Pos | DCR | DCL | GyroX | GryoY | GryoZ | AX | AY | AZ | RBEMF | LBEMF | VBatt
 // store current PID info into structure. Used by telemSaveSample and CmdGetPIDTelemetry
 void telemGetPID(unsigned long sampIdx)
 {
-	telemPIDdata.telemStruct.sampleIndex = sampIdx;
+//	telemPIDdata.telemStruct.sampleIndex = sampIdx;
+	telemPIDdata.telemStruct.sampleIndex = 0xa5a55a5a; // check writing of first sample
 //Stopwatch was already started in the cmdSpecialTelemetry function
 	telemPIDdata.telemStruct.timeStamp = (long)swatchTic(); 
 
@@ -49,6 +52,9 @@ void telemGetPID(unsigned long sampIdx)
 //  save Hall encoder position instead of commanded thrust
 		telemPIDdata.telemStruct.posL = pidObjs[0].p_state;
 		telemPIDdata.telemStruct.posR = pidObjs[1].p_state;
+// save commanded reference
+		telemPIDdata.telemStruct.refL = pidObjs[0].p_input;
+		telemPIDdata.telemStruct.refR = pidObjs[1].p_input;
 	// save output instead of reading PWM (sync issue?)
 		telemPIDdata.telemStruct.dcL = pidObjs[0].output;	// left
 		telemPIDdata.telemStruct.dcR = pidObjs[1].output;	// right
@@ -59,7 +65,7 @@ void telemGetPID(unsigned long sampIdx)
    		telemPIDdata.telemStruct.gyroX = gdata[0] - offsx;
 		telemPIDdata.telemStruct.gyroY = gdata[1] - offsy;
 		telemPIDdata.telemStruct.gyroZ = gdata[2] - offsz; 
-		telemPIDdata.telemStruct.gyroAvg = gyroAvg;
+//		telemPIDdata.telemStruct.gyroAvg = gyroAvg; // not used in Duncan code
 		telemPIDdata.telemStruct.accelX = xldata[0];
 		telemPIDdata.telemStruct.accelY = xldata[1];
 		telemPIDdata.telemStruct.accelZ = xldata[2];
