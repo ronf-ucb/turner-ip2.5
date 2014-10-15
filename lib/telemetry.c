@@ -43,7 +43,7 @@ telemU telemPIDdata;
 void telemGetPID(unsigned long sampIdx)
 {
 //	telemPIDdata.telemStruct.sampleIndex = sampIdx;
-	telemPIDdata.telemStruct.sampleIndex = 0xa5a55a5a; // check writing of first sample
+	telemPIDdata.telemStruct.sampleIndex = 0x11223344; // check writing of first sample
 //Stopwatch was already started in the cmdSpecialTelemetry function
 	telemPIDdata.telemStruct.timeStamp = (long)swatchTic(); 
 
@@ -54,7 +54,7 @@ void telemGetPID(unsigned long sampIdx)
 		telemPIDdata.telemStruct.posR = pidObjs[1].p_state;
 // save commanded reference
 		telemPIDdata.telemStruct.refL = pidObjs[0].p_input;
-		telemPIDdata.telemStruct.refR = pidObjs[1].p_input;
+//		telemPIDdata.telemStruct.refR = pidObjs[1].p_input;
 	// save output instead of reading PWM (sync issue?)
 		telemPIDdata.telemStruct.dcL = pidObjs[0].output;	// left
 		telemPIDdata.telemStruct.dcR = pidObjs[1].output;	// right
@@ -135,7 +135,7 @@ void telemFlashReadback(unsigned int count)
 	for(sampNum = 0; sampNum < count; sampNum++)
 	{ dfmemReadSample(sampNum, sampLen, (unsigned char *) &data);
 	   if ((sampNum+1) != data.telemStruct.sampleIndex)
-		while(1) // hang here if bad read
+		while(0) // hang here if bad read  *** MOD to Get second packet ***
 		{ blink_leds(1,200); }
 	   radioConfirmationPacket(RADIO_DEST_ADDR,
 						     CMD_SPECIAL_TELEMETRY, 

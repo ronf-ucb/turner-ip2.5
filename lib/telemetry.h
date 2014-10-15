@@ -7,7 +7,7 @@ typedef struct {
 		long posL;  	// Hall angle position
 		long posR;
 		long refL;		// reference position
-		long refR;
+//		long refR;
 		int dcL;		// PWM duty cycle
 		int dcR;
 		int gyroX;
