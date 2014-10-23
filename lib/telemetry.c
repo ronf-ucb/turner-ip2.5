@@ -24,6 +24,7 @@ extern SpicStatus port_status[SPIC_NUM_PORTS];
 TelemConStruct TelemControl;  // structure for telemetry control
 extern pidT steeringPID;
 extern pidPos pidObjs[NUM_PIDS];
+extern pidVelLUT pidVel[NUM_PIDS];
 extern int bemf[NUM_PIDS];
 
 /* static struct piddata {
@@ -42,8 +43,7 @@ telemU telemPIDdata;
 // store current PID info into structure. Used by telemSaveSample and CmdGetPIDTelemetry
 void telemGetPID(unsigned long sampIdx)
 {
-//	telemPIDdata.telemStruct.sampleIndex = sampIdx;
-	telemPIDdata.telemStruct.sampleIndex = 0x11223344; // check writing of first sample
+	telemPIDdata.telemStruct.sampleIndex = sampIdx;
 //Stopwatch was already started in the cmdSpecialTelemetry function
 	telemPIDdata.telemStruct.timeStamp = (long)swatchTic(); 
 
@@ -53,8 +53,8 @@ void telemGetPID(unsigned long sampIdx)
 		telemPIDdata.telemStruct.posL = pidObjs[0].p_state;
 		telemPIDdata.telemStruct.posR = pidObjs[1].p_state;
 // save commanded reference
-		telemPIDdata.telemStruct.refL = pidObjs[0].p_input;
-//		telemPIDdata.telemStruct.refR = pidObjs[1].p_input;
+		telemPIDdata.telemStruct.refL = pidObjs[0].p_input + pidVel[0].interpolate; // interpolated ref position
+		telemPIDdata.telemStruct.refR = pidObjs[1].p_input + pidVel[1].interpolate;
 	// save output instead of reading PWM (sync issue?)
 		telemPIDdata.telemStruct.dcL = pidObjs[0].output;	// left
 		telemPIDdata.telemStruct.dcR = pidObjs[1].output;	// right
@@ -70,7 +70,7 @@ void telemGetPID(unsigned long sampIdx)
 		telemPIDdata.telemStruct.accelY = xldata[1];
 		telemPIDdata.telemStruct.accelZ = xldata[2];
 		telemPIDdata.telemStruct.Vbatt = (int) adcGetVbatt();
-		telemPIDdata.telemStruct.sOut = steeringPID.output;
+//		telemPIDdata.telemStruct.sOut = steeringPID.output;  // not used in Duncan telem
 		return;
 }
 
@@ -79,34 +79,6 @@ void telemGetPID(unsigned long sampIdx)
 // record current state to telemU structure
 void telemSaveSample(unsigned long sampIdx)
 {	
-/* telemU data;
-			data.telemStruct.sampleIndex = sampIdx;
-//Stopwatch was already started in the cmdSpecialTelemetry function
-			data.telemStruct.timeStamp = (long)swatchTic(); 
-
-// since T1 has higher priority, these state readings might get interrupted 
-	CRITICAL_SECTION_START  // need coherent sample without T1 int updates
-//  save Hall encoder position instead of commanded thrust
-		data.telemStruct.posL = pidObjs[0].p_state;
-		data.telemStruct.posR = pidObjs[1].p_state;
-	// save output instead of reading PWM (sync issue?)
-			data.telemStruct.dcL = pidObjs[0].output;	// left
-			data.telemStruct.dcR = pidObjs[1].output;	// right
-			data.telemStruct.bemfL = bemf[0];
-			data.telemStruct.bemfR = bemf[1];
-	CRITICAL_SECTION_END
-   
-			data.telemStruct.gyroX = gdata[0] - offsx;
-			data.telemStruct.gyroY = gdata[1] - offsy;
-			data.telemStruct.gyroZ = gdata[2] - offsz; 
-			data.telemStruct.gyroAvg = gyroAvg;
-
-			data.telemStruct.accelX = xldata[0];
-			data.telemStruct.accelY = xldata[1];
-			data.telemStruct.accelZ = xldata[2];
-			data.telemStruct.Vbatt = (int) adcGetVbatt();
-			data.telemStruct.sOut = steeringPID.output;
-*/
 			telemGetPID(sampIdx);
 // inside T5 interrupt, so don't need to DisableIntT5
 			telemFlashSample(&telemPIDdata); 
@@ -135,7 +107,7 @@ void telemFlashReadback(unsigned int count)
 	for(sampNum = 0; sampNum < count; sampNum++)
 	{ dfmemReadSample(sampNum, sampLen, (unsigned char *) &data);
 	   if ((sampNum+1) != data.telemStruct.sampleIndex)
-		while(0) // hang here if bad read  *** MOD to Get second packet ***
+		while(1) // hang here if bad read  *** MOD to Get second packet ***
 		{ blink_leds(1,200); }
 	   radioConfirmationPacket(RADIO_DEST_ADDR,
 						     CMD_SPECIAL_TELEMETRY, 

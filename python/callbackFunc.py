@@ -90,8 +90,8 @@ def xbee_received(packet):
         telem_index = datum[0]
         datum = list(datum) #DUNCAN
  # diagnostic
-        if (shared.pkts <= 30):
-           print "telem_index, datum =", telem_index, map(hex,datum)
+ #      if (shared.pkts <= 30):
+ #          print "telem_index, datum =", telem_index, map(hex,datum)
  #        if (datum[0] != -1):
  #       print "telemetry packet #", telem_index, '\r',
         if (datum[0] != -1) and (telem_index >= 0):

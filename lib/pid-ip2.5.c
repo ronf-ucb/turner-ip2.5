@@ -476,7 +476,10 @@ void pidSetControl()
 		   tiHSetDC(2, pidObjs[1].output); 
 		} 
 		else // turn off motors if PID loop is off
-		{ tiHSetDC(1,0); tiHSetDC(2,0); }	
+		{ tiHSetDC(1,0); tiHSetDC(2,0); 
+		   pidObjs[0].output = 0;
+		   pidObjs[1].output = 0;
+		}	
 }
 
 

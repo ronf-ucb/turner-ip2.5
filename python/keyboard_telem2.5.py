@@ -178,11 +178,12 @@ def getPIDdata():
     shared.pkts = 0   # reset packet count
     dummy_data = [0,0] # index, time
     dummy_data = dummy_data + [0,0,0,0,0,0] # mpos, ref position, PMC duty cycle
-    dummy_data = dummy_data + [0,0,0,0,0,0,0] # gyro + accelerometer
-    dummy_data = dummy_data+ [0,0,0] # back EMF and VBatt
+    dummy_data = dummy_data + [0,0,0,0,0,0] # gyro + accelerometer
+    dummy_data = dummy_data+ [0,0,0,0] # back EMF and VBatt and sOut
     # data format '=LLll'+13*'h'
     # data format Duncan '=LLLLll'+13*'h' 
     shared.imudata = [] #reset stored data
+    shared.imudata.append(dummy_data) # use dummy data
     xb_send(0, command.GET_PID_TELEMETRY, pack('h',0))
     time.sleep(0.2)
     while shared.pkts == 0:
@@ -190,8 +191,7 @@ def getPIDdata():
         time.sleep(1)
         count = count + 1
         if count > 10:
-            print 'no return packet'
-            shared.imudata.append(dummy_data) # use dummy data
+            print 'no return packet' # use dummy data
             break   
     data = shared.imudata[0]  # convert string list to numbers
 #    print 'packet=', data
@@ -257,7 +257,10 @@ def flashReadback():
  #   np.savetxt(fileout , np.array(shared.imudata), '%d', delimiter = ',')
 # hack to prune off sequence number
     temp_array = np.array([e for e in shared.imudata if len(e)])
-    np.savetxt(fileout , temp_array, '%d', delimiter = ',')
+    temp_array1 = temp_array[0:,1:] # strip off sequence number
+#    print 'temp sequence numbers', temp_array1[0:5]
+# Duncan telem: don't need sequence number
+    np.savetxt(fileout , temp_array1, '%d', delimiter = ',')
 #    np.savetxt(fileout , np.array([e for e in shared.imudata if len(e)]), '%d', delimiter = ',')
     # Write non-empty lists in imudata to file
     fileout.close()
