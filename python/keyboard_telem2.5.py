@@ -14,7 +14,7 @@ import shared
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
 telemetry = False
-numSamples = 600 # 300 Hz sampling in steering = 3 sec
+numSamples = 900 # 300 Hz sampling in steering = 3 sec
 imudata = [ [] ] * (numSamples+1)
 gainsNotSet = True;
 delay = 0.025
@@ -28,10 +28,11 @@ RESET_ROBOT = False
 # now uses back emf velocity as d term
 # [left gains motor 0, right gains motor 1]
 #motorgains = [400,0,400,0,0, 400,0,400,0,0]
-motorgains = [1000,0,300,0,100, 1000,0,300,0,100]
+# ok motor gains for high speed: motorgains = [1000,0,300,0,100, 1000,0,300,0,100]
+motorgains = [2000,1000,150,0,200, 2000,1000,150,0,200]  # slow speed position tracking
 throttle = [0,0]
 duration = [512,512]  # length of run
-cycle = 128 # ms for a leg cycle
+cycle = 1000 # ms for a leg cycle
 # velocity profile
 # [time intervals for setpoints]
 # [position increments at set points]
@@ -40,8 +41,11 @@ delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
 #intervals = [48, 48, 16, 16]  # total 128 ms
 #vel = [348, 348,712,712]  # = delta/interval
 
-intervals = [32, 32, 32, 32]  # total 128 ms
-vel = [1024, 1024,1024,1024]  # = delta/interval
+intervals = [cycle/4, cycle/4, cycle/4, cycle/4]  # total cycle ms
+# = delta/interval
+vel = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
+
+
 
 
 ser = serial.Serial(shared.BS_COMPORT, shared.BS_BAUDRATE,timeout=3, rtscts=0)
