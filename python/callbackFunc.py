@@ -16,7 +16,7 @@ def xbee_received(packet):
     status = ord(rf_data[0])
     type = ord(rf_data[1])
     data = rf_data[2:]
-#    print 'rcv cmd:', str(type)
+    # print 'rcv cmd:', str(type)
     if (type == command.GET_IMU_DATA):
         datum = unpack('l6h', data)
         #datum = unpack('l3f', data)
@@ -82,9 +82,10 @@ def xbee_received(packet):
         shared.pkts = shared.pkts + 1
         # first word is packet #
         # updated angle position to signed long (l) for IP2.5
- #       print "pkt ",shared.pkts,
+        # print "pkt ",shared.pkts,
         print ".",
- #       pattern = '=LLll'+13*'h'  # RSF telem format, L = unsigned long
+        # print 'len(data), data=', len(data)
+        #       pattern = '=LLll'+13*'h'  # RSF telem format, L = unsigned long
         pattern = '=LLllll'+11*'h'  # seq + Duncan telem format, added ref pos, no steer
         datum = unpack(pattern, data)
         telem_index = datum[0]
