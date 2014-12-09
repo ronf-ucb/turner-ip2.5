@@ -37,6 +37,7 @@
         <itemPath>../../imageproc-lib/ppool.h</itemPath>
         <itemPath>../../imageproc-lib/version-string.h</itemPath>
         <itemPath>../../imageproc-lib/uart_driver.h</itemPath>
+        <itemPath>../../imageproc-lib/bsp-ip25.h</itemPath>
       </logicalFolder>
       <logicalFolder name="lib" displayName="lib" projectFiles="true">
         <itemPath>../lib/init.h</itemPath>
@@ -56,6 +57,9 @@
       </logicalFolder>
       <logicalFolder name="MyConsts" displayName="MyConsts" projectFiles="true">
         <itemPath>../MyConsts/radio_settings.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="source" displayName="source" projectFiles="true">
+        <itemPath>source/version-string.h</itemPath>
       </logicalFolder>
       <itemPath>../p33FJ128MC706.h</itemPath>
     </logicalFolder>
@@ -119,6 +123,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>..</Elem>
+    <Elem>../../imageproc-lib</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -311,7 +316,7 @@
         <property key="optimization-level" value="0"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros" value="__IMAGEPROC2;PID_HARDWARE"/>
+        <property key="preprocessor-macros" value="__IMAGEPROC25;PID_HARDWARE"/>
         <property key="scalar-model" value="default"/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>

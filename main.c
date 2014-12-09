@@ -20,6 +20,7 @@
 #include "init_default.h"
 #include "timer.h"
 #include "utils.h"
+#include "bsp-ip25.h"
 #include "queue.h"
 #include "radio.h"
 #include "MyConsts/radio_settings.h"
