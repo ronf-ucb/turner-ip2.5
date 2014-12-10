@@ -24,7 +24,7 @@
 #include "queue.h"
 #include "radio.h"
 #include "MyConsts/radio_settings.h"
-#include "tests.h" 
+#include "tests.h"
 #include "dfmem.h"
 #include "interrupts.h"
 #include "sclock.h"
@@ -37,6 +37,7 @@
 #include "steering.h"
 #include "consts.h"
 #include "adc_pid.h"
+#include "telemetry.h"
 
 Payload rx_payload;
 MacPacket rx_packet;
@@ -70,7 +71,8 @@ int main() {
 #if HALL_SENSOR == 1
     amsHallSetup();
 #endif
-    dfmemSetup(); 
+    dfmemSetup();
+    telemSetup(); // added Dec. 9, 2014
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
 	pidSetup();  // setup PID control

@@ -53,10 +53,17 @@ void steeringSetup(void)
 // get gyro offset 
 	calib[0] = 0; calib[1]=1; calib[2]=0;
 	for( i =0; i < GYRO_AVG_SAMPLES; i++)
-	{ mpuUpdate();
-	   calib[0] += mpu_data.gyro_data[0];
+	{ // mpuUpdate();  old version
+         mpuGetGyro(gdata);
+        mpuGetXl(xldata);
+         calib[0] +=  gdata[0];
+ 	 calib[1] += gdata[1];
+	 calib[2] += gdata[2];
+
+/*	   calib[0] += mpu_data.gyro_data[0];
  	   calib[1] += mpu_data.gyro_data[1];
 	   calib[2] += mpu_data.gyro_data[2];
+ */
 	} 
 	offsx = (int)(calib[0]/GYRO_AVG_SAMPLES);
 	offsy = (int)(calib[1]/GYRO_AVG_SAMPLES);
@@ -99,13 +106,18 @@ void __attribute__((interrupt, no_auto_psv)) _T5Interrupt(void)
 	int i;
  
 // this is only place where mpuUpdate can be called as it shares SPI2 with dfmem
-  	mpuUpdate(); // read mpu6000 gyro + accelerometer
+  //	mpuUpdate(); // read mpu6000 gyro + accelerometer
+// split in new version Dec. 9, 2014
+        mpuGetGyro(gdata);
+        mpuGetXl(xldata);
 
+                /*  old version
 // for now just copy data from structure
 	for(i = 0; i<3; i++)
 	{ gdata[i] = mpu_data.gyro_data[i];
 	   xldata[i] = mpu_data.xl_data[i];
 	}
+*/
 
 // get moving average of z axis
 	gyroWindow[windowIdx] = gdata[2];

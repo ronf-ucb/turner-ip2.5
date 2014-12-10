@@ -38,12 +38,12 @@
         <itemPath>../../imageproc-lib/version-string.h</itemPath>
         <itemPath>../../imageproc-lib/uart_driver.h</itemPath>
         <itemPath>../../imageproc-lib/bsp-ip25.h</itemPath>
+        <itemPath>../../imageproc-lib/atomic.h</itemPath>
       </logicalFolder>
       <logicalFolder name="lib" displayName="lib" projectFiles="true">
         <itemPath>../lib/init.h</itemPath>
         <itemPath>../lib/interrupts.h</itemPath>
         <itemPath>../lib/consts.h</itemPath>
-        <itemPath>../lib/tests.h</itemPath>
         <itemPath>../lib/cmd.h</itemPath>
         <itemPath>../lib/move_queue.h</itemPath>
         <itemPath>../lib/steering.h</itemPath>
@@ -54,6 +54,7 @@
         <itemPath>../lib/cmd-motor.h</itemPath>
         <itemPath>../lib/uart_send.h</itemPath>
         <itemPath>../lib/cmd-aux.h</itemPath>
+        <itemPath>../lib/tests.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MyConsts" displayName="MyConsts" projectFiles="true">
         <itemPath>../MyConsts/radio_settings.h</itemPath>
@@ -102,7 +103,6 @@
       <logicalFolder name="lib" displayName="lib" projectFiles="true">
         <itemPath>../lib/init.c</itemPath>
         <itemPath>../lib/interrupts.c</itemPath>
-        <itemPath>../lib/tests.c</itemPath>
         <itemPath>../lib/cmd.c</itemPath>
         <itemPath>../lib/move_queue.c</itemPath>
         <itemPath>../lib/steering.c</itemPath>
@@ -112,6 +112,7 @@
         <itemPath>../lib/cmd-motor.c</itemPath>
         <itemPath>../lib/uart_send.c</itemPath>
         <itemPath>../lib/cmd-aux.c</itemPath>
+        <itemPath>../lib/tests.c</itemPath>
       </logicalFolder>
       <itemPath>../main.c</itemPath>
     </logicalFolder>

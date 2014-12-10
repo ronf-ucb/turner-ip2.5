@@ -65,6 +65,8 @@
 
 volatile Queue fun_queue;
 extern mpuObj mpu_data;
+extern int gdata[3];
+extern int xldata[3];
 
 
 /*****************************************************************************
@@ -116,7 +118,8 @@ unsigned char test_gyro(unsigned char type, unsigned char status,\
 {  	MacPacket packet;
      Payload pld;
 	// refresh MPU reading
-	mpuUpdate();
+      mpuGetGyro(gdata);      mpuGetXl(xldata);
+      //	mpuUpdate();
 
     // Get a new packet from the pool
     	packet = radioRequestPacket(sizeof(mpu_data));

@@ -184,7 +184,8 @@ void cmdPushFunc(MacPacket rx_packet)
 */
 
 
-static void cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+/*  previous version
+ static void cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
 {
 //	eraseDFMemSectors0a0b();
 /// updated for IP2.5
@@ -194,7 +195,15 @@ static void cmdEraseSector(unsigned char type, unsigned char status, unsigned ch
 	CRITICAL_SECTION_END
 	mpuUpdate(); // make sure we can still use SPI2
 }
+*/
 
+/* updated from RoACH Dec. 2014*/
+static void cmdEraseSector(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame){
+unsigned int numSamples = frame[0] + (frame[1] << 8);
+telemErase(numSamples);
+LED_RED = ~LED_RED;
+// return 1;
+}
 
 // telemetry is saved at 300 Hz inside steering servo
 // alternative telemetry which runs at 1 kHz rate inside PID loop

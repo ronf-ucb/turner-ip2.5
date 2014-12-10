@@ -3,6 +3,7 @@
 
 // Flash bug? make sure not multiple of 0x420 to avoid overwrite of address 0 with 0x00
 // 44, 48, 66, 88, 96, 132 are factors of 1056
+// fixed in dfmem.c, not writing over last byte.
 
 typedef struct {
 		unsigned long sampleIndex;
@@ -41,9 +42,12 @@ typedef struct
 	int skip;				// samples to skip
 } TelemConStruct;
 
-
+void telemSetup(); //To be called in main
 void telemGetPID(unsigned long sampIdx);
 void telemSaveSample(unsigned long sampIdx);
 void telemFlashSample(telemU* data);
 void setSampleSaveCount(int count);
 void telemFlashReadback(unsigned int count);
+void telemErase(unsigned long numSamples);
+void telemGetSample(unsigned long sampNum, unsigned int sampLen, unsigned char *data);
+

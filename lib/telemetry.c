@@ -18,7 +18,7 @@ extern int gdata[3];
 extern int gyroAvg;
 extern int xldata[3];  // accelerometer data 
 extern int offsx, offsy, offsz;
-extern SpicStatus port_status[SPIC_NUM_PORTS];  
+// extern SpicStatus port_status[SPIC_NUM_PORTS];
 
 // structure to keep track of telemetry recording
 TelemConStruct TelemControl;  // structure for telemetry control
@@ -36,6 +36,14 @@ extern int bemf[NUM_PIDS];
 
 /* data structure for telemetry */
 telemU telemPIDdata;
+
+unsigned int telemPacketSize;
+static DfmemGeometryStruct mem_geo;
+void telemSetup() {
+dfmemGetGeometryParams(&mem_geo); // Read memory chip sizing
+//Telemetry packet size is set at startupt time.
+telemPacketSize = sizeof (telemStruct_t);
+}
 
 // 7 Oct 2014 - added reference position
 // Duncan's telemetry uses this format: 
@@ -105,7 +113,8 @@ void telemFlashReadback(unsigned int count)
 	telemU data;
 	DisableIntT5;		// prevent MPU access to SPI2
 	for(sampNum = 0; sampNum < count; sampNum++)
-	{ dfmemReadSample(sampNum, sampLen, (unsigned char *) &data);
+//	{ dfmemReadSample(sampNum, sampLen, (unsigned char *) &data);
+        { telemGetSample(sampNum, sampLen, (unsigned char *) &data); // updated Dec. 9, 2014
 	   if ((sampNum+1) != data.telemStruct.sampleIndex)
 		while(1) // hang here if bad read  *** MOD to Get second packet ***
 		{ blink_leds(1,200); }
@@ -116,9 +125,60 @@ void telemFlashReadback(unsigned int count)
 	blink_leds(1,20); // wait 40 ms to give plenty of time to send packets
 	}
 	// wait for DMA to finish and release SPI2
-	while(port_status[1] == STAT_SPI_BUSY)
-	{ blink_leds(1,300);   // waste some time
-	}
+/* not sure if this is needed to avoid hanging when using newer SPI control */
+//        while(port_status[1] == STAT_SPI_BUSY)
+//	{ blink_leds(1,300);   // waste some time
+//	}
 	EnableIntT5;
+}
+
+void telemGetSample(unsigned long sampNum, unsigned int sampLen, unsigned char *data)
+{
+unsigned int samplesPerPage = mem_geo.bytes_per_page / sampLen; //round DOWN int division
+unsigned int pagenum = sampNum / samplesPerPage;
+unsigned int byteOffset = (sampNum - pagenum*samplesPerPage)*sampLen;
+dfmemRead(pagenum, byteOffset, sampLen, data);
+}
+
+void telemErase(unsigned long numSamples) {
+//dfmemEraseSectorsForSamples(numSamples, sizeof (telemU));
+// TODO (apullin) : Add an explicit check to see if the number of saved
+// samples will fit into memory!
+LED_2 = 1;
+unsigned int firstPageOfSector, i;
+//avoid trivial case
+if (numSamples == 0) {
+return;
+}
+//Saves to dfmem will NOT overlap page boundaries, so we need to do this level by level:
+unsigned int samplesPerPage = mem_geo.bytes_per_page / telemPacketSize; //round DOWN int division
+unsigned int numPages = (numSamples + samplesPerPage - 1) / samplesPerPage; //round UP int division
+unsigned int numSectors = (numPages + mem_geo.pages_per_sector - 1) / mem_geo.pages_per_sector;
+//At this point, it is impossible for numSectors == 0
+//Sector 0a and 0b will be erased together always, for simplicity
+//Note that numSectors will be the actual number of sectors to erase,
+// even though the sectors themselves are numbered starting at '0'
+DisableIntT1;
+dfmemEraseSector(0); //Erase Sector 0a
+dfmemEraseSector(8); //Erase Sector 0b
+//Start erasing the rest from Sector 1:
+for (i = 1; i <= numSectors; i++) {
+firstPageOfSector = mem_geo.pages_per_sector * i;
+//hold off until dfmem is ready for secort erase command
+//while (!dfmemIsReady());
+//LED should blink indicating progress
+LED_2 = ~LED_2;
+//Send actual erase command
+dfmemEraseSector(firstPageOfSector);
+}
+EnableIntT1;
+//Leadout flash, should blink faster than above, indicating the last sector
+//while (!dfmemIsReady()) {
+// LED_2 = ~LED_2;
+// delay_ms(75);
+//}
+LED_2 = 0; //Green LED off
+//Since we've erased, reset our place keeper vars
+dfmemZeroIndex();
 }
 
