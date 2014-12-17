@@ -297,7 +297,7 @@ def writeFileHeader(dataFileName):
     fileout.close()
     
 def main():
-    print 'keyboard_telem for IP2.5c Jan. 2013\n'
+    print 'keyboard_telem for IP2.5c Nov. 2014\n'
     global throttle, duration, telemetry, dataFileName
     dataFileName = 'Data/imudata.txt'
     count = 0       # keep track of packet tries
