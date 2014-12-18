@@ -18,12 +18,10 @@
         <itemPath>../../imageproc-lib/radio.h</itemPath>
         <itemPath>../../imageproc-lib/spi.h</itemPath>
         <itemPath>../../imageproc-lib/spi_controller.h</itemPath>
-        <itemPath>../../imageproc-lib/stopwatch.h</itemPath>
         <itemPath>../../imageproc-lib/tih.h</itemPath>
         <itemPath>../../imageproc-lib/utils.h</itemPath>
         <itemPath>../../imageproc-lib/version.h</itemPath>
         <itemPath>../../imageproc-lib/adc_pid.h</itemPath>
-        <itemPath>../../imageproc-lib/ams-enc.h</itemPath>
         <itemPath>../../imageproc-lib/at86rf231.h</itemPath>
         <itemPath>../../imageproc-lib/battery.h</itemPath>
         <itemPath>../../imageproc-lib/blink.h</itemPath>
@@ -35,7 +33,6 @@
         <itemPath>../../imageproc-lib/led.h</itemPath>
         <itemPath>../../imageproc-lib/at86rf231_driver.h</itemPath>
         <itemPath>../../imageproc-lib/ppool.h</itemPath>
-        <itemPath>../../imageproc-lib/version-string.h</itemPath>
         <itemPath>../../imageproc-lib/uart_driver.h</itemPath>
         <itemPath>../../imageproc-lib/bsp-ip25.h</itemPath>
         <itemPath>../../imageproc-lib/atomic.h</itemPath>
@@ -55,6 +52,8 @@
         <itemPath>../lib/uart_send.h</itemPath>
         <itemPath>../lib/cmd-aux.h</itemPath>
         <itemPath>../lib/tests.h</itemPath>
+        <itemPath>../lib/stopwatch.h</itemPath>
+        <itemPath>../lib/ams-enc.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MyConsts" displayName="MyConsts" projectFiles="true">
         <itemPath>../MyConsts/radio_settings.h</itemPath>
@@ -86,11 +85,9 @@
         <itemPath>../../imageproc-lib/queue.c</itemPath>
         <itemPath>../../imageproc-lib/radio.c</itemPath>
         <itemPath>../../imageproc-lib/spi_controller.c</itemPath>
-        <itemPath>../../imageproc-lib/stopwatch.c</itemPath>
         <itemPath>../../imageproc-lib/tih.c</itemPath>
         <itemPath>../../imageproc-lib/version.c</itemPath>
         <itemPath>../../imageproc-lib/adc_pid.c</itemPath>
-        <itemPath>../../imageproc-lib/ams-enc.c</itemPath>
         <itemPath>../../imageproc-lib/battery.c</itemPath>
         <itemPath>../../imageproc-lib/blink.c</itemPath>
         <itemPath>../../imageproc-lib/carray.c</itemPath>
@@ -113,6 +110,8 @@
         <itemPath>../lib/uart_send.c</itemPath>
         <itemPath>../lib/cmd-aux.c</itemPath>
         <itemPath>../lib/tests.c</itemPath>
+        <itemPath>../lib/stopwatch.c</itemPath>
+        <itemPath>../lib/ams-enc.c</itemPath>
       </logicalFolder>
       <itemPath>../main.c</itemPath>
     </logicalFolder>
@@ -297,7 +296,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="../lib;../MyConsts;../../imageproc-lib;..;."/>
+                  value="../lib;../MyConsts;../../imageproc-lib;..;.;source"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
