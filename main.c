@@ -23,39 +23,97 @@
 #include "bsp-ip25.h"
 #include "queue.h"
 #include "radio.h"
-#include "MyConsts/radio_settings.h"
+// #include "MyConsts/radio_settings.h"
+#include "settings.h"  // user constants such as radio channels
 #include "tests.h"
 #include "dfmem.h"
 #include "interrupts.h"
 #include "sclock.h"
 #include "ams-enc.h"
+// #include "mpu6000-nodma.h"
 #include "tih.h"
 #include "blink.h"
 #include <stdlib.h>
 #include "cmd.h"
 #include "pid-ip2.5.h"
-#include "steering.h"
+// #include "steering.h"
 #include "consts.h"
 #include "adc_pid.h"
-#include "telemetry.h"
+// #include "telemetry.h"
+#include "telem.h"
 
 Payload rx_payload;
 MacPacket rx_packet;
 
 volatile MacPacket uart_tx_packet;
 volatile unsigned char uart_tx_flag;
+volatile Queue fun_queue;
+
 
 Test* test;
 
-
 unsigned int error_code;
+void setupImageProc25c(); // function prototype
 
 int main() {
+
+unsigned char payloadType;
+unsigned char payloadStatus;
+unsigned char payloadDataLength;
+unsigned char* payloadData;
+
+ /*    (*tf)(payGetType(rx_payload),   // old commands don't use packet type
+                    payGetStatus(rx_payload),
+			  payGetDataLength(rx_payload),
+                    payGetData(rx_payload));
+  * */
+
     fun_queue = queueInit(FUN_Q_LEN);
     test_function tf;
     error_code = ERR_NONE;
 
-    /* Initialization */
+    setupImageProc25c();   // setup all needed functions
+
+	blink_leds(4,500); // blink LEDs 4 times at half sec
+    char j;
+    for(j=0; j<3; j++){
+        LED_2 = ON;
+        delay_ms(250);
+        LED_2 = OFF;
+        delay_ms(250);
+    }
+    LED_2 = ON;
+
+    EnableIntT2;
+    while(1){
+        while(!queueIsEmpty(fun_queue))
+        {
+            test = queuePop(fun_queue);
+            rx_payload = macGetPayload(test->packet);
+            payloadType = payGetType(rx_payload);
+            payloadStatus = payGetStatus(rx_payload);
+            payloadDataLength = payGetDataLength(rx_payload);
+            payloadData = payGetData(rx_payload);
+
+            tf = test->tf;
+            (*tf)(payloadType, payloadStatus, payloadDataLength, payloadData);  // to make debugging commands easier
+
+    /*        (*tf)(payGetType(rx_payload),   // old commands don't use packet type
+                    payGetStatus(rx_payload), 
+			  payGetDataLength(rx_payload), 
+                    payGetData(rx_payload));
+    */
+            radioReturnPacket(test->packet);
+            free(test);
+        }
+    }
+    return 0;
+}
+
+//put all set up operations here
+void setupImageProc25c()
+{
+     /* Initialization */
     SetupClock();
     SwitchClocks();
     SetupPorts();
@@ -67,9 +125,10 @@ int main() {
     SetupTimer2();
     sclockSetup();
     mpuSetup();
-/*   if Hall not present will hang */
+    mpuRunCalib(100);  // get offset for gyro/ accelerometer
+     /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
-    amsHallSetup();
+    amsEncoderSetup();
 #endif
     dfmemSetup();
     telemSetup(); // added Dec. 9, 2014
@@ -85,32 +144,5 @@ int main() {
     radioSetSrcPanID(RADIO_PAN_ID);
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
 /**** set up steering last - so dfmem can finish ****/
-	steeringSetup(); // steering and Timer5 Int
-	blink_leds(4,500); // blink LEDs 4 times at half sec
-    char j;
-    for(j=0; j<3; j++){
-        LED_2 = ON;
-        delay_ms(250);
-        LED_2 = OFF;
-        delay_ms(250);
-    }
-
-    LED_2 = ON;
-
-    EnableIntT2;
-    while(1){
-        while(!queueIsEmpty(fun_queue))
-        {
-            test = queuePop(fun_queue);
-            rx_payload = macGetPayload(test->packet);
-            tf = test->tf;
-            (*tf)(payGetType(rx_payload),   // old commands don't use packet type
-                    payGetStatus(rx_payload), 
-			  payGetDataLength(rx_payload), 
-                    payGetData(rx_payload));
-            radioReturnPacket(test->packet);
-            free(test);
-        }
-    }
-    return 0;
+//	steeringSetup(); // steering and Timer5 Int
 }

@@ -8,11 +8,14 @@
  * modified Jan. 2012 to include median filter on back emf
  * modified Jan. 2013 to include AMS Hall encoder, and MPU 6000 gyro
  */
+#include "telem.h"
+#include "ams-enc.h"
+#include "mpu6000-nodma.h"
 #include "pid-ip2.5.h"
 #include "consts.h"
 #include "dfmem.h"
 #include "gyro.h"
-#include "steering.h"
+// #include "steering.h"
 #include "motor_ctrl.h"
 #include "timer.h"
 #include "adc_pid.h"
@@ -21,9 +24,9 @@
 #include "adc.h"
 #include "move_queue.h"
 #include "p33Fxxxx.h"
-#include "stopwatch.h"
+//#include "stopwatch.h"
+# include "sclock.h"
 //#include "incap.h" // input capture
-#include "ams-enc.h"
 #include "tih.h"
 #include <stdlib.h> // for malloc
 #include "init.h"  // for Timer1
@@ -243,7 +246,10 @@ void pidZeroPos(int pid_num){
 	DisableIntT1; // turn off pid interrupts
 /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
-	amsHallSetup(); //  reinitialize rev count and relative zero encoder position for both motors
+	//amsEncoderResetPos(); //  reinitialize rev count and relative zero encoder position for both motors
+        encPos[pid_num].offset = encPos[pid_num].pos; // initialize encoder offset to current position
+        encPos[pid_num].calibPos = 0;
+        encPos[pid_num].oticks = 0;   // set revolution counter to 0
 #endif
 	pidObjs[pid_num].p_state = 0;
 // reset position setpoint as well
@@ -324,10 +330,29 @@ void EmergencyStop(void)
 
 /* update setpoint  only leg which has run_time + start_time > t1_ticks */
 /* turn off when all PIDs have finished */
+static volatile unsigned char interrupt_count = 0;
+
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) 
 { int j;
-//  unsigned long time_start, time_end; 
-//	time_start =  swatchTic(); 
+ unsigned long time_start, time_end; 
+time_start =  sclockGetTime();
+    interrupt_count++;
+
+    //Telemetry save, at 1 KHz
+//TODO: Break coupling between PID module and telemetry triggering
+    if(interrupt_count == 3) {
+        telemSaveNow();
+    }
+
+    if(interrupt_count == 4) {
+//            mpuBeginUpdate();  // DMA version
+        mpuUpdate(); // non DMA version to read accel and gyro
+        amsEncoderStartAsyncRead();
+    }
+
+//PID controller update
+else if(interrupt_count == 5)
+{    interrupt_count = 0;
 
     if (t1_ticks == T1_MAX) t1_ticks = 0;
     t1_ticks++;
@@ -345,8 +370,11 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 
 	pidSetControl();	// run control even if not updating setpoint to hold position 
 //	time_end =  swatchToc();
-    //Clear Timer1 interrupt flag
-    _T1IF = 0;
+  
+   
+    }
+      //Clear Timer1 interrupt flag
+     _T1IF = 0;  // reset interrupt  flag!
 }
 
 // update desired velocity and position tracking setpoints for each leg
@@ -397,7 +425,7 @@ void pidGetState()
 /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
 	for(i =0; i<NUM_PIDS; i++)
-	{  amsGetPos(i); 
+	{ /*  amsGetPos(i);  */ ///  ****** updated now in interrupt ??????????
 	    p_state = (long)(encPos[i].pos << 2);		// pos 14 bits 0x0 -> 0x3fff
 	    p_state = p_state + (encPos[i].oticks << 16);
 	    p_state = p_state - (long)(encPos[i].offset <<2); 	//  subtract offset to get zero position

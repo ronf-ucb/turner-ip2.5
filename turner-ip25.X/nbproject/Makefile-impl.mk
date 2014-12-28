@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=turner-ip25.X
 
 # Active Configuration
-DEFAULTCONF=default
+DEFAULTCONF=dec2014v1
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=default 
+ALLCONFS=default dec2014 dec2014v1 
 
 
 # build
@@ -46,12 +46,16 @@ ALLCONFS=default
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=dec2014 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=dec2014v1 clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=dec2014 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=dec2014v1 build
 
 
 

@@ -298,7 +298,7 @@ def writeFileHeader(dataFileName):
     fileout.close()
     
 def main():
-    print 'keyboard_telem for IP2.5c Jan. 2013\n'
+    print 'keyboard test for IP2.5c Dec. 2014 (no initialization)\n'
     global throttle, duration, telemetry, dataFileName
     dataFileName = 'Data/imudata.txt'
     count = 0       # keep track of packet tries
@@ -314,9 +314,9 @@ def main():
    
     xb_send(0, command.WHO_AM_I, "Robot Echo")
     time.sleep(0.5)
-    setGain()
-    time.sleep(0.5)  # wait for whoami before sending next command
-    setVelProfile()
+    # setGain()
+    #time.sleep(0.5)  # wait for whoami before sending next command
+    #setVelProfile()
     throttle = [0,0]
     tinc = 25
     time.sleep(1)  # wait for other commands to get queued and processes

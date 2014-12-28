@@ -78,12 +78,14 @@ def xbee_received(packet):
         print 'Emergency Stop from Robot'
         print "estop:",data
         
-    elif (type == command.SPECIAL_TELEMETRY):
+   # elif (type == command.SPECIAL_TELEMETRY):
+    elif (type == command.FLASH_READBACK):
         shared.pkts = shared.pkts + 1
         # first word is packet #
         # updated angle position to signed long (l) for IP2.5
         # print "pkt ",shared.pkts,
-        print ".",
+        if (shared.pkts % 100) == 0:
+            print shared.pkts,
         # print 'len(data), data=', len(data)
         #       pattern = '=LLll'+13*'h'  # RSF telem format, L = unsigned long
         pattern = '=LLllll'+11*'h'  # seq + Duncan telem format, added ref pos, no steer

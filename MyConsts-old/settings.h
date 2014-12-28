@@ -29,7 +29,9 @@ extern "C" {
 #define TELEM_INCLUDE "vr_telem.h"
 #define TELEMPACKFUNC(x) vrTelemGetData(x)
 
-
+    // specific to robot
+#define AMS_ENC_OFFSET_0 0
+#define AMS_ENC_OFFSET_1 0
 
 #ifdef	__cplusplus
 }

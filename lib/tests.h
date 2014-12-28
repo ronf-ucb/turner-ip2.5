@@ -7,7 +7,7 @@
 #include "queue.h"
 #include "payload_queue.h"
 #include "mac_packet.h"
-#include "mpu6000.h"
+#include "mpu6000-nodma.h"
 
 #define RX_QUEUE_LEN    6
 #define TX_QUEUE_LEN    12

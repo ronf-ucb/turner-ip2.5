@@ -6,10 +6,11 @@
 #include "utils.h"
 #include "pid-ip2.5.h"
 #include "radio.h"
-#include "../MyConsts/radio_settings.h"
+//#include "../MyConsts/radio_settings.h"
+#include "settings.h"
 #include "tiH.h"
 #include "timer.h"
-#include "telemetry.h"
+// #include "telemetry.h"
 #include "stopwatch.h"
 #include "blink.h"
 

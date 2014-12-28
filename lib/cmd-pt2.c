@@ -2,6 +2,41 @@
     old, unused or obsolete commands can go in here 
 */
 
+#include "cmd.h"
+#include "cmd_const.h"
+#include "cmd-motor.h"
+#include "cmd-aux.h"
+#include "dfmem.h"
+#include "utils.h"
+#include "ports.h"
+#include "stopwatch.h"
+#include "led.h"
+#include "blink.h"
+#include "payload.h"
+#include "mac_packet.h"
+#include "dfmem.h"
+#include "pid-ip2.5.h"
+#include "radio.h"
+#include "move_queue.h"
+// #include "steering.h"
+#include "dfmem.h"
+//  #include "dfmem_extra.h" replace with telemetry.h
+#include "tests.h"
+#include "queue.h"
+#include "version.h"
+#include "../MyConsts/radio_settings.h"
+#include "tiH.h"
+#include "timer.h"
+#include "telemetry.h"
+#include "battery.h"
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+
 static void cmdGetImuLoopZGyro(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame) {
     unsigned int count;     unsigned long tic;   unsigned char *tic_char;
     MacPacket packet; Payload pld;
