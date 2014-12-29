@@ -18,6 +18,7 @@
 #include "adc_pid.h"
 #include "pwm.h"
 #include "led.h"
+#include "utils.h"
 #include "adc.h"
 #include "move_queue.h"
 #include "p33Fxxxx.h"

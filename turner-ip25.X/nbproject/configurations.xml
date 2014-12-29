@@ -10,7 +10,7 @@
         <itemPath>../../imageproc-lib/init_default.h</itemPath>
         <itemPath>../../imageproc-lib/larray.h</itemPath>
         <itemPath>../../imageproc-lib/mac_packet.h</itemPath>
-        <itemPath>Z:/research/development/imageproc-lib/mpu6050.h</itemPath>
+        <itemPath>../../imageproc-lib/mpu6050.h</itemPath>
         <itemPath>../../imageproc-lib/packet_queue.h</itemPath>
         <itemPath>../../imageproc-lib/payload.h</itemPath>
         <itemPath>../../imageproc-lib/payload_queue.h</itemPath>
@@ -292,7 +292,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="../lib;../MyConsts;../../imageproc-lib;../project/FEARING/home/ronf/research/development/imageproc-lib;Z:\research\development\imageproc-lib;../project/FEARING/home/ronf/research/development/turner-ip2.5;../project/FEARING/home/ronf/research/development/turner-ip2.5/lib;../project/FEARING/home/ronf/research/development/turner-ip2.5/MyConsts;."/>
+                  value="../lib;../MyConsts;../../imageproc-lib;.;..\..\imageproc-lib"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
