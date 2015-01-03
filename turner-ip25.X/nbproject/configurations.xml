@@ -36,6 +36,7 @@
         <itemPath>../../imageproc-lib/atomic.h</itemPath>
         <itemPath>../../imageproc-lib/telem.h</itemPath>
         <itemPath>../../imageproc-lib/ams-enc.h</itemPath>
+        <itemPath>../../imageproc-lib/mpu6000.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="imageproc-settings" projectFiles="true">
         <itemPath>../../imageproc-settings/settings.h</itemPath>
@@ -54,7 +55,6 @@
         <itemPath>../lib/cmd-aux.h</itemPath>
         <itemPath>../lib/stopwatch.h</itemPath>
         <itemPath>../lib/vr_telem.h</itemPath>
-        <itemPath>../lib/mpu6000-nodma.h</itemPath>
       </logicalFolder>
       <logicalFolder name="source" displayName="source" projectFiles="true">
         <itemPath>source/version-string.h</itemPath>
@@ -95,6 +95,7 @@
         <itemPath>../../imageproc-lib/uart_driver.c</itemPath>
         <itemPath>../../imageproc-lib/telem.c</itemPath>
         <itemPath>../../imageproc-lib/ams-enc.c</itemPath>
+        <itemPath>../../imageproc-lib/mpu6000.c</itemPath>
       </logicalFolder>
       <logicalFolder name="lib" displayName="lib" projectFiles="true">
         <itemPath>../lib/init.c</itemPath>
@@ -108,7 +109,6 @@
         <itemPath>../lib/cmd-aux.c</itemPath>
         <itemPath>../lib/stopwatch.c</itemPath>
         <itemPath>../lib/vr_telem.c</itemPath>
-        <itemPath>../lib/mpu6000-nodma.c</itemPath>
       </logicalFolder>
       <itemPath>../main.c</itemPath>
     </logicalFolder>
@@ -872,7 +872,7 @@
         <property key="enable-short-double" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories" value="source"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
@@ -1019,7 +1019,6 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="false"/>

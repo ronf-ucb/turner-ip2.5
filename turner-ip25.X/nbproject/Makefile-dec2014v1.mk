@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../imageproc-lib/delay.s ../../imageproc-lib/dfmem.c ../../imageproc-lib/i2c_driver.c ../../imageproc-lib/init_default.c ../../imageproc-lib/larray.c ../../imageproc-lib/packet_queue.c ../../imageproc-lib/payload.c ../../imageproc-lib/payload_queue.c ../../imageproc-lib/queue.c ../../imageproc-lib/radio.c ../../imageproc-lib/spi_controller.c ../../imageproc-lib/tih.c ../../imageproc-lib/version.c ../../imageproc-lib/adc_pid.c ../../imageproc-lib/battery.c ../../imageproc-lib/blink.c ../../imageproc-lib/carray.c ../../imageproc-lib/sclock.c ../../imageproc-lib/at86rf231_driver.c ../../imageproc-lib/mac_packet.c ../../imageproc-lib/ppool.c ../../imageproc-lib/uart_driver.c ../../imageproc-lib/telem.c ../../imageproc-lib/ams-enc.c ../lib/init.c ../lib/interrupts.c ../lib/cmd.c ../lib/move_queue.c ../lib/motor_ctrl.c ../lib/pid-ip2.5.c ../lib/cmd-motor.c ../lib/uart_send.c ../lib/cmd-aux.c ../lib/stopwatch.c ../lib/vr_telem.c ../main.c ../lib/mpu6000-nodma.c
+SOURCEFILES_QUOTED_IF_SPACED=../../imageproc-lib/delay.s ../../imageproc-lib/dfmem.c ../../imageproc-lib/i2c_driver.c ../../imageproc-lib/init_default.c ../../imageproc-lib/larray.c ../../imageproc-lib/packet_queue.c ../../imageproc-lib/payload.c ../../imageproc-lib/payload_queue.c ../../imageproc-lib/queue.c ../../imageproc-lib/radio.c ../../imageproc-lib/spi_controller.c ../../imageproc-lib/tih.c ../../imageproc-lib/version.c ../../imageproc-lib/adc_pid.c ../../imageproc-lib/battery.c ../../imageproc-lib/blink.c ../../imageproc-lib/carray.c ../../imageproc-lib/sclock.c ../../imageproc-lib/at86rf231_driver.c ../../imageproc-lib/mac_packet.c ../../imageproc-lib/ppool.c ../../imageproc-lib/uart_driver.c ../../imageproc-lib/telem.c ../../imageproc-lib/ams-enc.c ../../imageproc-lib/mpu6000.c ../lib/init.c ../lib/interrupts.c ../lib/cmd.c ../lib/move_queue.c ../lib/motor_ctrl.c ../lib/pid-ip2.5.c ../lib/cmd-motor.c ../lib/uart_send.c ../lib/cmd-aux.c ../lib/stopwatch.c ../lib/vr_telem.c ../main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1290873929/delay.o ${OBJECTDIR}/_ext/1290873929/dfmem.o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o ${OBJECTDIR}/_ext/1290873929/init_default.o ${OBJECTDIR}/_ext/1290873929/larray.o ${OBJECTDIR}/_ext/1290873929/packet_queue.o ${OBJECTDIR}/_ext/1290873929/payload.o ${OBJECTDIR}/_ext/1290873929/payload_queue.o ${OBJECTDIR}/_ext/1290873929/queue.o ${OBJECTDIR}/_ext/1290873929/radio.o ${OBJECTDIR}/_ext/1290873929/spi_controller.o ${OBJECTDIR}/_ext/1290873929/tih.o ${OBJECTDIR}/_ext/1290873929/version.o ${OBJECTDIR}/_ext/1290873929/adc_pid.o ${OBJECTDIR}/_ext/1290873929/battery.o ${OBJECTDIR}/_ext/1290873929/blink.o ${OBJECTDIR}/_ext/1290873929/carray.o ${OBJECTDIR}/_ext/1290873929/sclock.o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o ${OBJECTDIR}/_ext/1290873929/mac_packet.o ${OBJECTDIR}/_ext/1290873929/ppool.o ${OBJECTDIR}/_ext/1290873929/uart_driver.o ${OBJECTDIR}/_ext/1290873929/telem.o ${OBJECTDIR}/_ext/1290873929/ams-enc.o ${OBJECTDIR}/_ext/1360930230/init.o ${OBJECTDIR}/_ext/1360930230/interrupts.o ${OBJECTDIR}/_ext/1360930230/cmd.o ${OBJECTDIR}/_ext/1360930230/move_queue.o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o ${OBJECTDIR}/_ext/1360930230/uart_send.o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o ${OBJECTDIR}/_ext/1360930230/stopwatch.o ${OBJECTDIR}/_ext/1360930230/vr_telem.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1290873929/delay.o.d ${OBJECTDIR}/_ext/1290873929/dfmem.o.d ${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d ${OBJECTDIR}/_ext/1290873929/init_default.o.d ${OBJECTDIR}/_ext/1290873929/larray.o.d ${OBJECTDIR}/_ext/1290873929/packet_queue.o.d ${OBJECTDIR}/_ext/1290873929/payload.o.d ${OBJECTDIR}/_ext/1290873929/payload_queue.o.d ${OBJECTDIR}/_ext/1290873929/queue.o.d ${OBJECTDIR}/_ext/1290873929/radio.o.d ${OBJECTDIR}/_ext/1290873929/spi_controller.o.d ${OBJECTDIR}/_ext/1290873929/tih.o.d ${OBJECTDIR}/_ext/1290873929/version.o.d ${OBJECTDIR}/_ext/1290873929/adc_pid.o.d ${OBJECTDIR}/_ext/1290873929/battery.o.d ${OBJECTDIR}/_ext/1290873929/blink.o.d ${OBJECTDIR}/_ext/1290873929/carray.o.d ${OBJECTDIR}/_ext/1290873929/sclock.o.d ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d ${OBJECTDIR}/_ext/1290873929/mac_packet.o.d ${OBJECTDIR}/_ext/1290873929/ppool.o.d ${OBJECTDIR}/_ext/1290873929/uart_driver.o.d ${OBJECTDIR}/_ext/1290873929/telem.o.d ${OBJECTDIR}/_ext/1290873929/ams-enc.o.d ${OBJECTDIR}/_ext/1360930230/init.o.d ${OBJECTDIR}/_ext/1360930230/interrupts.o.d ${OBJECTDIR}/_ext/1360930230/cmd.o.d ${OBJECTDIR}/_ext/1360930230/move_queue.o.d ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d ${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d ${OBJECTDIR}/_ext/1360930230/uart_send.o.d ${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d ${OBJECTDIR}/_ext/1360930230/stopwatch.o.d ${OBJECTDIR}/_ext/1360930230/vr_telem.o.d ${OBJECTDIR}/_ext/1472/main.o.d ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1290873929/delay.o ${OBJECTDIR}/_ext/1290873929/dfmem.o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o ${OBJECTDIR}/_ext/1290873929/init_default.o ${OBJECTDIR}/_ext/1290873929/larray.o ${OBJECTDIR}/_ext/1290873929/packet_queue.o ${OBJECTDIR}/_ext/1290873929/payload.o ${OBJECTDIR}/_ext/1290873929/payload_queue.o ${OBJECTDIR}/_ext/1290873929/queue.o ${OBJECTDIR}/_ext/1290873929/radio.o ${OBJECTDIR}/_ext/1290873929/spi_controller.o ${OBJECTDIR}/_ext/1290873929/tih.o ${OBJECTDIR}/_ext/1290873929/version.o ${OBJECTDIR}/_ext/1290873929/adc_pid.o ${OBJECTDIR}/_ext/1290873929/battery.o ${OBJECTDIR}/_ext/1290873929/blink.o ${OBJECTDIR}/_ext/1290873929/carray.o ${OBJECTDIR}/_ext/1290873929/sclock.o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o ${OBJECTDIR}/_ext/1290873929/mac_packet.o ${OBJECTDIR}/_ext/1290873929/ppool.o ${OBJECTDIR}/_ext/1290873929/uart_driver.o ${OBJECTDIR}/_ext/1290873929/telem.o ${OBJECTDIR}/_ext/1290873929/ams-enc.o ${OBJECTDIR}/_ext/1290873929/mpu6000.o ${OBJECTDIR}/_ext/1360930230/init.o ${OBJECTDIR}/_ext/1360930230/interrupts.o ${OBJECTDIR}/_ext/1360930230/cmd.o ${OBJECTDIR}/_ext/1360930230/move_queue.o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o ${OBJECTDIR}/_ext/1360930230/uart_send.o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o ${OBJECTDIR}/_ext/1360930230/stopwatch.o ${OBJECTDIR}/_ext/1360930230/vr_telem.o ${OBJECTDIR}/_ext/1472/main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1290873929/delay.o.d ${OBJECTDIR}/_ext/1290873929/dfmem.o.d ${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d ${OBJECTDIR}/_ext/1290873929/init_default.o.d ${OBJECTDIR}/_ext/1290873929/larray.o.d ${OBJECTDIR}/_ext/1290873929/packet_queue.o.d ${OBJECTDIR}/_ext/1290873929/payload.o.d ${OBJECTDIR}/_ext/1290873929/payload_queue.o.d ${OBJECTDIR}/_ext/1290873929/queue.o.d ${OBJECTDIR}/_ext/1290873929/radio.o.d ${OBJECTDIR}/_ext/1290873929/spi_controller.o.d ${OBJECTDIR}/_ext/1290873929/tih.o.d ${OBJECTDIR}/_ext/1290873929/version.o.d ${OBJECTDIR}/_ext/1290873929/adc_pid.o.d ${OBJECTDIR}/_ext/1290873929/battery.o.d ${OBJECTDIR}/_ext/1290873929/blink.o.d ${OBJECTDIR}/_ext/1290873929/carray.o.d ${OBJECTDIR}/_ext/1290873929/sclock.o.d ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d ${OBJECTDIR}/_ext/1290873929/mac_packet.o.d ${OBJECTDIR}/_ext/1290873929/ppool.o.d ${OBJECTDIR}/_ext/1290873929/uart_driver.o.d ${OBJECTDIR}/_ext/1290873929/telem.o.d ${OBJECTDIR}/_ext/1290873929/ams-enc.o.d ${OBJECTDIR}/_ext/1290873929/mpu6000.o.d ${OBJECTDIR}/_ext/1360930230/init.o.d ${OBJECTDIR}/_ext/1360930230/interrupts.o.d ${OBJECTDIR}/_ext/1360930230/cmd.o.d ${OBJECTDIR}/_ext/1360930230/move_queue.o.d ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d ${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d ${OBJECTDIR}/_ext/1360930230/uart_send.o.d ${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d ${OBJECTDIR}/_ext/1360930230/stopwatch.o.d ${OBJECTDIR}/_ext/1360930230/vr_telem.o.d ${OBJECTDIR}/_ext/1472/main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1290873929/delay.o ${OBJECTDIR}/_ext/1290873929/dfmem.o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o ${OBJECTDIR}/_ext/1290873929/init_default.o ${OBJECTDIR}/_ext/1290873929/larray.o ${OBJECTDIR}/_ext/1290873929/packet_queue.o ${OBJECTDIR}/_ext/1290873929/payload.o ${OBJECTDIR}/_ext/1290873929/payload_queue.o ${OBJECTDIR}/_ext/1290873929/queue.o ${OBJECTDIR}/_ext/1290873929/radio.o ${OBJECTDIR}/_ext/1290873929/spi_controller.o ${OBJECTDIR}/_ext/1290873929/tih.o ${OBJECTDIR}/_ext/1290873929/version.o ${OBJECTDIR}/_ext/1290873929/adc_pid.o ${OBJECTDIR}/_ext/1290873929/battery.o ${OBJECTDIR}/_ext/1290873929/blink.o ${OBJECTDIR}/_ext/1290873929/carray.o ${OBJECTDIR}/_ext/1290873929/sclock.o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o ${OBJECTDIR}/_ext/1290873929/mac_packet.o ${OBJECTDIR}/_ext/1290873929/ppool.o ${OBJECTDIR}/_ext/1290873929/uart_driver.o ${OBJECTDIR}/_ext/1290873929/telem.o ${OBJECTDIR}/_ext/1290873929/ams-enc.o ${OBJECTDIR}/_ext/1360930230/init.o ${OBJECTDIR}/_ext/1360930230/interrupts.o ${OBJECTDIR}/_ext/1360930230/cmd.o ${OBJECTDIR}/_ext/1360930230/move_queue.o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o ${OBJECTDIR}/_ext/1360930230/uart_send.o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o ${OBJECTDIR}/_ext/1360930230/stopwatch.o ${OBJECTDIR}/_ext/1360930230/vr_telem.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o
+OBJECTFILES=${OBJECTDIR}/_ext/1290873929/delay.o ${OBJECTDIR}/_ext/1290873929/dfmem.o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o ${OBJECTDIR}/_ext/1290873929/init_default.o ${OBJECTDIR}/_ext/1290873929/larray.o ${OBJECTDIR}/_ext/1290873929/packet_queue.o ${OBJECTDIR}/_ext/1290873929/payload.o ${OBJECTDIR}/_ext/1290873929/payload_queue.o ${OBJECTDIR}/_ext/1290873929/queue.o ${OBJECTDIR}/_ext/1290873929/radio.o ${OBJECTDIR}/_ext/1290873929/spi_controller.o ${OBJECTDIR}/_ext/1290873929/tih.o ${OBJECTDIR}/_ext/1290873929/version.o ${OBJECTDIR}/_ext/1290873929/adc_pid.o ${OBJECTDIR}/_ext/1290873929/battery.o ${OBJECTDIR}/_ext/1290873929/blink.o ${OBJECTDIR}/_ext/1290873929/carray.o ${OBJECTDIR}/_ext/1290873929/sclock.o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o ${OBJECTDIR}/_ext/1290873929/mac_packet.o ${OBJECTDIR}/_ext/1290873929/ppool.o ${OBJECTDIR}/_ext/1290873929/uart_driver.o ${OBJECTDIR}/_ext/1290873929/telem.o ${OBJECTDIR}/_ext/1290873929/ams-enc.o ${OBJECTDIR}/_ext/1290873929/mpu6000.o ${OBJECTDIR}/_ext/1360930230/init.o ${OBJECTDIR}/_ext/1360930230/interrupts.o ${OBJECTDIR}/_ext/1360930230/cmd.o ${OBJECTDIR}/_ext/1360930230/move_queue.o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o ${OBJECTDIR}/_ext/1360930230/uart_send.o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o ${OBJECTDIR}/_ext/1360930230/stopwatch.o ${OBJECTDIR}/_ext/1360930230/vr_telem.o ${OBJECTDIR}/_ext/1472/main.o
 
 # Source Files
-SOURCEFILES=../../imageproc-lib/delay.s ../../imageproc-lib/dfmem.c ../../imageproc-lib/i2c_driver.c ../../imageproc-lib/init_default.c ../../imageproc-lib/larray.c ../../imageproc-lib/packet_queue.c ../../imageproc-lib/payload.c ../../imageproc-lib/payload_queue.c ../../imageproc-lib/queue.c ../../imageproc-lib/radio.c ../../imageproc-lib/spi_controller.c ../../imageproc-lib/tih.c ../../imageproc-lib/version.c ../../imageproc-lib/adc_pid.c ../../imageproc-lib/battery.c ../../imageproc-lib/blink.c ../../imageproc-lib/carray.c ../../imageproc-lib/sclock.c ../../imageproc-lib/at86rf231_driver.c ../../imageproc-lib/mac_packet.c ../../imageproc-lib/ppool.c ../../imageproc-lib/uart_driver.c ../../imageproc-lib/telem.c ../../imageproc-lib/ams-enc.c ../lib/init.c ../lib/interrupts.c ../lib/cmd.c ../lib/move_queue.c ../lib/motor_ctrl.c ../lib/pid-ip2.5.c ../lib/cmd-motor.c ../lib/uart_send.c ../lib/cmd-aux.c ../lib/stopwatch.c ../lib/vr_telem.c ../main.c ../lib/mpu6000-nodma.c
+SOURCEFILES=../../imageproc-lib/delay.s ../../imageproc-lib/dfmem.c ../../imageproc-lib/i2c_driver.c ../../imageproc-lib/init_default.c ../../imageproc-lib/larray.c ../../imageproc-lib/packet_queue.c ../../imageproc-lib/payload.c ../../imageproc-lib/payload_queue.c ../../imageproc-lib/queue.c ../../imageproc-lib/radio.c ../../imageproc-lib/spi_controller.c ../../imageproc-lib/tih.c ../../imageproc-lib/version.c ../../imageproc-lib/adc_pid.c ../../imageproc-lib/battery.c ../../imageproc-lib/blink.c ../../imageproc-lib/carray.c ../../imageproc-lib/sclock.c ../../imageproc-lib/at86rf231_driver.c ../../imageproc-lib/mac_packet.c ../../imageproc-lib/ppool.c ../../imageproc-lib/uart_driver.c ../../imageproc-lib/telem.c ../../imageproc-lib/ams-enc.c ../../imageproc-lib/mpu6000.c ../lib/init.c ../lib/interrupts.c ../lib/cmd.c ../lib/move_queue.c ../lib/motor_ctrl.c ../lib/pid-ip2.5.c ../lib/cmd-motor.c ../lib/uart_send.c ../lib/cmd-aux.c ../lib/stopwatch.c ../lib/vr_telem.c ../main.c
 
 
 CFLAGS=
@@ -99,506 +99,506 @@ ${OBJECTDIR}/_ext/1290873929/dfmem.o: ../../imageproc-lib/dfmem.c  nbproject/Mak
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/dfmem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/dfmem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/dfmem.c  -o ${OBJECTDIR}/_ext/1290873929/dfmem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/dfmem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/dfmem.c  -o ${OBJECTDIR}/_ext/1290873929/dfmem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/dfmem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/dfmem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/i2c_driver.o: ../../imageproc-lib/i2c_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/i2c_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/i2c_driver.c  -o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/i2c_driver.c  -o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/init_default.o: ../../imageproc-lib/init_default.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/init_default.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/init_default.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/init_default.c  -o ${OBJECTDIR}/_ext/1290873929/init_default.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/init_default.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/init_default.c  -o ${OBJECTDIR}/_ext/1290873929/init_default.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/init_default.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/init_default.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/larray.o: ../../imageproc-lib/larray.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/larray.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/larray.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/larray.c  -o ${OBJECTDIR}/_ext/1290873929/larray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/larray.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/larray.c  -o ${OBJECTDIR}/_ext/1290873929/larray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/larray.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/larray.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/packet_queue.o: ../../imageproc-lib/packet_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/packet_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/packet_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/packet_queue.c  -o ${OBJECTDIR}/_ext/1290873929/packet_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/packet_queue.c  -o ${OBJECTDIR}/_ext/1290873929/packet_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/payload.o: ../../imageproc-lib/payload.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload.c  -o ${OBJECTDIR}/_ext/1290873929/payload.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload.c  -o ${OBJECTDIR}/_ext/1290873929/payload.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/payload.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/payload_queue.o: ../../imageproc-lib/payload_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload_queue.c  -o ${OBJECTDIR}/_ext/1290873929/payload_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload_queue.c  -o ${OBJECTDIR}/_ext/1290873929/payload_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/queue.o: ../../imageproc-lib/queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/queue.c  -o ${OBJECTDIR}/_ext/1290873929/queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/queue.c  -o ${OBJECTDIR}/_ext/1290873929/queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/radio.o: ../../imageproc-lib/radio.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/radio.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/radio.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/radio.c  -o ${OBJECTDIR}/_ext/1290873929/radio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/radio.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/radio.c  -o ${OBJECTDIR}/_ext/1290873929/radio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/radio.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/radio.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/spi_controller.o: ../../imageproc-lib/spi_controller.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/spi_controller.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/spi_controller.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/spi_controller.c  -o ${OBJECTDIR}/_ext/1290873929/spi_controller.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/spi_controller.c  -o ${OBJECTDIR}/_ext/1290873929/spi_controller.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/tih.o: ../../imageproc-lib/tih.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/tih.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/tih.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/tih.c  -o ${OBJECTDIR}/_ext/1290873929/tih.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/tih.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/tih.c  -o ${OBJECTDIR}/_ext/1290873929/tih.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/tih.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/tih.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/version.o: ../../imageproc-lib/version.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/version.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/version.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/version.c  -o ${OBJECTDIR}/_ext/1290873929/version.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/version.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/version.c  -o ${OBJECTDIR}/_ext/1290873929/version.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/version.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/version.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/adc_pid.o: ../../imageproc-lib/adc_pid.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/adc_pid.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/adc_pid.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/adc_pid.c  -o ${OBJECTDIR}/_ext/1290873929/adc_pid.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/adc_pid.c  -o ${OBJECTDIR}/_ext/1290873929/adc_pid.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/battery.o: ../../imageproc-lib/battery.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/battery.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/battery.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/battery.c  -o ${OBJECTDIR}/_ext/1290873929/battery.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/battery.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/battery.c  -o ${OBJECTDIR}/_ext/1290873929/battery.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/battery.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/battery.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/blink.o: ../../imageproc-lib/blink.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/blink.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/blink.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/blink.c  -o ${OBJECTDIR}/_ext/1290873929/blink.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/blink.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/blink.c  -o ${OBJECTDIR}/_ext/1290873929/blink.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/blink.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/blink.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/carray.o: ../../imageproc-lib/carray.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/carray.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/carray.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/carray.c  -o ${OBJECTDIR}/_ext/1290873929/carray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/carray.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/carray.c  -o ${OBJECTDIR}/_ext/1290873929/carray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/carray.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/carray.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/sclock.o: ../../imageproc-lib/sclock.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/sclock.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/sclock.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/sclock.c  -o ${OBJECTDIR}/_ext/1290873929/sclock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/sclock.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/sclock.c  -o ${OBJECTDIR}/_ext/1290873929/sclock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/sclock.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/sclock.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o: ../../imageproc-lib/at86rf231_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/at86rf231_driver.c  -o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/at86rf231_driver.c  -o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/mac_packet.o: ../../imageproc-lib/mac_packet.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/mac_packet.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/mac_packet.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mac_packet.c  -o ${OBJECTDIR}/_ext/1290873929/mac_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mac_packet.c  -o ${OBJECTDIR}/_ext/1290873929/mac_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/ppool.o: ../../imageproc-lib/ppool.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ppool.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ppool.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ppool.c  -o ${OBJECTDIR}/_ext/1290873929/ppool.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ppool.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ppool.c  -o ${OBJECTDIR}/_ext/1290873929/ppool.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ppool.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/ppool.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/uart_driver.o: ../../imageproc-lib/uart_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/uart_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/uart_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/uart_driver.c  -o ${OBJECTDIR}/_ext/1290873929/uart_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/uart_driver.c  -o ${OBJECTDIR}/_ext/1290873929/uart_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/telem.o: ../../imageproc-lib/telem.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/telem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/telem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/telem.c  -o ${OBJECTDIR}/_ext/1290873929/telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/telem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/telem.c  -o ${OBJECTDIR}/_ext/1290873929/telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/telem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/telem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/ams-enc.o: ../../imageproc-lib/ams-enc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ams-enc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ams-enc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ams-enc.c  -o ${OBJECTDIR}/_ext/1290873929/ams-enc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ams-enc.c  -o ${OBJECTDIR}/_ext/1290873929/ams-enc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1290873929/mpu6000.o: ../../imageproc-lib/mpu6000.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
+	@${RM} ${OBJECTDIR}/_ext/1290873929/mpu6000.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1290873929/mpu6000.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mpu6000.c  -o ${OBJECTDIR}/_ext/1290873929/mpu6000.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mpu6000.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/mpu6000.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/init.o: ../lib/init.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/init.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/init.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/init.c  -o ${OBJECTDIR}/_ext/1360930230/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/init.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/init.c  -o ${OBJECTDIR}/_ext/1360930230/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/init.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/init.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/interrupts.o: ../lib/interrupts.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/interrupts.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/interrupts.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/interrupts.c  -o ${OBJECTDIR}/_ext/1360930230/interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/interrupts.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/interrupts.c  -o ${OBJECTDIR}/_ext/1360930230/interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/interrupts.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/interrupts.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd.o: ../lib/cmd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd.c  -o ${OBJECTDIR}/_ext/1360930230/cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd.c  -o ${OBJECTDIR}/_ext/1360930230/cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/move_queue.o: ../lib/move_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/move_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/move_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/move_queue.c  -o ${OBJECTDIR}/_ext/1360930230/move_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/move_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/move_queue.c  -o ${OBJECTDIR}/_ext/1360930230/move_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/move_queue.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/move_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o: ../lib/motor_ctrl.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/motor_ctrl.c  -o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/motor_ctrl.c  -o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o: ../lib/pid-ip2.5.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/pid-ip2.5.c  -o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/pid-ip2.5.c  -o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd-motor.o: ../lib/cmd-motor.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-motor.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-motor.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-motor.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/uart_send.o: ../lib/uart_send.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/uart_send.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/uart_send.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/uart_send.c  -o ${OBJECTDIR}/_ext/1360930230/uart_send.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/uart_send.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/uart_send.c  -o ${OBJECTDIR}/_ext/1360930230/uart_send.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/uart_send.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/uart_send.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd-aux.o: ../lib/cmd-aux.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-aux.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-aux.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-aux.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/stopwatch.o: ../lib/stopwatch.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/stopwatch.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/stopwatch.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/stopwatch.c  -o ${OBJECTDIR}/_ext/1360930230/stopwatch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/stopwatch.c  -o ${OBJECTDIR}/_ext/1360930230/stopwatch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/vr_telem.o: ../lib/vr_telem.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/vr_telem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/vr_telem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/vr_telem.c  -o ${OBJECTDIR}/_ext/1360930230/vr_telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/vr_telem.c  -o ${OBJECTDIR}/_ext/1360930230/vr_telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1472 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o: ../lib/mpu6000-nodma.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
-	@${RM} ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/mpu6000-nodma.c  -o ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/_ext/1290873929/dfmem.o: ../../imageproc-lib/dfmem.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/dfmem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/dfmem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/dfmem.c  -o ${OBJECTDIR}/_ext/1290873929/dfmem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/dfmem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/dfmem.c  -o ${OBJECTDIR}/_ext/1290873929/dfmem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/dfmem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/dfmem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/i2c_driver.o: ../../imageproc-lib/i2c_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/i2c_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/i2c_driver.c  -o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/i2c_driver.c  -o ${OBJECTDIR}/_ext/1290873929/i2c_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/i2c_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/init_default.o: ../../imageproc-lib/init_default.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/init_default.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/init_default.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/init_default.c  -o ${OBJECTDIR}/_ext/1290873929/init_default.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/init_default.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/init_default.c  -o ${OBJECTDIR}/_ext/1290873929/init_default.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/init_default.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/init_default.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/larray.o: ../../imageproc-lib/larray.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/larray.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/larray.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/larray.c  -o ${OBJECTDIR}/_ext/1290873929/larray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/larray.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/larray.c  -o ${OBJECTDIR}/_ext/1290873929/larray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/larray.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/larray.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/packet_queue.o: ../../imageproc-lib/packet_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/packet_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/packet_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/packet_queue.c  -o ${OBJECTDIR}/_ext/1290873929/packet_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/packet_queue.c  -o ${OBJECTDIR}/_ext/1290873929/packet_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/packet_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/payload.o: ../../imageproc-lib/payload.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload.c  -o ${OBJECTDIR}/_ext/1290873929/payload.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload.c  -o ${OBJECTDIR}/_ext/1290873929/payload.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/payload.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/payload_queue.o: ../../imageproc-lib/payload_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/payload_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload_queue.c  -o ${OBJECTDIR}/_ext/1290873929/payload_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/payload_queue.c  -o ${OBJECTDIR}/_ext/1290873929/payload_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/payload_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/queue.o: ../../imageproc-lib/queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/queue.c  -o ${OBJECTDIR}/_ext/1290873929/queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/queue.c  -o ${OBJECTDIR}/_ext/1290873929/queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/radio.o: ../../imageproc-lib/radio.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/radio.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/radio.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/radio.c  -o ${OBJECTDIR}/_ext/1290873929/radio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/radio.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/radio.c  -o ${OBJECTDIR}/_ext/1290873929/radio.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/radio.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/radio.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/spi_controller.o: ../../imageproc-lib/spi_controller.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/spi_controller.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/spi_controller.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/spi_controller.c  -o ${OBJECTDIR}/_ext/1290873929/spi_controller.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/spi_controller.c  -o ${OBJECTDIR}/_ext/1290873929/spi_controller.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/spi_controller.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/tih.o: ../../imageproc-lib/tih.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/tih.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/tih.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/tih.c  -o ${OBJECTDIR}/_ext/1290873929/tih.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/tih.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/tih.c  -o ${OBJECTDIR}/_ext/1290873929/tih.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/tih.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/tih.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/version.o: ../../imageproc-lib/version.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/version.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/version.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/version.c  -o ${OBJECTDIR}/_ext/1290873929/version.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/version.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/version.c  -o ${OBJECTDIR}/_ext/1290873929/version.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/version.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/version.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/adc_pid.o: ../../imageproc-lib/adc_pid.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/adc_pid.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/adc_pid.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/adc_pid.c  -o ${OBJECTDIR}/_ext/1290873929/adc_pid.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/adc_pid.c  -o ${OBJECTDIR}/_ext/1290873929/adc_pid.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/adc_pid.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/battery.o: ../../imageproc-lib/battery.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/battery.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/battery.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/battery.c  -o ${OBJECTDIR}/_ext/1290873929/battery.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/battery.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/battery.c  -o ${OBJECTDIR}/_ext/1290873929/battery.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/battery.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/battery.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/blink.o: ../../imageproc-lib/blink.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/blink.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/blink.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/blink.c  -o ${OBJECTDIR}/_ext/1290873929/blink.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/blink.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/blink.c  -o ${OBJECTDIR}/_ext/1290873929/blink.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/blink.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/blink.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/carray.o: ../../imageproc-lib/carray.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/carray.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/carray.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/carray.c  -o ${OBJECTDIR}/_ext/1290873929/carray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/carray.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/carray.c  -o ${OBJECTDIR}/_ext/1290873929/carray.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/carray.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/carray.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/sclock.o: ../../imageproc-lib/sclock.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/sclock.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/sclock.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/sclock.c  -o ${OBJECTDIR}/_ext/1290873929/sclock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/sclock.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/sclock.c  -o ${OBJECTDIR}/_ext/1290873929/sclock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/sclock.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/sclock.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o: ../../imageproc-lib/at86rf231_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/at86rf231_driver.c  -o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/at86rf231_driver.c  -o ${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/at86rf231_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/mac_packet.o: ../../imageproc-lib/mac_packet.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/mac_packet.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/mac_packet.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mac_packet.c  -o ${OBJECTDIR}/_ext/1290873929/mac_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mac_packet.c  -o ${OBJECTDIR}/_ext/1290873929/mac_packet.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/mac_packet.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/ppool.o: ../../imageproc-lib/ppool.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ppool.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ppool.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ppool.c  -o ${OBJECTDIR}/_ext/1290873929/ppool.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ppool.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ppool.c  -o ${OBJECTDIR}/_ext/1290873929/ppool.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ppool.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/ppool.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/uart_driver.o: ../../imageproc-lib/uart_driver.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/uart_driver.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/uart_driver.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/uart_driver.c  -o ${OBJECTDIR}/_ext/1290873929/uart_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/uart_driver.c  -o ${OBJECTDIR}/_ext/1290873929/uart_driver.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/uart_driver.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/telem.o: ../../imageproc-lib/telem.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/telem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/telem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/telem.c  -o ${OBJECTDIR}/_ext/1290873929/telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/telem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/telem.c  -o ${OBJECTDIR}/_ext/1290873929/telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/telem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/telem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1290873929/ams-enc.o: ../../imageproc-lib/ams-enc.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ams-enc.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1290873929/ams-enc.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ams-enc.c  -o ${OBJECTDIR}/_ext/1290873929/ams-enc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/ams-enc.c  -o ${OBJECTDIR}/_ext/1290873929/ams-enc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/ams-enc.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1290873929/mpu6000.o: ../../imageproc-lib/mpu6000.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR}/_ext/1290873929 
+	@${RM} ${OBJECTDIR}/_ext/1290873929/mpu6000.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1290873929/mpu6000.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../imageproc-lib/mpu6000.c  -o ${OBJECTDIR}/_ext/1290873929/mpu6000.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1290873929/mpu6000.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1290873929/mpu6000.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/init.o: ../lib/init.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/init.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/init.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/init.c  -o ${OBJECTDIR}/_ext/1360930230/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/init.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/init.c  -o ${OBJECTDIR}/_ext/1360930230/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/init.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/init.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/interrupts.o: ../lib/interrupts.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/interrupts.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/interrupts.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/interrupts.c  -o ${OBJECTDIR}/_ext/1360930230/interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/interrupts.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/interrupts.c  -o ${OBJECTDIR}/_ext/1360930230/interrupts.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/interrupts.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/interrupts.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd.o: ../lib/cmd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd.c  -o ${OBJECTDIR}/_ext/1360930230/cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd.c  -o ${OBJECTDIR}/_ext/1360930230/cmd.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/move_queue.o: ../lib/move_queue.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/move_queue.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/move_queue.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/move_queue.c  -o ${OBJECTDIR}/_ext/1360930230/move_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/move_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/move_queue.c  -o ${OBJECTDIR}/_ext/1360930230/move_queue.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/move_queue.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/move_queue.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o: ../lib/motor_ctrl.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/motor_ctrl.c  -o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/motor_ctrl.c  -o ${OBJECTDIR}/_ext/1360930230/motor_ctrl.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/motor_ctrl.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o: ../lib/pid-ip2.5.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/pid-ip2.5.c  -o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/pid-ip2.5.c  -o ${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/pid-ip2.5.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd-motor.o: ../lib/cmd-motor.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-motor.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-motor.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-motor.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-motor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd-motor.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/uart_send.o: ../lib/uart_send.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/uart_send.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/uart_send.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/uart_send.c  -o ${OBJECTDIR}/_ext/1360930230/uart_send.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/uart_send.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/uart_send.c  -o ${OBJECTDIR}/_ext/1360930230/uart_send.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/uart_send.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/uart_send.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/cmd-aux.o: ../lib/cmd-aux.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/cmd-aux.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-aux.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/cmd-aux.c  -o ${OBJECTDIR}/_ext/1360930230/cmd-aux.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/cmd-aux.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/stopwatch.o: ../lib/stopwatch.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/stopwatch.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/stopwatch.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/stopwatch.c  -o ${OBJECTDIR}/_ext/1360930230/stopwatch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/stopwatch.c  -o ${OBJECTDIR}/_ext/1360930230/stopwatch.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/stopwatch.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1360930230/vr_telem.o: ../lib/vr_telem.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/vr_telem.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360930230/vr_telem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/vr_telem.c  -o ${OBJECTDIR}/_ext/1360930230/vr_telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/vr_telem.c  -o ${OBJECTDIR}/_ext/1360930230/vr_telem.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/vr_telem.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 ${OBJECTDIR}/_ext/1472/main.o: ../main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR}/_ext/1472 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1472/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../main.c  -o ${OBJECTDIR}/_ext/1472/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1472/main.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -I"source" -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o: ../lib/mpu6000-nodma.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR}/_ext/1360930230 
-	@${RM} ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../lib/mpu6000-nodma.c  -o ${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d"        -g -omf=elf -I"../../imageproc-settings" -I"../lib" -I"../../imageproc-lib" -I"source" -O0 -D__IMAGEPROC25 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360930230/mpu6000-nodma.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

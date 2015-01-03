@@ -33,7 +33,8 @@
 #include <xc.h>
 #include "vr_telem.h"
 #include "ams-enc.h"
-#include "mpu6000-nodma.h"
+//  #include "mpu6000-nodma.h"
+#include "mpu6000.h"
 #include "adc_pid.h"
 #include "tih.h"
 #include "pid-ip2.5.h"

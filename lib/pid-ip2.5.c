@@ -10,7 +10,8 @@
  */
 #include "telem.h"
 #include "ams-enc.h"
-#include "mpu6000-nodma.h"
+// #include "mpu6000-nodma.h"
+#include "mpu6000.h"
 #include "pid-ip2.5.h"
 #include "consts.h"
 #include "dfmem.h"
@@ -345,8 +346,8 @@ time_start =  sclockGetTime();
     }
 
     if(interrupt_count == 4) {
-//            mpuBeginUpdate();  // DMA version
-        mpuUpdate(); // non DMA version to read accel and gyro
+         mpuBeginUpdate();  // DMA version
+      // mpuUpdate(); // non DMA version to read accel and gyro
         amsEncoderStartAsyncRead();
     }
 
