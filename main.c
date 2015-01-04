@@ -117,25 +117,30 @@ void setupImageProc25c()
     SetupClock();
     SwitchClocks();
     SetupPorts();
-
+    LED_3 = OFF; LED_2 = OFF; LED_1 = OFF; // all LEDs initially off step #0
     SetupInterrupts();
  //   SetupADC(); old A/D
     adcSetup();   // DMA A/D
 //    SetupTimer1(); setup in pidSetup
     SetupTimer2();
+       LED_3 = OFF; LED_2 = OFF; LED_1 = ON; // initialize step #1
     sclockSetup();
     mpuSetup();
+          LED_3 = OFF; LED_2 = ON; LED_1 = OFF; // initialize step #2
     mpuRunCalib(100);  // get offset for gyro/ accelerometer
+        LED_3 = OFF; LED_2 = ON; LED_1 = ON; // initialize step #3, mpu setup
      /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
     amsEncoderSetup();
 #endif
+     LED_3 = ON; LED_2 = OFF; LED_1 = OFF; // initialize step #4, Hall encoder
     dfmemSetup();
+    LED_3 = ON; LED_2 = OFF; LED_1 = ON; // initialize step #5, FLASH
     telemSetup(); // added Dec. 9, 2014
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
 	pidSetup();  // setup PID control
-
+    LED_3 = ON; LED_2 = ON; LED_1 = OFF; // initialize step #6, PWM
     // Radio setup
     blink_leds(4,200); // blink LEDs 4 times at half sec
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
@@ -145,4 +150,5 @@ void setupImageProc25c()
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
 /**** set up steering last - so dfmem can finish ****/
 //	steeringSetup(); // steering and Timer5 Int
+    LED_3 = ON; LED_2 = ON; LED_1 = ON; // initialize step #7, Radio
 }
