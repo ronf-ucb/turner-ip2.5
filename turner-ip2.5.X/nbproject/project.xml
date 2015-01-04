@@ -2,8 +2,8 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>turner-ip25</name>
-            <creation-uuid>58d8aa61-8d35-4a07-be41-8499492a93a1</creation-uuid>
+            <name>turner-ip2.5</name>
+            <creation-uuid>801fb9d1-7a7e-4258-b08b-a27742587fb6</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>

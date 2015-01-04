@@ -20,7 +20,7 @@
 #define ERR_SPI_TIMEOUT 0x01   // SPI timeout
 
 // Choose if Hall encoder present
-#define HALL_SENSOR 1
+#define HALL_SENSOR 0
 
 //Command identifiers
 #define RADIO_TEST          0

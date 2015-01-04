@@ -86,7 +86,7 @@ int main() {
 	blink_leds(4,500); // blink LEDs 4 times at half sec
     char j;
     for(j=0; j<3; j++){
-        LED_2 = ON;
+LED_2 = ON;
         delay_ms(250);
         LED_2 = OFF;
         delay_ms(250);
