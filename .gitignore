@@ -1,18 +1,9 @@
-# Compiled source & project cruft #
-###################################
 *.pyc
-
-*.cof
-*.map
-*.hex
-*.mcs
 *.mcw
+*.o
+*.hex
+*.map
+*.cof
 build
 dist
-private
-*.mk
-*.properties
-*.bash
-/obj/
-/*.old
-/Obsolete/
+version-string.h

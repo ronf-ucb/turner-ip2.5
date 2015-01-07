@@ -144,7 +144,7 @@ void setupImageProc25c()
     // Radio setup
     blink_leds(4,200); // blink LEDs 4 times at half sec
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
-    radioSetChannel(RADIO_MY_CHAN);
+    radioSetChannel(RADIO_DST_ADDR);
     radioSetSrcAddr(RADIO_SRC_ADDR);
     radioSetSrcPanID(RADIO_PAN_ID);
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
