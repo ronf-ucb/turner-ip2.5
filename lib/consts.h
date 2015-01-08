@@ -19,7 +19,7 @@
 #define ERR_NONE 0
 #define ERR_SPI_TIMEOUT 0x01   // SPI timeout
 
-// Choose if Hall encoder present
+// Choose 1 if Hall encoder present
 #define HALL_SENSOR 1
 
 //Command identifiers

@@ -10,7 +10,6 @@
         <itemPath>../../imageproc-lib/init_default.h</itemPath>
         <itemPath>../../imageproc-lib/larray.h</itemPath>
         <itemPath>../../imageproc-lib/mac_packet.h</itemPath>
-        <itemPath>Z:/research/development/imageproc-lib/mpu6050.h</itemPath>
         <itemPath>../../imageproc-lib/packet_queue.h</itemPath>
         <itemPath>../../imageproc-lib/payload.h</itemPath>
         <itemPath>../../imageproc-lib/payload_queue.h</itemPath>
@@ -38,6 +37,7 @@
         <itemPath>../../imageproc-lib/ppool.h</itemPath>
         <itemPath>../../imageproc-lib/version-string.h</itemPath>
         <itemPath>../../imageproc-lib/uart_driver.h</itemPath>
+        <itemPath>../../imageproc-lib/mpu6000.h</itemPath>
       </logicalFolder>
       <logicalFolder name="lib" displayName="lib" projectFiles="true">
         <itemPath>../lib/init.h</itemPath>
@@ -120,6 +120,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>..</Elem>
+    <Elem>../../imageproc-lib</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -172,7 +173,7 @@
           <property key="enable-symbols" value="true"/>
           <property key="enable-unroll-loops" value="false"/>
           <property key="extra-include-directories"
-                    value="&quot;.\lib&quot;;../lib;../MyConsts;../../imageproc-lib;../project/FEARING/home/ronf/research/development/imageproc-lib;Z:\research\development\imageproc-lib;../project/FEARING/home/ronf/research/development/turner-ip2.5;../project/FEARING/home/ronf/research/development/turner-ip2.5/lib;../project/FEARING/home/ronf/research/development/turner-ip2.5/MyConsts;;."/>
+                    value="&quot;.\lib&quot;;../lib;../MyConsts;../../imageproc-lib;Z:\research\development\imageproc-lib;Z:\research/development/turner-ip2.5;Z:/research/development/turner-ip2.5/lib;Z:/research/development/turner-ip2.5/MyConsts;;."/>
           <property key="isolate-each-function" value="false"/>
           <property key="keep-inline" value="false"/>
           <property key="oXC16gcc-align-arr" value="false"/>
@@ -292,7 +293,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="../lib;../MyConsts;../../imageproc-lib;../project/FEARING/home/ronf/research/development/imageproc-lib;Z:\research\development\imageproc-lib;../project/FEARING/home/ronf/research/development/turner-ip2.5;../project/FEARING/home/ronf/research/development/turner-ip2.5/lib;../project/FEARING/home/ronf/research/development/turner-ip2.5/MyConsts;."/>
+                  value="../lib;../MyConsts;../../imageproc-lib;Z:/research/development/imageproc-lib;Z:\research\development\imageproc-lib;Z:/research/development/turner-ip2.5;Z:/research/development/turner-ip2.5/lib;Z:/research/development/turner-ip2.5/MyConsts;."/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
