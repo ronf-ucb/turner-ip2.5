@@ -249,7 +249,7 @@ static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigne
 { 	unsigned int sampLen = sizeof(vrTelemStruct_t);
 	// telemGetPID(packetNum);  // get current state
         vrTelemGetData( &telemTemp);
-	 radioConfirmationPacket(RADIO_DEST_ADDR,
+	 radioConfirmationPacket(RADIO_DST_ADDR,
 						     CMD_SPECIAL_TELEMETRY, 
 						     status, sampLen, (unsigned char *) &telemTemp);
 	packetNum++;
