@@ -127,7 +127,7 @@ void setupImageProc25c()
     sclockSetup();
     mpuSetup();
           LED_3 = OFF; LED_2 = ON; LED_1 = OFF; // initialize step #2
-    mpuRunCalib(100);  // get offset for gyro/ accelerometer
+    mpuRunCalib(10,100);  // get offset for gyro/ accelerometer
         LED_3 = OFF; LED_2 = ON; LED_1 = ON; // initialize step #3, mpu setup
      /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
