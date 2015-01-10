@@ -64,12 +64,19 @@ int main() {
 //    SetupTimer1(); setup in pidSetup
     SetupTimer2();
     sclockSetup();
+    LED_1 = ON; LED_2 = ON; LED_3 = ON; // initialize step 1 internal setup done
     mpuSetup();
+    LED_1 = ON; 
+    LED_2 = ON;
+    LED_3 = OFF; // initialize step 2 mpu setup done
+
 /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
     amsHallSetup();
+    LED_1 = ON; LED_2 = OFF; LED_3 = ON; // initialize step 3 Hall encoder done
 #endif
-    dfmemSetup(); 
+    dfmemSetup();
+    LED_1 = ON; LED_2 = OFF; LED_3 = OFF; // initialize step 4 FLASH setup done
     tiHSetup();   // set up H bridge drivers
 	cmdSetup();  // setup command table
 	pidSetup();  // setup PID control
@@ -80,6 +87,8 @@ int main() {
     radioSetChannel(RADIO_MY_CHAN);
     radioSetSrcAddr(RADIO_SRC_ADDR);
     radioSetSrcPanID(RADIO_PAN_ID);
+     LED_1 = OFF; LED_2 = ON; LED_3 = ON; // initialize step 5 Radio setup done
+     
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
 /**** set up steering last - so dfmem can finish ****/
 	steeringSetup(); // steering and Timer5 Int
