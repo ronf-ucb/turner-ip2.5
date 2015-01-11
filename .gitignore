@@ -1,3 +1,5 @@
+# Compiled source & project cruft #
+###################################
 *.pyc
 *.mcw
 *.o
@@ -6,4 +8,11 @@
 *.cof
 build
 dist
-version-string.h
+private
+*.mk
+*.properties
+*.bash
+/obj/
+/*.old
+/Obsolete/
+
