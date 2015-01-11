@@ -144,6 +144,7 @@ void cmdSetup(void) {
 	cmd_func[CMD_START_TELEM] = &cmdStartTelemetry;
 	cmd_func[CMD_ZERO_POS] = &cmdZeroPos;
 	cmd_func[CMD_ESTOP] = &cmdEStop;
+        cmd_func[CMD_TEST_BOARD] = &cmdTestBoard;
 // setup battery low voltage callback
 	 batSetCallback(&cmdEStopSend);
 }

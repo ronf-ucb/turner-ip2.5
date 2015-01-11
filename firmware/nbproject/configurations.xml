@@ -36,6 +36,7 @@
         <itemPath>../lib/tests.h</itemPath>
         <itemPath>../lib/vr_telem.h</itemPath>
         <itemPath>../lib/cmd.h</itemPath>
+        <itemPath>../lib/cmd-aux.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="settings" projectFiles="true">
         <itemPath>../../imageproc-settings/settings.h</itemPath>
@@ -293,6 +294,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="false"/>

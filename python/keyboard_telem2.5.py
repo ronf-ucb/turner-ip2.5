@@ -58,6 +58,10 @@ def xb_send(status, type, data):
 def resetRobot():
     xb_send(0, command.SOFTWARE_RESET, pack('h',0))
 
+def runDiagnostic():
+    print 'running robot diagnostic'
+    xb_send(0, command.TEST_BOARD, "Robot Echo")   
+
 def setThrust():
     global duration, delay, throttle
     time = max(duration) # just pick mx of 2 motor run times for now
@@ -68,9 +72,10 @@ def setThrust():
 
 def menu():
     print "-------------------------------------"
-    print "e: radio echo test    | g: right motor gains | h: Help menu"
+    print "d: run Diagnostic test| g: right motor Gains  | l: Left motor gains"
     print "a: access PIDdata     | f: flash readback     | l: left motor gains"
-    print "m: toggle memory mode | n: get robot name    | p: proceed"
+    print "e: radio echo test    | g: right motor gains | h: Help menu"
+    print "m: toggle memory mode | n: get robot Name    | p: Proceed"
     print "q: quit               | r: reset robot       | s: set throttle"
     print "t: time of move length| v: set velocity profile"
     print "x: PWM test thrust    | z: zero motor counts"
@@ -298,7 +303,7 @@ def writeFileHeader(dataFileName):
     fileout.close()
     
 def main():
-    print 'keyboard_telem for IP2.5c Jan. 2013\n'
+    print 'keyboard_telem for IP2.5c Jan. 2015\n'
     global throttle, duration, telemetry, dataFileName
     dataFileName = 'Data/imudata.txt'
     count = 0       # keep track of packet tries
@@ -340,7 +345,7 @@ def main():
         elif keypress == 'c':
             throttle[0] = 0
         elif keypress == 'd':
-            throttle[0] -= tinc
+            runDiagnostic()  # diagnostic test on IP2.5c board
         elif keypress == 'e':
    #         import pdb; pdb.set_trace()
             xb_send(0, command.ECHO,  "Echo Test")

@@ -4,3 +4,4 @@ void cmdNop(unsigned char type, unsigned char status, unsigned char length, unsi
 void cmdSoftwareReset(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
 void cmdError(void);
+void cmdTestBoard(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame);
