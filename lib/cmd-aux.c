@@ -45,6 +45,21 @@ void cmdWhoAmI(unsigned char type, unsigned char status, unsigned char length, u
       return; //success
 }
 
+void cmdTestBoard(unsigned char type, unsigned char status, unsigned char length, unsigned char *frame)
+{   unsigned char message[80]; // caution - do not over write end of string
+    unsigned char i, string_length; unsigned char *version_string;
+// maximum string length to avoid packet size limit
+	version_string = (unsigned char *)versionGetString();
+	i = 0;
+	while((i < 127) && version_string[i] != '\0')
+	{ i++;}
+	string_length=i;
+	/* serialSendData(RADIO_DST_ADDR, status, CMD_WHO_AM_I,
+            				string_length, version_string, 0); */
+	radioConfirmationPacket(RADIO_DST_ADDR, CMD_WHO_AM_I,
+					status, string_length, version_string);
+      return; //success
+
 // handle bad command packets
 // we might be in the middle of a dangerous maneuver- better to stop and signal we need resent command
 // wait for command to be resent

@@ -127,7 +127,7 @@ void setupImageProc25c()
     sclockSetup();
     mpuSetup();
           LED_3 = OFF; LED_2 = ON; LED_1 = OFF; // initialize step #2
-    mpuRunCalib(100);  // get offset for gyro/ accelerometer
+    mpuRunCalib(10,100);  // get offset for gyro/ accelerometer
         LED_3 = OFF; LED_2 = ON; LED_1 = ON; // initialize step #3, mpu setup
      /*   if Hall not present will hang */
 #if HALL_SENSOR == 1
@@ -144,7 +144,7 @@ void setupImageProc25c()
     // Radio setup
     blink_leds(4,200); // blink LEDs 4 times at half sec
     radioInit(RADIO_RXPQ_MAX_SIZE, RADIO_TXPQ_MAX_SIZE);
-    radioSetChannel(RADIO_DST_ADDR);
+    radioSetChannel(RADIO_MY_CHAN);
     radioSetSrcAddr(RADIO_SRC_ADDR);
     radioSetSrcPanID(RADIO_PAN_ID);
     setupTimer6(RADIO_FCY); // Radio and buffer loop timer
