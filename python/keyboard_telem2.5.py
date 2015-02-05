@@ -14,7 +14,7 @@ import shared
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
 telemetry = False
-numSamples = 900 # 300 Hz sampling in steering = 3 sec
+numSamples = 3000 # 1 kHz sampling in pid loop = 3 sec
 imudata = [ [] ] * (numSamples+1)
 gainsNotSet = True;
 delay = 0.025
@@ -371,7 +371,7 @@ def main():
             resetRobot()
             print 'Resetting robot'
         elif keypress == 's':  # set speed with throttle
-            print "throttle = ", throttle, "enter throttle [0]:",
+            print "throttle = ", throttle, "enter throttle [0] (0-3800):",
             throttle[0]= int(raw_input())
             print "enter throttle[1]:",
             throttle[1]= int(raw_input())

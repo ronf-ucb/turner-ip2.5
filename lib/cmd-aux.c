@@ -57,19 +57,19 @@ int xldata[3];  // accelerometer data
 // maximum string length to avoid packet size limit
     DisableIntT1; // turn off pid interrupts
      reg =mpuReadReg(MPU_REG_WHOAMI);              // Some sort of check here?
-        sprintf(message,"Diagnostic:  mpu WHO_AM_I should be 0x68 = 0x%x\n", reg);
+        sprintf(message,"Diagnostic:  mpu Echo should be 0x68 = 0x%x", reg);
 
         string_length = strlen(message);
-	radioConfirmationPacket(RADIO_DST_ADDR, CMD_WHO_AM_I,
+	radioConfirmationPacket(RADIO_DST_ADDR, CMD_ECHO,
 					status, string_length, (unsigned char *) message);
 
 
     /////// Get XL data
         mpuBeginUpdate();  // DMA version
         mpuGetXl(xldata);
-        sprintf(message,"Diagnostic: xldata[z] = 0x%x\n", xldata[2]); 
+        sprintf(message,"Diagnostic: xldata[z] = 0x%x", xldata[2]); 
         string_length = strlen(message);
-	radioConfirmationPacket(RADIO_DST_ADDR, CMD_WHO_AM_I,
+	radioConfirmationPacket(RADIO_DST_ADDR, CMD_ECHO,
 					status, string_length, (unsigned char *) message);
 
         // turn on self-test for Z axis
@@ -80,9 +80,9 @@ int xldata[3];  // accelerometer data
 
         mpuBeginUpdate();  // DMA version
         mpuGetXl(xldata);
-        sprintf(message,"Diagnostic: selftest xldata[z] = 0x%x\n", xldata[2]);
+        sprintf(message,"Diagnostic: after selftest xldata[z] = 0x%x", xldata[2]);
         string_length = strlen(message);
-	radioConfirmationPacket(RADIO_DST_ADDR, CMD_WHO_AM_I,
+	radioConfirmationPacket(RADIO_DST_ADDR, CMD_ECHO,
 					status, string_length, (unsigned char *) message);
 
         // turn off self test

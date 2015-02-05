@@ -251,7 +251,7 @@ static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigne
 	// telemGetPID(packetNum);  // get current state
         vrTelemGetData( &telemTemp);
 	 radioConfirmationPacket(RADIO_DST_ADDR,
-						     CMD_SPECIAL_TELEMETRY, 
+						     CMD_FLASH_READBACK,
 						     status, sampLen, (unsigned char *) &telemTemp);
 	packetNum++;
     // delay_ms(25);	// slow down for XBee 57.6 K
