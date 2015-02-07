@@ -35,6 +35,7 @@
 #include "battery.h"
 // # include "vr_telem.h"  // already included by telem.h
 #include "telem.h"
+#include "sclock.h"
 
 
 #include <stdio.h>
@@ -243,13 +244,20 @@ static void cmdStartTelemetry(unsigned char type, unsigned char status, unsigned
 }
  */
 
-vrTelemStruct_t telemTemp;
+// vrTelemStruct_t telemData;
+telemStruct_t telemTemp; // sampleIndex; uint32_t timestamp;  TELEM_TYPE telemData;
 //send single radio packet with current PID state
 static void cmdGetPIDTelemetry(unsigned char type, unsigned char status, unsigned char length,
 								 unsigned char *frame)
-{ 	unsigned int sampLen = sizeof(vrTelemStruct_t);
+{ 	unsigned int sampLen = sizeof(telemStruct_t);
 	// telemGetPID(packetNum);  // get current state
-        vrTelemGetData( &telemTemp);
+
+        DisableIntT1; // turn off pid interrupts - so don't get multiple SPI reads on MPU
+        vrTelemGetData( &telemTemp.telemData);  // fill structure with state data
+        EnableIntT1; 
+        telemTemp.sampleIndex = 0;  // default to 0th packet for reading
+        telemTemp.timestamp = sclockGetTime();
+
 	 radioConfirmationPacket(RADIO_DST_ADDR,
 						     CMD_FLASH_READBACK,
 						     status, sampLen, (unsigned char *) &telemTemp);

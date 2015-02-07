@@ -181,37 +181,6 @@ def getGain(lr):
         else:
             print 'not enough gain values'
 
-# get one packet of PID data from robot
-def getPIDdata():
-    count = 0
-    shared.pkts = 0   # reset packet count
-    dummy_data = [0,0] # index, time
-    dummy_data = dummy_data + [0,0,0,0,0,0] # mpos, ref position, PMC duty cycle
-    dummy_data = dummy_data + [0,0,0,0,0,0] # gyro + accelerometer
-    dummy_data = dummy_data+ [0,0,0,0] # back EMF and VBatt and sOut
-    # data format '=LLll'+13*'h'
-    # data format Duncan '=LLLLll'+13*'h' 
-    shared.imudata = [] #reset stored data
-    shared.imudata.append(dummy_data) # use dummy data
-    xb_send(0, command.GET_PID_TELEMETRY, pack('h',0))
-    time.sleep(0.2)
-    while shared.pkts == 0:
-        print "\n Retry after 1 seconds. Got only %d packets" %shared.pkts
-        time.sleep(1)
-        count = count + 1
-        if count > 10:
-            print 'no return packet' # use dummy data
-            break   
-    data = shared.imudata[0]  # convert string list to numbers
-#    print 'packet=', data
-    print 'index =', data[0]
-    print 'time = ', data[1]
-    print 'mpos=', data[2:4]
-    print 'ref=', data[4:6]
-    print 'pwm=',data[6:8]
-    print 'imu=',data[8:15]
-    print 'emf/Vbatt=',data[15:18]
-
         
 # execute move command
 # duration modified to allow running legs for differennt number of cycles
@@ -275,6 +244,41 @@ def flashReadback():
     # Write non-empty lists in imudata to file
     fileout.close()
     print "data saved to ",dataFileName
+
+# get one packet of PID data from robot
+def getPIDdata():
+    count = 0
+    # shared.imudata = []  # reset imudata structure
+    shared.imudata = [ [] ] * (numSamples+1)  # reset imudata structure
+    shared.pkts = 0   # reset packet count
+    dummy_data = [0,0] # index, time
+    dummy_data = dummy_data + [0,0,0,0,0,0] # mpos, ref position, PMC duty cycle
+    dummy_data = dummy_data + [0,0,0,0,0,0] # gyro + accelerometer
+    dummy_data = dummy_data+ [0,0,0,0] # back EMF and VBatt and sOut
+    # data format '=LLll'+13*'h'
+    # data format Duncan '=LLLLll'+13*'h' 
+ #   shared.imudata = [] #reset stored data
+    shared.imudata[0]= dummy_data # use dummy data
+    xb_send(0, command.GET_PID_TELEMETRY, pack('h',0))
+    time.sleep(0.2)
+    while shared.pkts == 0:
+        print "\n Retry after 1 seconds. Got only %d packets" %shared.pkts
+        time.sleep(1)
+        count = count + 1
+        if count > 5:
+            print 'no return packet' # use dummy data
+            break   
+    data = shared.imudata[0]  # convert string list to numbers
+#   temp_array = np.array([e for e in shared.imudata if len(e)])
+#   import pdb; pdb.set_trace()
+#    print 'packet=', data
+    print 'index =', data[0]
+    print 'time = ', data[1]
+    print 'mpos=', data[2:4]
+    print 'ref=', data[4:6]
+    print 'pwm=',data[6:8]
+    print 'gyro=',data[8:11], 'acc=', data[11:14]
+    print 'emf=', data[14:16], 'Vbatt=',data[16]
 
 
         

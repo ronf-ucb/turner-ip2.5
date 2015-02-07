@@ -57,9 +57,6 @@ void vrTelemGetData(vrTelemStruct_t* ptr) {
 
     int gdata[3];   //gyrodata
     int xldata[3];  // accelerometer data
-    /////// Get XL data
-    mpuGetGyro(gdata);
-    mpuGetXl(xldata);
 
     ptr->posL = pidObjs[0].p_state;
     ptr->posR = pidObjs[1].p_state;
@@ -70,6 +67,7 @@ void vrTelemGetData(vrTelemStruct_t* ptr) {
     ptr->bemfL = bemf[0];
     ptr->bemfR = bemf[1];
 
+    /////// Get gyro and XL data - may be interrupted by PID loop
     mpuGetGyro(gdata);
     mpuGetXl(xldata);
 

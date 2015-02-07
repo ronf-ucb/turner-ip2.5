@@ -16,7 +16,7 @@ def xbee_received(packet):
     status = ord(rf_data[0])
     type = ord(rf_data[1])
     data = rf_data[2:]
-    # print 'rcv cmd:', str(type)
+#    print 'rcv cmd:', str(type)
     if (type == command.GET_IMU_DATA):
         datum = unpack('l6h', data)
         #datum = unpack('l3f', data)
