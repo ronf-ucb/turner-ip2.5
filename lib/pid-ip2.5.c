@@ -381,25 +381,26 @@ else if(interrupt_count == 5)
 // update desired velocity and position tracking setpoints for each leg
 void pidGetSetpoint(int j)
 { int index; long temp_v;
-		index = pidVel[j].index;		
-		// update desired position between setpoints, scaled by 256
-		pidVel[j].interpolate += (long)pidVel[j].vel[index];
+	index = pidVel[j].index;		
+	// update desired position between setpoints, scaled by 256
+	pidVel[j].interpolate += (long)pidVel[j].vel[index];
 
+        /**** position setpoint delta >  interval*vel (maybe need to handle round off?) ***/
 	if (t1_ticks >= pidVel[j].expire)  // time to reach previous setpoint has passed
-	{ 	pidVel[j].interpolate = 0;	
-	// go to next index point	
+	{ 	pidVel[j].interpolate = 0;
+                pidObjs[j].p_input += (long)pidVel[j].delta[index];	//update to next delta set point
+
+                // go to next index point
 		pidVel[j].index++;
-	      index++;
-		if (pidVel[j].index >= NUM_VELS) 
-		{     pidVel[j].index = 0;
-		      	index = 0;
-			pidVel[j].leg_stride++;  // one full leg revolution
-	/**** maybe need to handle round off in position set point ***/
-		}  // loop on index
-			pidObjs[j].p_input += (long)pidVel[j].delta[index];	//update to next set point
-			pidVel[j].expire += pidVel[j].interval[index];  // expire time for next interval
-			temp_v = ((long)pidVel[j].vel[index] * K_EMF)>>8;  // scale velocity to A/D units
-		       pidObjs[j].v_input = (int)(temp_v);	  //update to next velocity 			
+        	if (pidVel[j].index >= NUM_VELS) 
+		{   pidVel[j].index = 0;   
+                    pidVel[j].leg_stride++;  // one full leg revolution
+		}  // reset index for next leg cycle
+
+                index = pidVel[j].index;  // local copy
+		pidVel[j].expire += pidVel[j].interval[index];  // expire time for next interval
+		temp_v = ((long)pidVel[j].vel[index] * K_EMF)>>8;  // scale velocity to A/D units
+		pidObjs[j].v_input = (int)(temp_v);	  //update to next velocity 			
 	}
 }
 
