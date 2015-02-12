@@ -38,14 +38,11 @@ cycle = 1000 # ms for a leg cycle
 # [position increments at set points]
 # [velocity increments]   
 delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
-#intervals = [48, 48, 16, 16]  # total 128 ms
-#vel = [348, 348,712,712]  # = delta/interval
-
 intervals = [cycle/4, cycle/4, cycle/4, cycle/4]  # total cycle ms
 # = delta/interval
 vel = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
-
-
+leftVelData = [delta, intervals, vel]
+rightVelData = [delta, intervals, vel]    
 
 
 ser = serial.Serial(shared.BS_COMPORT, shared.BS_BAUDRATE,timeout=3, rtscts=0)
@@ -81,6 +78,35 @@ def menu():
     print "x: PWM test thrust    | z: zero motor counts"
  
     
+####################################
+# set up velocity increments and setpoints for left and right sides
+
+def queryVelProfile():    
+    global leftVelData, rightVelData
+    print "velocity profile l: left side/r: right side/d: duplicate \n    >",
+      
+    keypress = msvcrt.getch() 
+    if keypress == 'l':
+        getVelProfile()
+        leftVelData = [delta, intervals, vel]
+        print "leftVelData =", leftVelData
+        print "rightVelData =", rightVelData
+        setVelProfile(leftVelData, rightVelData)
+    elif keypress == 'r':
+        getVelProfile()
+        rightVelData = [delta, intervals, vel]
+        print "rightVelData =", rightVelData
+        setVelProfile(leftVelData, rightVelData)
+        setVelProfile()       
+    elif keypress == 'd':
+        getVelProfile()
+        leftVelData = [delta, intervals, vel]
+        rightVelData = [delta, intervals, vel] 
+        setVelProfile(leftVelData, leftVelData)
+    else:
+         print "** unknown option** \n"
+            
+
 #get velocity profile
 # velocity should be in Hall Diff per ms clock tick
 # 
@@ -122,19 +148,24 @@ def invert(x):
 
 #set velocity profile
 # invert profile for motor 0 for VelociRoACH kinematics
-def setVelProfile():
+# format [ [delta], [intervals], [vel]
+def setVelProfile(leftVelData,rightVelData):
     global intervals, vel
+#    print "leftVelData =", leftVelData
     print "Sending velocity profile"
-    print "set points [encoder values]", delta
-    print "intervals (ms)",intervals
-    print "velocities (delta per ms)",vel
-    temp0 = intervals + map(invert,delta) + map(invert,vel) # invert 0
-    temp1 = intervals+delta+vel
-    temp = temp0 + temp1  # -left = right
+    print "set points [encoder values]", leftVelData[0], rightVelData[0]
+    print "intervals (ms)",leftVelData[1], rightVelData[1]
+    print "velocities (delta per ms)", leftVelData[2], rightVelData[2]
+#    temp0 = intervals + map(invert,delta) + map(invert,vel) # invert 0
+#    temp1 = intervals+delta+vel
+#    temp = temp0 + temp1  # -left = right
+    temp = leftVelData[0] + leftVelData[1] + leftVelData[2]
+    temp = temp + rightVelData[0] + rightVelData[1] + rightVelData[2]
+    print "velocity string", temp
     xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
     time.sleep(1)
    
-    
+##########################################    
 
 
 # set robot control gains
@@ -325,7 +356,7 @@ def main():
     time.sleep(0.5)
     setGain()
     time.sleep(0.5)  # wait for whoami before sending next command
-    setVelProfile()
+    setVelProfile(leftVelData, rightVelData)
     throttle = [0,0]
     tinc = 25
     time.sleep(1)  # wait for other commands to get queued and processes
@@ -387,8 +418,9 @@ def main():
             print 'duration[1]:',
             duration[1] = int(raw_input())
         elif keypress =='v':
-            getVelProfile()
-            setVelProfile()           
+   #         getVelProfile()
+   #         setVelProfile()
+           queryVelProfile()
         elif keypress == 'w':
             throttle[1] += tinc
             print "Throttle = ",throttle
