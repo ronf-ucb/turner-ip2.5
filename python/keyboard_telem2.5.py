@@ -83,6 +83,7 @@ def menu():
 
 def queryVelProfile():    
     global leftVelData, rightVelData
+    global delta, intervals, vel
     print "velocity profile l: left side/r: right side/d: duplicate \n    >",
       
     keypress = msvcrt.getch() 
@@ -96,8 +97,7 @@ def queryVelProfile():
         getVelProfile()
         rightVelData = [delta, intervals, vel]
         print "rightVelData =", rightVelData
-        setVelProfile(leftVelData, rightVelData)
-        setVelProfile()       
+        setVelProfile(leftVelData, rightVelData)      
     elif keypress == 'd':
         getVelProfile()
         leftVelData = [delta, intervals, vel]
@@ -111,7 +111,7 @@ def queryVelProfile():
 # velocity should be in Hall Diff per ms clock tick
 # 
 def getVelProfile():
-    global cycle, intervals, vel
+    global cycle, intervals, vel, delta
     sum = 0
     print 'set points in degrees e.g. 60,90,180,360:',
     x = raw_input()
