@@ -40,9 +40,12 @@ cycle = 1000 # ms for a leg cycle
 delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
 intervals = [cycle/4, cycle/4, cycle/4, cycle/4]  # total cycle ms
 # = delta/interval
-vel = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
-leftVelData = [delta, intervals, vel]
-rightVelData = [delta, intervals, vel]    
+velL = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
+velR = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
+# left side is opposite sign
+#    temp0 = intervals + map(invert,delta) + map(invert,vel) # invert 0
+leftVelData = [intervals,delta,velL]
+rightVelData = [intervals,delta,velR]
 
 
 ser = serial.Serial(shared.BS_COMPORT, shared.BS_BAUDRATE,timeout=3, rtscts=0)
@@ -83,26 +86,24 @@ def menu():
 
 def queryVelProfile():    
     global leftVelData, rightVelData
-    global delta, intervals, vel
-    print "velocity profile l: left side/r: right side/d: duplicate \n    >",
-      
-    keypress = msvcrt.getch() 
+    print "velocity profile l: left side/r: right side/d: duplicate \n    >", 
+    keypress = msvcrt.getch()
+    intervals, delta, vel = getVelProfile()
+##    print 'getVelProfile. delta', delta,'intervals', intervals,'vel', vel
+##    print 'after getVelProfile'
+##    print "leftVelData =", leftVelData
+##    print "rightVelData =", rightVelData
+##    leftVelData = [intervals,delta,velL]
     if keypress == 'l':
-        getVelProfile()
-        leftVelData = [delta, intervals, vel]
-        print "leftVelData =", leftVelData
-        print "rightVelData =", rightVelData
+        leftVelData = [intervals, delta, vel]  
         setVelProfile(leftVelData, rightVelData)
     elif keypress == 'r':
-        getVelProfile()
-        rightVelData = [delta, intervals, vel]
-        print "rightVelData =", rightVelData
+        rightVelData = [intervals, delta, vel]
         setVelProfile(leftVelData, rightVelData)      
     elif keypress == 'd':
-        getVelProfile()
-        leftVelData = [delta, intervals, vel]
-        rightVelData = [delta, intervals, vel] 
-        setVelProfile(leftVelData, leftVelData)
+        leftVelData = [intervals, delta, vel]  
+        rightVelData = [intervals, delta, vel]
+        setVelProfile(leftVelData, rightVelData)
     else:
          print "** unknown option** \n"
             
@@ -111,7 +112,10 @@ def queryVelProfile():
 # velocity should be in Hall Diff per ms clock tick
 # 
 def getVelProfile():
-    global cycle, intervals, vel, delta
+    global cycle
+    vel = [0,0,0,0] # local variables
+    delta = [0,0,0,0]
+    intervals =[0,0,0,0]
     sum = 0
     print 'set points in degrees e.g. 60,90,180,360:',
     x = raw_input()
@@ -141,6 +145,7 @@ def getVelProfile():
     else:
         print 'not enough values'
     print 'intervals (ms)',intervals
+    return intervals, delta, vel
  
         
 def invert(x):
@@ -153,13 +158,14 @@ def setVelProfile(leftVelData,rightVelData):
     global intervals, vel
 #    print "leftVelData =", leftVelData
     print "Sending velocity profile"
-    print "set points [encoder values]", leftVelData[0], rightVelData[0]
-    print "intervals (ms)",leftVelData[1], rightVelData[1]
+    print "intervals (ms)",leftVelData[0], rightVelData[0]
+    print "set points [encoder values]", leftVelData[1], rightVelData[1]
     print "velocities (delta per ms)", leftVelData[2], rightVelData[2]
 #    temp0 = intervals + map(invert,delta) + map(invert,vel) # invert 0
 #    temp1 = intervals+delta+vel
 #    temp = temp0 + temp1  # -left = right
-    temp = leftVelData[0] + leftVelData[1] + leftVelData[2]
+# left opposite sign from right
+    temp = leftVelData[0] + map(invert,leftVelData[1]) + map(invert,leftVelData[2]) # invert side 0
     temp = temp + rightVelData[0] + rightVelData[1] + rightVelData[2]
     print "velocity string", temp
     xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
