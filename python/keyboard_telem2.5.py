@@ -10,6 +10,7 @@ from xbee import XBee
 import serial
 from callbackFunc import xbee_received
 import shared
+from timeit import default_timer as timer
 
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
@@ -60,7 +61,22 @@ def resetRobot():
 
 def runDiagnostic():
     print 'running robot diagnostic'
-    xb_send(0, command.TEST_BOARD, "Robot Echo")   
+    xb_send(0, command.TEST_BOARD, "Robot Echo")
+
+def radioEchoTest():
+    print 'start radioEchoTest'
+    count = 0
+    start = timer()
+    for i in range(0,100):
+        print 'pkt #',i,
+        shared.echo_set = False  # set flag false, and wait for echo from ImagProc
+        xb_send(0, command.ECHO,  "Echo Test")
+        count = 0
+        while shared.echo_set == False:
+            count = count + 1        
+    end = timer()
+    print 'radioEchoTest elapsed time:', (end - start),'count:',count    
+    
 
 def setThrust():
     global duration, delay, throttle
@@ -72,9 +88,9 @@ def setThrust():
 
 def menu():
     print "-------------------------------------"
-    print "d: run Diagnostic test| g: right motor Gains  | l: Left motor gains"
-    print "a: access PIDdata     | f: flash readback     | l: left motor gains"
-    print "e: radio echo test    | g: right motor gains | h: Help menu"
+    print "a: access PIDdata     | d: run Diagnostic test| f: flash readback"
+    print "c: packet rate test   | g: right motor Gains  l: left motor gains"
+    print "e: radio echo test    | h: Help menu"
     print "m: toggle memory mode | n: get robot Name    | p: Proceed"
     print "q: quit               | r: reset robot       | s: set throttle"
     print "t: time of move length| v: set velocity profile"
@@ -89,6 +105,11 @@ def queryVelProfile():
     print "velocity profile l: left side/r: right side/d: duplicate \n    >", 
     keypress = msvcrt.getch()
     intervals, delta, vel = getVelProfile()
+    print "Forward (f) or Reverse (r) \n   >"
+    keydir = msvcrt.getch()
+    if keydir == 'r':
+        delta = map(invert,delta)
+        vel =  map(invert,vel) # invert increment and velocity
 ##    print 'getVelProfile. delta', delta,'intervals', intervals,'vel', vel
 ##    print 'after getVelProfile'
 ##    print "leftVelData =", leftVelData
@@ -166,6 +187,7 @@ def setVelProfile(leftVelData,rightVelData):
 #    temp = temp0 + temp1  # -left = right
 # left opposite sign from right
     temp = leftVelData[0] + map(invert,leftVelData[1]) + map(invert,leftVelData[2]) # invert side 0
+#    temp = leftVelData[0] + leftVelData[1]+ leftVelData[2] # don't invert side 0
     temp = temp + rightVelData[0] + rightVelData[1] + rightVelData[2]
     print "velocity string", temp
     xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
@@ -344,7 +366,7 @@ def writeFileHeader(dataFileName):
     fileout.close()
     
 def main():
-    print 'keyboard_telem for IP2.5c Jan. 2015\n'
+    print 'keyboard_telem for IP2.5c Jul. 2015\n'
     global throttle, duration, telemetry, dataFileName
     dataFileName = 'Data/imudata.txt'
     count = 0       # keep track of packet tries
@@ -384,11 +406,12 @@ def main():
         elif keypress == 'a':
             getPIDdata()
         elif keypress == 'c':
-            throttle[0] = 0
+            radioEchoTest()
         elif keypress == 'd':
             runDiagnostic()  # diagnostic test on IP2.5c board
         elif keypress == 'e':
    #         import pdb; pdb.set_trace()
+            shared.echo_set = True  # enable printing
             xb_send(0, command.ECHO,  "Echo Test")
             print 'xb_send ECHO'
         elif keypress == 'f':

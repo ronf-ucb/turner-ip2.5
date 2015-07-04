@@ -32,7 +32,9 @@ def xbee_received(packet):
         if (datum[0] != -1):
             dutycycles.append(datum)
     elif (type == command.ECHO):
-        print "echo:",status, type, data
+        if shared.echo_set == True:
+            print "echo:",status, type, data
+        shared.echo_set = True  # set every time echo is received
     elif (type == command.WHO_AM_I):
        # print "whoami:",status, hex(type), data
         print "whoami:",data

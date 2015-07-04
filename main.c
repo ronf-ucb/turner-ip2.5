@@ -90,6 +90,7 @@ unsigned char* payloadData;
         {
             test = queuePop(fun_queue);
             rx_payload = macGetPayload(test->packet);
+            Nop();
             payloadType = payGetType(rx_payload);
             payloadStatus = payGetStatus(rx_payload);
             payloadDataLength = payGetDataLength(rx_payload);

@@ -8,6 +8,7 @@ steering_rate_set = False
 pkts = 0
 bytesIn = 0
 count2deg = 2000.0/(2**15-1)
+echo_set = False   # set true when echo is received
 
 imudata = [[]] * 300 # HACK should use numSamples
 statedata = []
