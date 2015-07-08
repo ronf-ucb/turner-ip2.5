@@ -389,7 +389,7 @@ void pidGetSetpoint(int j)
 	if (t1_ticks >= pidVel[j].expire)  // time to reach previous setpoint has passed
 	{ 	pidVel[j].interpolate = 0;
                 pidObjs[j].p_input += (long)pidVel[j].delta[index];	//update to next delta set point
-
+                
                 // go to next index point
 		pidVel[j].index++;
         	if (pidVel[j].index >= NUM_VELS) 

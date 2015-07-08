@@ -38,7 +38,7 @@ cycle = 1000 # ms for a leg cycle
 # [time intervals for setpoints]
 # [position increments at set points]
 # [velocity increments]   
-delta = [0x4000,0x4000,0x4000,0x4000]  # adds up to 65536 (2 pi)
+delta = [0x4000,0x4000,0x4000,0x4000]  # incremental setpoints in cycle
 intervals = [cycle/4, cycle/4, cycle/4, cycle/4]  # total cycle ms
 # = delta/interval
 velL = [0x4000 / intervals[0], 0x4000 / intervals[1], 0x4000/ intervals[2], 0x4000/intervals[3]]
@@ -88,9 +88,9 @@ def setThrust():
 
 def menu():
     print "-------------------------------------"
-    print "a: access PIDdata     | d: run Diagnostic test| f: flash readback"
-    print "c: packet rate test   | g: right motor Gains  l: left motor gains"
-    print "e: radio echo test    | h: Help menu"
+    print "a: access PIDdata     |c: packet rate test   |d: run Diagnostic test"
+    print "e: radio echo test    |f: flash readback     | g: right motor Gains"
+    print "h: Help menu          |i: increment phase    | l: left motor gains"
     print "m: toggle memory mode | n: get robot Name    | p: Proceed"
     print "q: quit               | r: reset robot       | s: set throttle"
     print "t: time of move length| v: set velocity profile"
@@ -147,7 +147,7 @@ def getVelProfile():
         for i in range(1,3):
             delta[i] = ((temp[i]-temp[i-1])*65536)/360
             sum = sum + delta[i]
-        delta[3]=65536-sum
+        delta[3]=65536-sum     
     else:
         print 'not enough delta values'
     print 'current cycle (ms)',cycle,' new value:',
@@ -167,10 +167,11 @@ def getVelProfile():
         print 'not enough values'
     print 'intervals (ms)',intervals
     return intervals, delta, vel
- 
-        
+
+
 def invert(x):
     return (-x)
+
 
 #set velocity profile
 # invert profile for motor 0 for VelociRoACH kinematics
@@ -194,7 +195,50 @@ def setVelProfile(leftVelData,rightVelData):
     time.sleep(1)
    
 ##########################################    
+# send just first interval operation to advance left and right phase
+def incrementPhase():
+# advance phase desired amount on both sides (will be new setpoint at index =0
+    print 'enter phase offset (degrees) for left,right:',
+    x = raw_input()
+    if len(x):
+        phase_inc = map(int,x.split(','))
+        deltaL = [(phase_inc[0]*65536)/360,0,0,0]  # only using first increment
+        deltaR = [(phase_inc[1]*65536)/360,0,0,0]
+        # set velocity to ave to reduce twitch
+        vel = [(deltaL[0]+deltaR[0])/2/intervals[0],0,0,0] # 
+# send temporary profile and move to next index point     
+# left =0 opposite sign from right = 1
+        temp = intervals + map(invert,deltaL) + map(invert,vel) # invert side 0
+        temp = temp + intervals + deltaR + vel  # don't invert side 1
+        print "velocity string", temp
+        xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
+        time.sleep(0.5)
+# now move to first index point       
+        thrust = [0, intervals[0], 0, intervals[0], 0]
+        print "thrust =" + str(thrust)
+        global duration, numSamples, delay, throttle
+        xb_send(0, command.SET_THRUST_CLOSED_LOOP, pack('5h',*thrust))
+        time.sleep(1)  # give time for move to complete
+        
+    # restore original velocity profile    
+        temp = leftVelData[0] + map(invert,leftVelData[1]) + map(invert,leftVelData[2]) # invert side 0
+    #    temp = leftVelData[0] + leftVelData[1]+ leftVelData[2] # don't invert side 0
+        temp = temp + rightVelData[0] + rightVelData[1] + rightVelData[2]
+        print "velocity string", temp
+        xb_send(0, command.SET_VEL_PROFILE, pack('24h',*temp))
+        time.sleep(1)
 
+
+
+        
+    else:
+        print 'Error-incrementPhase: not enough values.'
+ 
+  
+
+
+
+##########################################    
 
 # set robot control gains
 def setGain():
@@ -242,7 +286,7 @@ def getGain(lr):
 
         
 # execute move command
-# duration modified to allow running legs for differennt number of cycles
+# duration modified to allow running legs for different number of cycles
 def proceed():
     global duration, numSamples, delay, throttle
     thrust = [throttle[0], duration[0], throttle[1], duration[1], 0]
@@ -421,6 +465,8 @@ def main():
             setGain()
         elif keypress == 'h':
             menu()
+        elif keypress == 'i':
+            incrementPhase()
         elif keypress == 'l':
             getGain('L')
             setGain()    
