@@ -15,7 +15,7 @@ from timeit import default_timer as timer
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
 telemetry = False
-numSamples = 3000 # 1 kHz sampling in pid loop = 3 sec
+numSamples = 3300 # 1 kHz sampling in pid loop = 3 sec
 imudata = [ [] ] * (numSamples+1)
 gainsNotSet = True;
 delay = 0.025
@@ -317,7 +317,13 @@ def flashReadback():
     shared.imudata = [ [] ] * (numSamples+1)  # reset imudata structure
     shared.pkts = 0  # reset packet count???
     xb_send(0, command.FLASH_READBACK, pack('=h',numSamples))
-    time.sleep(delay*numSamples + 5)
+# wait reasonable time for packets
+    count = 0
+    countmax = np.int(delay*numSamples+0.5) + 5
+    while shared.pkts < numSamples and count < countmax:
+        time.sleep(1)
+        count = count +1
+        print '.',
     print '\n after sleep, got shared.pkts =', shared.pkts
     while shared.pkts < numSamples:
         print "\n Retry after 10 seconds. Got only %d packets" %shared.pkts
