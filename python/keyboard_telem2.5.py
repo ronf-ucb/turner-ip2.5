@@ -277,6 +277,7 @@ def getGain(lr):
 # enable sensing gains again
             shared.motor_gains_set = False
             if lr == 'L':
+                motor[4] = -motor[4] #  feedforward on left side inverted!!!
                 motorgains[0:5] = motor
            #     motorgains[5:11] = motor
             else:
