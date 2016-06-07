@@ -15,7 +15,7 @@ from timeit import default_timer as timer
 DEST_ADDR = '\x20\x52'
 imudata_file_name = 'imudata.txt'
 telemetry = False
-numSamples = 3300 # 1 kHz sampling in pid loop = 3 sec
+numSamples = 1500 # 1 kHz sampling in pid loop = 1.5 sec
 imudata = [ [] ] * (numSamples+1)
 gainsNotSet = True;
 delay = 0.025

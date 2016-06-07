@@ -1,4 +1,5 @@
 BS_COMPORT = 'COM4' # ron
+#BS_COMPORT = 'COM5' # ron
 #BS_COMPORT = 'COM3' # duncan, ROBOPROC
 BS_BAUDRATE = 230400
 
